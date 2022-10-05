@@ -10,15 +10,17 @@ public class PlayerFactionCommander : FactionCommander
     float selectionDistance = 1.5f;
     Vector3 moveDirection = Vector3.zero;
     float camSpeed = 10f;
-    FactionCommander actingFaction;
-    private void Start()
-    {
-        actingFaction = this;
-    }
+
+    private bool isOverUI;
+    Pawn closestPawnToCursor;
     private void Update()
     {
         //TODO Display Pawn Stats
-        universeSimulation.transform.position -= moveDirection*camSpeed*Time.deltaTime;
+       
+        universeSimulation.transform.position -= camSpeed * Time.deltaTime * moveDirection;
+        isOverUI = EventSystem.current.IsPointerOverGameObject();//works as intended, ignore warning
+        closestPawnToCursor = universeSimulation.ClosestPawnInRange(MouseWorldPoint(), selectionDistance, out _);
+        MouseHighlight();
     }
 
 
@@ -39,7 +41,7 @@ public class PlayerFactionCommander : FactionCommander
         {
             yield return null;
             Vector3 maxMove = targetLocation - universeSimulation.transform.position;
-            Vector3 move = maxMove.normalized * Time.deltaTime * speed;
+            Vector3 move = speed * Time.deltaTime * maxMove.normalized;
             move = Vector3.ClampMagnitude(move, maxMove.magnitude);
             speed += Time.deltaTime * 200;
             universeSimulation.transform.position += move;
@@ -51,12 +53,14 @@ public class PlayerFactionCommander : FactionCommander
 
     public void OnMove(InputValue value)
     {
+        
         moveDirection = new Vector3(value.Get<Vector2>().x, 0, value.Get<Vector2>().y);
+        Debug.Log(moveDirection);
     }
 
 
 
-    Vector2 mouseScreenPoint = new Vector2(0.5f, 0.5f);
+    Vector2 mouseScreenPoint = new(0.5f, 0.5f);
     public void OnMouseMove(InputValue value)
     {
         mouseScreenPoint = value.Get<Vector2>();
@@ -83,31 +87,30 @@ public class PlayerFactionCommander : FactionCommander
     }
 
 
+
+
+
     Vector3 startSelectPoint;
+    bool wasOverUI;
     public void OnSelect(InputValue value)
     {
         float minDragDistance=0.5f;
         Vector3 currentSelectPoint = MouseWorldPoint();
-        //DragToSelect
+      
         if (value.isPressed)
         {
             startSelectPoint = currentSelectPoint;
+            wasOverUI = isOverUI;
         }
-        else if(Vector3.Distance(startSelectPoint, currentSelectPoint)<=minDragDistance)//select the single closest Pawn
+        else if (Vector3.Distance(startSelectPoint, currentSelectPoint) <= minDragDistance)//select the single closest Pawn
         {
-            bool isOverUI = EventSystem.current.IsPointerOverGameObject();//works as intended, ignore warning
-            if (!isOverUI)
+            if (!wasOverUI)
             {
-
-                Pawn closest;
-                closest = universeSimulation.ClosestPawnInRange(startSelectPoint, selectionDistance, out float distance);
-
-
                 Vector3 moveOffset;//select location to move to
-                if (closest != null)
+                if (closestPawnToCursor != null)
                 {
-                    moveOffset = closest.transform.position - ScreenCenterWorldPoint();
-                    closest.DefaultAction(actingFaction);
+                    moveOffset = closestPawnToCursor.transform.position - ScreenCenterWorldPoint();
+                    closestPawnToCursor.DefaultAction(actingFaction);
                 }
                 else
                 {
@@ -120,37 +123,61 @@ public class PlayerFactionCommander : FactionCommander
 
             }
         }
-        else
+        else if(!wasOverUI)
         {
+            //TODO DragToSelect
             Debug.Log("Implement rectangular select");
         }
     }
+    Pawn lastStatMenuOpened;
+    private void MouseHighlight()
+    {
+        if (lastStatMenuOpened != closestPawnToCursor)
+        {
+            if (lastStatMenuOpened != null)
+            {
+                lastStatMenuOpened.CloseStatMenu();
+                lastStatMenuOpened = null;
+            }
+            if (closestPawnToCursor != null)
+            {
+                closestPawnToCursor.OpenStatMenu(this);
+                lastStatMenuOpened = closestPawnToCursor;
+            }
+        }
+    }
 
-
-    Pawn lastMenuOpened;
+    Pawn lastComponentMenuOpened;
     public void OnOpenMenu(InputValue value)
     {
-        bool isOverUI = EventSystem.current.IsPointerOverGameObject();//=works as intended, ignore warning
-        if (!isOverUI)
+        Pawn targetPawn;
+        if (isOverUI||closestPawnToCursor == lastComponentMenuOpened)
         {
-            if (lastMenuOpened != null)
-            {
-                lastMenuOpened.CloseMenu();
-            }
-            
-            Pawn closest;
-            closest = universeSimulation.ClosestPawnInRange(MouseWorldPoint(), selectionDistance, out float distance);
-            if (closest != null)
-            {
-                closest.OpenMenu(actingFaction);
-                lastMenuOpened = closest;
-            }
-            else
-            {
-                Debug.Log("No menu to open/open command menu?");
-            }
-
+            targetPawn = null;
         }
+        else
+        {
+            targetPawn = closestPawnToCursor;
+        }
+        //
+        if (lastComponentMenuOpened != null )
+        {
+            lastComponentMenuOpened.CloseComponentMenu();
+            lastComponentMenuOpened = null;
+        }
+        //
+        if (targetPawn != null)
+        {
+            targetPawn.OpenComponentMenu(actingFaction);
+            lastComponentMenuOpened = targetPawn;
+        }
+        else
+        {
+            Debug.Log("No menu to open/open command menu?");
+            lastComponentMenuOpened = null;
+        }
+
+        
     }
 
 
@@ -162,32 +189,6 @@ public class PlayerFactionCommander : FactionCommander
         actingFaction = universeSimulation.factionsInPlay[index];
 
         Debug.Log(actingFaction);
-    }
-
-
-
-
-
-
-    
-
-
-
-    public void ActivatePawnMenu(Pawn pawn)// right click 
-    {
-        Debug.Log("Activating the pawns action menu.");
-    }
-    public void ActivatePawnInfo(Pawn pawn)  //hover
-    {
-        Debug.Log("Activating the pawns stat menu.");
-    }
-    public void SelectShipPrimaryAction(Ship ship)//Left Click. Main: move, Combat: attack
-    {
-        Debug.Log("Activating the ships primary action");
-    }
-    public void SelectShipPrimaryAction(List<Ship> ship)//left click and drag
-    {
-        Debug.Log("Activating a bunch of ships primary action");
     }
 
 

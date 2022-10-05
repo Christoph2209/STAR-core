@@ -82,13 +82,13 @@ public class UniverseChronology : MonoBehaviour
     {
         if (readiedFactions.Add(factionCommander))
         {
-            Debug.Log(factionCommander.factionName + " has completed the " + currentPhase + " phase.");
+            Debug.Log(factionCommander + " has completed the " + currentPhase + " phase.");
             return true;
         }
         else
         {
             readiedFactions.Remove(factionCommander);
-            Debug.Log(factionCommander.factionName + " has allready completed the " + currentPhase + " phase!" + "\n" + "Canceling ready Status!");
+            Debug.Log(factionCommander + " has allready completed the " + currentPhase + " phase!" + "\n" + "Canceling ready Status!");
             return false;
         }
 

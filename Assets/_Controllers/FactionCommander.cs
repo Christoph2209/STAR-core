@@ -8,9 +8,13 @@ public abstract class FactionCommander : MonoBehaviour
     [SerializeField]
     protected UniverseSimulation universeSimulation;
     public string factionName = default;
-    
-    
+    protected FactionCommander actingFaction;
+
     #region Initialization
+    private void Start()
+    {
+        actingFaction = this;
+    }
     //Establish Faction is not to be called at any point except after the faction is created.
     //Only Universe Simulation should be able to call EstablishFaction when they are actively initializng that faction.
     public virtual bool EstablishFaction(string name, UniverseSimulation universeSimulation)
@@ -37,10 +41,10 @@ public abstract class FactionCommander : MonoBehaviour
         switch (universeSimulation.universeChronology.currentPhase)
         {
             case TurnPhase.Main:
-                universeSimulation.universeChronology.MarkFactionReady(this);
+                universeSimulation.universeChronology.MarkFactionReady(actingFaction);
                 break;
             case TurnPhase.Combat:
-                universeSimulation.universeChronology.MarkFactionReady(this);
+                universeSimulation.universeChronology.MarkFactionReady(actingFaction);
                 break;
             default:
                 Debug.Log("Attempting to complete invalid phase, No actions taken");

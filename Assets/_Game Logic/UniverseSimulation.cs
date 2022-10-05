@@ -53,7 +53,7 @@ public class UniverseSimulation : MonoBehaviour
         {
             Debug.LogError("Creating new chronology for this universe while one already exists! Multiple timelines are not supported!");
         }
-        GameObject chronology = new GameObject("UniverseChronology");
+        GameObject chronology = new("UniverseChronology");
         universeChronology = chronology.AddComponent<UniverseChronology>();
         chronology.GetComponent<UniverseChronology>().EstablishUniverseChronology(this);
         
@@ -108,15 +108,11 @@ public class UniverseSimulation : MonoBehaviour
 
         //initialize all of the factions and turnphase tracking
         EstablishUniverseChronolgoy();
-        EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
-        EstablishFaction("OTHER FACTION", NPCFactionCommander);
+        //EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
+       // EstablishFaction("OTHER FACTION", NPCFactionCommander);
         GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN");
         
     }
 
 
-    void Update()
-    {
-        
-    }
 }

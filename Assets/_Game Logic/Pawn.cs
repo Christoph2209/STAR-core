@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public abstract class Pawn : MonoBehaviour
 {
     [SerializeField]
@@ -13,12 +13,14 @@ public abstract class Pawn : MonoBehaviour
     public GameObject componentMenu;
     public Transform componentContainer;
     public GameObject statsMenu;
+    public TMP_Text statsText;
 
+    public Dictionary<string, float> stats = new();
 
     #region Copy and lock inpsector value hack
     [SerializeField]
     private List<GameObject> setPawnComponents;//variable exposed in the inspector
-    private List<GameObject> pawnComponentsReference => pawnComponents; // this holds a reference to the pawnComponents list that can not be written to
+    private List<GameObject> PawnComponentsReference => pawnComponents; // this holds a reference to the pawnComponents list that can not be written to
     private void CopyInspectorPawnValues()//call in awake
     {
         pawnComponents = new();
@@ -34,7 +36,7 @@ public abstract class Pawn : MonoBehaviour
                 pawnComponents.Add(null);
             }
         }
-        setPawnComponents = pawnComponentsReference;
+        setPawnComponents = PawnComponentsReference;
     }
 
 
@@ -48,8 +50,12 @@ public abstract class Pawn : MonoBehaviour
     {
         CopyInspectorPawnValues();
     }
+    private void Start()// we want to close these menus after they awake
+    {
+        CloseComponentMenu();
+        CloseStatMenu();
+    }
 
-    
 
     public virtual void EstablishPawn(string name, UniverseSimulation universeSimulation, FactionCommander faction)
     {
@@ -97,7 +103,7 @@ public abstract class Pawn : MonoBehaviour
 
     }
 
-    public void OpenMenu(FactionCommander faction)
+    public void OpenComponentMenu(FactionCommander faction)
     {
         if (faction == this.faction)
         {
@@ -111,10 +117,27 @@ public abstract class Pawn : MonoBehaviour
         }
         
     }
-    public void CloseMenu()
+    public void CloseComponentMenu()
     {
         componentMenu.SetActive(false);
         Debug.Log(this + " is closing menus");
+    }
+    public void OpenStatMenu(FactionCommander faction)
+    {
+        if (faction == this.faction)
+        {
+            statsMenu.SetActive(true);
+            Debug.Log("Opening" + this + " Stat Menu");
+        }
+        else
+        {
+
+            Debug.Log("Opening " + this + " Foreign Stat Menu");
+        }
+    }
+    public void CloseStatMenu()
+    {
+        statsMenu.SetActive(false);
     }
 
 
@@ -126,8 +149,6 @@ public abstract class Pawn : MonoBehaviour
         GameObject newPawnComponent = Instantiate(pawnComponent, componentContainer);
         pawnComponents.Add(newPawnComponent);
         newPawnComponent.GetComponent<PawnComponent>().EstablishPawnComponent(this);
-     
-        
     }
 
     private void RemovePawnComponent(GameObject pawnComponent)
@@ -138,11 +159,38 @@ public abstract class Pawn : MonoBehaviour
 
 
 
+    public void UpdateStats()
+    {
+        stats = new();
+        foreach (GameObject pawnComponent in pawnComponents)
+        {
+            PawnComponent p = pawnComponent.GetComponent<PawnComponent>();
+            foreach(Stats s in p.stats)
+            {
+                stats.TryAdd(s.StatName, 0);
+                stats[s.StatName] += s.value;
+            }
+        }
+        string statString = "";
+        foreach(KeyValuePair<string, float> stat in stats)
+        {
+            statString += stat.Key + ": " + stat.Value + "\n";
+        }
+        statsText.text = statString;
+        Debug.Log("UpdatedStats");
+    }
 
+
+   
+    protected virtual void OnPhaseTransition()
+    { 
+        CloseComponentMenu();
+    }
 
 
     public virtual void OnMainPhaseStart()
     {
+        OnPhaseTransition();
         foreach (GameObject pawnComponent in pawnComponents)
         {
             pawnComponent.GetComponent<PawnComponent>().OnMainPhaseStart();
@@ -150,6 +198,7 @@ public abstract class Pawn : MonoBehaviour
     }
     public virtual void OnMainPhaseEnd()
     {
+        OnPhaseTransition();
         foreach (GameObject pawnComponent in pawnComponents)
         {
             pawnComponent.GetComponent<PawnComponent>().OnMainPhaseEnd();
@@ -157,6 +206,7 @@ public abstract class Pawn : MonoBehaviour
     }
     public virtual void OnCombatPhaseStart()
     {
+        OnPhaseTransition();
         foreach (GameObject pawnComponent in pawnComponents)
         {
             pawnComponent.GetComponent<PawnComponent>().OnCombatPhaseStart();
@@ -164,6 +214,7 @@ public abstract class Pawn : MonoBehaviour
     }
     public virtual void OnCombatPhaseEnd()
     {
+        OnPhaseTransition();
         foreach (GameObject pawnComponent in pawnComponents)
         {
             pawnComponent.GetComponent<PawnComponent>().OnCombatPhaseEnd();
