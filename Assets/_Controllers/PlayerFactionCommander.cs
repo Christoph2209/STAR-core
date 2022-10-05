@@ -19,7 +19,7 @@ public class PlayerFactionCommander : FactionCommander
        
         universeSimulation.transform.position -= camSpeed * Time.deltaTime * moveDirection;
         isOverUI = EventSystem.current.IsPointerOverGameObject();//works as intended, ignore warning
-        closestPawnToCursor = universeSimulation.ClosestPawnInRange(MouseWorldPoint(), selectionDistance, out _);
+        closestPawnToCursor = universeSimulation.GetClosestPawnInRange(MouseWorldPoint(), selectionDistance, out _);
         MouseHighlight();
     }
 

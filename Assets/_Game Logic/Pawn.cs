@@ -9,7 +9,14 @@ public abstract class Pawn : MonoBehaviour
     [SerializeField]
     FactionCommander faction;
 
-    
+    public delegate void MovePawn();
+    public MovePawn movePawn;
+
+    public void mvtest()
+    {
+        Debug.Log("No Move Action Taken");
+    }
+
     public GameObject componentMenu;
     public Transform componentContainer;
     public GameObject statsMenu;
@@ -190,6 +197,7 @@ public abstract class Pawn : MonoBehaviour
 
     public virtual void OnMainPhaseStart()
     {
+        //movePawn => mvtest();
         OnPhaseTransition();
         foreach (GameObject pawnComponent in pawnComponents)
         {
@@ -198,6 +206,7 @@ public abstract class Pawn : MonoBehaviour
     }
     public virtual void OnMainPhaseEnd()
     {
+        //movePawn();
         OnPhaseTransition();
         foreach (GameObject pawnComponent in pawnComponents)
         {
@@ -219,6 +228,25 @@ public abstract class Pawn : MonoBehaviour
         {
             pawnComponent.GetComponent<PawnComponent>().OnCombatPhaseEnd();
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Getters/setters
+
+    public FactionCommander GetFaction()
+    {
+        return faction;
     }
 
 

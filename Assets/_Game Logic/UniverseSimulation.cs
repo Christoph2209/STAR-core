@@ -10,8 +10,8 @@ public class UniverseSimulation : MonoBehaviour
     public GameObject Ship;
     public GameObject SolarSystem;
 
-
-    public List<Pawn> pawns = new();
+    [SerializeField]
+    private List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();
     public UniverseChronology universeChronology;
     
@@ -63,7 +63,7 @@ public class UniverseSimulation : MonoBehaviour
 
 
 
-    public Pawn ClosestPawnToPosition(Vector3 targetPosition, out float distance)
+    public Pawn GetClosestPawnToPosition(Vector3 targetPosition, out float distance)
     {
         distance = float.PositiveInfinity;
         Pawn closest = null;
@@ -77,9 +77,9 @@ public class UniverseSimulation : MonoBehaviour
         }
         return closest;
     }
-    public Pawn ClosestPawnInRange(Vector3 targetPosition, float range, out float distance)
+    public Pawn GetClosestPawnInRange(Vector3 targetPosition, float range, out float distance)
     {
-        Pawn closest = ClosestPawnToPosition(targetPosition, out distance);
+        Pawn closest = GetClosestPawnToPosition(targetPosition, out distance);
         if (distance <= range)
         {
             return closest;
@@ -90,8 +90,31 @@ public class UniverseSimulation : MonoBehaviour
         }
     }
 
+    public List<Pawn> GetAllPawnsInRange(Vector3 targetPosition, float range)
+    {
+        List<Pawn> pawnInRange = new();
+        foreach (Pawn pawn in pawns)
+        {
+            if (range > Vector3.Distance(targetPosition, pawn.transform.position))
+            {
+                pawnInRange.Add(pawn);
+            }
+        }
+        return pawnInRange;
+    }
 
-
+    public List<Pawn> GetAllFactionPawns(FactionCommander faction)
+    {
+        List<Pawn> pawnInRange = new();
+        foreach (Pawn pawn in pawns)
+        {
+            if (pawn.GetFaction() == faction)
+            {
+                pawnInRange.Add(pawn);
+            }
+        }
+        return pawnInRange;
+    }
 
 
 

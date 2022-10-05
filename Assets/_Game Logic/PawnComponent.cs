@@ -30,6 +30,11 @@ public class PawnComponent : MonoBehaviour
     public void EstablishPawnComponent(Pawn owner)
     {
         this.owner = owner;
+        owner.UpdateStats();
+    }
+    private void OnDestroy()
+    {
+        owner.UpdateStats();
     }
 
     public void OnCombatPhaseEnd()
