@@ -14,13 +14,14 @@ public class UniverseSimulation : MonoBehaviour
     private List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();
     public UniverseChronology universeChronology;
-    
-    public void GeneratePawn(GameObject pawnPrefab, FactionCommander Owner, string pawnName) 
+
+    public void GeneratePawn(GameObject pawnPrefab, FactionCommander faction, string pawnName, Vector3 position) 
     {
         GameObject pawnGameObject = Instantiate(pawnPrefab, transform);
         Pawn newPawn = pawnGameObject.GetComponent<Pawn>();
-        newPawn.EstablishPawn(pawnName ,this, Owner);
+        newPawn.transform.position = position;
         pawns.Add(newPawn);
+        newPawn.EstablishPawn(pawnName, this, faction);
     }
 
     public bool EstablishFaction(string name, GameObject factionCommanderPrefab)
@@ -124,7 +125,6 @@ public class UniverseSimulation : MonoBehaviour
 
 
 
-
     
     void Start()
     {
@@ -132,9 +132,11 @@ public class UniverseSimulation : MonoBehaviour
         //initialize all of the factions and turnphase tracking
         EstablishUniverseChronolgoy();
         //EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
-       // EstablishFaction("OTHER FACTION", NPCFactionCommander);
-        GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN");
-        
+        EstablishFaction("OTHER FACTION", NPCFactionCommander);
+        GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
+        GeneratePawn(Ship, factionsInPlay[1], "OTHER PAWN", Vector3.right*3);
+
+
     }
 
 

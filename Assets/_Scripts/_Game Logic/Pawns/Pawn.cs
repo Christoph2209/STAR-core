@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 public abstract class Pawn : MonoBehaviour
 {
     [SerializeField]
@@ -9,8 +10,6 @@ public abstract class Pawn : MonoBehaviour
     [SerializeField]
     FactionCommander faction;
 
-    public delegate void MovePawn();
-    public MovePawn movePawn;
 
     public void mvtest()
     {
@@ -52,11 +51,9 @@ public abstract class Pawn : MonoBehaviour
     [HideInInspector]
     private List<GameObject> pawnComponents;//this is the real list that should be referenced by the code and shown at runtime
 
+    Action MovePawn;
 
-    private void Awake()
-    {
-        CopyInspectorPawnValues();
-    }
+
     private void Start()// we want to close these menus after they awake
     {
         CloseComponentMenu();
@@ -74,6 +71,8 @@ public abstract class Pawn : MonoBehaviour
         universeSimulation.universeChronology.MainPhaseEnd.AddListener(() => OnMainPhaseEnd());
         universeSimulation.universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());
         universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
+
+        CopyInspectorPawnValues();
     }
 
 
@@ -155,12 +154,14 @@ public abstract class Pawn : MonoBehaviour
         Debug.Assert(pawnComponent.TryGetComponent(typeof(PawnComponent), out _));
         GameObject newPawnComponent = Instantiate(pawnComponent, componentContainer);
         pawnComponents.Add(newPawnComponent);
-        newPawnComponent.GetComponent<PawnComponent>().EstablishPawnComponent(this);
+        newPawnComponent.GetComponent<PawnComponent>().EstablishPawnComponent(this, universeSimulation);
+        UpdateStats();
     }
 
     private void RemovePawnComponent(GameObject pawnComponent)
     {
         pawnComponents.Remove(pawnComponent);
+        UpdateStats();
         Destroy(pawnComponent);
     }
 
@@ -171,68 +172,58 @@ public abstract class Pawn : MonoBehaviour
         stats = new();
         foreach (GameObject pawnComponent in pawnComponents)
         {
-            PawnComponent p = pawnComponent.GetComponent<PawnComponent>();
-            foreach(Stats s in p.stats)
+            PawnComponent script = pawnComponent.GetComponent<PawnComponent>();
+            foreach(KeyValuePair<string,float> stat in script.Stats)
             {
-                stats.TryAdd(s.StatName, 0);
-                stats[s.StatName] += s.value;
+                stats.TryAdd(stat.Key, 0); //if the stat is not present creat a new one with a starting value of 0
+                stats[stat.Key] += stat.Value;
             }
         }
+
+        //update stat UI
         string statString = "";
         foreach(KeyValuePair<string, float> stat in stats)
         {
             statString += stat.Key + ": " + stat.Value + "\n";
         }
         statsText.text = statString;
-        Debug.Log("UpdatedStats");
     }
 
 
    
     protected virtual void OnPhaseTransition()
-    { 
+    {
+        MovePawn = () => { Debug.Log("No move action taken!"); };
         CloseComponentMenu();
     }
 
 
-    public virtual void OnMainPhaseStart()
+    protected virtual void OnMainPhaseStart()
     {
-        //movePawn => mvtest();
         OnPhaseTransition();
-        foreach (GameObject pawnComponent in pawnComponents)
-        {
-            pawnComponent.GetComponent<PawnComponent>().OnMainPhaseStart();
-        }
     }
-    public virtual void OnMainPhaseEnd()
+    protected virtual void OnMainPhaseEnd()
     {
-        //movePawn();
+        
+        MovePawn();
         OnPhaseTransition();
-        foreach (GameObject pawnComponent in pawnComponents)
-        {
-            pawnComponent.GetComponent<PawnComponent>().OnMainPhaseEnd();
-        }
     }
-    public virtual void OnCombatPhaseStart()
+    protected virtual void OnCombatPhaseStart()
     {
         OnPhaseTransition();
-        foreach (GameObject pawnComponent in pawnComponents)
-        {
-            pawnComponent.GetComponent<PawnComponent>().OnCombatPhaseStart();
-        }
     }
-    public virtual void OnCombatPhaseEnd()
+    protected virtual void OnCombatPhaseEnd()
     {
         OnPhaseTransition();
-        foreach (GameObject pawnComponent in pawnComponents)
-        {
-            pawnComponent.GetComponent<PawnComponent>().OnCombatPhaseEnd();
-        }
+
     }
 
 
 
-
+    public void SetMovePattern(Action moveMethod)
+    {
+        MovePawn = moveMethod;
+    }
 
 
 

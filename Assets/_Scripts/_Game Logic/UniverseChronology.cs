@@ -41,7 +41,6 @@ public class UniverseChronology : MonoBehaviour
 
             //Trasition to main
             currentPhase = global::TurnPhase.TransitionToMain;
-            Debug.Log(currentPhase);
             yield return new WaitForSeconds(transitionTime);
             readiedFactions.Clear();
             //----
@@ -49,14 +48,12 @@ public class UniverseChronology : MonoBehaviour
             //Main 
             currentPhase = global::TurnPhase.Main;
             MainPhaseStart.Invoke();
-            Debug.Log(currentPhase);
             yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
             MainPhaseEnd.Invoke();
             //----
 
             //Transition to combat
             currentPhase = global::TurnPhase.TransitionToCombat;
-            Debug.Log(currentPhase);
             yield return new WaitForSeconds(transitionTime);
             readiedFactions.Clear();
             //----
@@ -64,7 +61,6 @@ public class UniverseChronology : MonoBehaviour
             //Combat
             currentPhase = global::TurnPhase.Combat;
             CombatPhaseStart.Invoke();
-            Debug.Log(currentPhase);
             yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
             CombatPhaseEnd.Invoke();
             //----
@@ -83,15 +79,18 @@ public class UniverseChronology : MonoBehaviour
         if (readiedFactions.Add(factionCommander))
         {
             Debug.Log(factionCommander + " has completed the " + currentPhase + " phase.");
+            Debug.Log(readiedFactions.SetEquals(universeSimulation.factionsInPlay));
+            Debug.Log(universeSimulation.factionsInPlay + "       " + readiedFactions);
             return true;
         }
         else
         {
             readiedFactions.Remove(factionCommander);
-            Debug.Log(factionCommander + " has allready completed the " + currentPhase + " phase!" + "\n" + "Canceling ready Status!");
+            Debug.Log(factionCommander + " is no longer ready to complete" + currentPhase + " phase!" + "\n" + "Canceling ready Status!");
+            Debug.Log(readiedFactions.SetEquals(universeSimulation.factionsInPlay));
             return false;
         }
-
+        
     }
 
 

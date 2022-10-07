@@ -29,9 +29,36 @@ public abstract class FactionCommander : MonoBehaviour
         this.name = name + " Commander";
         this.universeSimulation = universeSimulation;
 
+
+        universeSimulation.universeChronology.MainPhaseStart.AddListener(() => OnMainPhaseStart());
+        universeSimulation.universeChronology.MainPhaseEnd.AddListener(() => OnMainPhaseEnd());
+        universeSimulation.universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());
+        universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
+
+
         return true;
     }
     #endregion
+
+
+    public virtual void OnMainPhaseStart()
+    {
+
+    }
+    public virtual void OnMainPhaseEnd()
+    {
+
+    }
+    public virtual void OnCombatPhaseStart()
+    {
+
+    }
+    public virtual void OnCombatPhaseEnd()
+    {
+
+    }
+
+
 
 
 

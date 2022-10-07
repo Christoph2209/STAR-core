@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TrianglePowerDiverter : PawnComponent
+{
+   
+    public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
+    {
+        base.EstablishPawnComponent(owner, universeSimulation);
+        PowerCell powerCell = GetComponentInChildren<PowerCell>();
+        powerCell.OnSliderValueUpdate = (x) => OnSliderValueUpdate(x);
+    }
+    public void OnSliderValueUpdate(Dictionary<string, float> updatedValues)
+    {
+        foreach(KeyValuePair<string,float> updatedValue in updatedValues)
+        {
+            stats.TryAdd(updatedValue.Key, 0);
+            stats[updatedValue.Key] = updatedValue.Value;
+
+        }
+        owner.UpdateStats();
+
+    }
+}

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 
+
 public class PlayerFactionCommander : FactionCommander 
 {
     float selectionDistance = 1.5f;
@@ -13,6 +14,7 @@ public class PlayerFactionCommander : FactionCommander
 
     private bool isOverUI;
     Pawn closestPawnToCursor;
+    GameObject[] sounds;
     private void Update()
     {
         //TODO Display Pawn Stats
@@ -21,6 +23,8 @@ public class PlayerFactionCommander : FactionCommander
         isOverUI = EventSystem.current.IsPointerOverGameObject();//works as intended, ignore warning
         closestPawnToCursor = universeSimulation.GetClosestPawnInRange(MouseWorldPoint(), selectionDistance, out _);
         MouseHighlight();
+
+
     }
 
 
@@ -141,7 +145,7 @@ public class PlayerFactionCommander : FactionCommander
             }
             if (closestPawnToCursor != null)
             {
-                closestPawnToCursor.OpenStatMenu(this);
+                closestPawnToCursor.OpenStatMenu(actingFaction);
                 lastStatMenuOpened = closestPawnToCursor;
             }
         }
@@ -159,13 +163,13 @@ public class PlayerFactionCommander : FactionCommander
         {
             targetPawn = closestPawnToCursor;
         }
-        //
+        //---
         if (lastComponentMenuOpened != null )
         {
             lastComponentMenuOpened.CloseComponentMenu();
             lastComponentMenuOpened = null;
         }
-        //
+        //---
         if (targetPawn != null)
         {
             targetPawn.OpenComponentMenu(actingFaction);
@@ -183,6 +187,7 @@ public class PlayerFactionCommander : FactionCommander
 
     public void OnTest(InputValue value)
     {
+        
         int index = universeSimulation.factionsInPlay.IndexOf(actingFaction);
         index++;
         index %= universeSimulation.factionsInPlay.Count;
