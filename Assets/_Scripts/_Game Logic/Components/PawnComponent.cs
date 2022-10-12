@@ -10,12 +10,13 @@ using System.Collections.ObjectModel;
 /// </summary>
 public abstract class PawnComponent : MonoBehaviour
 {
+    [SerializeField]
+    private float maxHealth;
+    private float currentHealth;
+
     public Pawn owner;
     
     public TurnPhase activeTurnPhase = TurnPhase.Main;
-
-    public bool isDefaultAction;
-    public int defaultActionPriority;
 
     UniverseSimulation universeSimulation;
 
@@ -23,7 +24,11 @@ public abstract class PawnComponent : MonoBehaviour
     /// The same component should never have more than one of the same starting stat
     /// </summary>
     [SerializeField]
-    private List<startingStat> startingStats;
+    private List<Priority> startingPrioritys;
+    protected Dictionary<string, int> prioritys = new();
+    public ReadOnlyDictionary<string,int> Prioritys { get => new ReadOnlyDictionary<string, int>(prioritys); }
+    [SerializeField]
+    private List<StartingStat> startingStats;
     protected Dictionary<string, float> stats = new();
     public ReadOnlyDictionary<string, float> Stats { get => new ReadOnlyDictionary<string, float>(stats); }
 
@@ -36,18 +41,30 @@ public abstract class PawnComponent : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        foreach (startingStat baseStat in startingStats)
+
+
+        foreach (Priority basePriority in startingPrioritys)
         {
-            stats.Add(baseStat.StatName, baseStat.value);
+            prioritys.Add(basePriority.Name, basePriority.Value);
         }
+        foreach (StartingStat baseStat in startingStats)
+        {
+            stats.Add(baseStat.Name, baseStat.Value);
+        }
+        
+
         this.owner = owner;
         Debug.Log("Owner:" + owner);
+
 
         this.universeSimulation = universeSimulation;
         this.universeSimulation.universeChronology.MainPhaseStart.AddListener(() => OnMainPhaseStart());
         this.universeSimulation.universeChronology.MainPhaseEnd.AddListener(() => OnMainPhaseEnd());
         this.universeSimulation.universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());
         this.universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
+
+        RepairComponent();
+
     }
 
 
@@ -112,6 +129,26 @@ public abstract class PawnComponent : MonoBehaviour
         }
     }
 
+    public float DamageComponent(float damage)
+    {
+        if (damage < 0)
+        {
+            Debug.LogError("Damage can not be a negative number!");
+            return 0;
+        }
+        currentHealth -= damage;
+        float overflow = Mathf.Abs(Mathf.Min(currentHealth, 0f));
+
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        return overflow;
+    }
+    public void RepairComponent()
+    {
+        currentHealth = maxHealth;
+    }
+
+
     protected virtual void DeffensiveAction() { }
     protected virtual void AggressiveAction() { }
     protected virtual void PassiveAction() { }
@@ -121,12 +158,20 @@ public abstract class PawnComponent : MonoBehaviour
 
 
     [System.Serializable]
-    private struct startingStat
+    private struct StartingStat
     {
-        public string StatName;
-        public float value;
+        public string Name;
+        public float Value;
+    }
+    [System.Serializable]
+    private struct Priority
+    {
+        public string Name;
+        public int Value;
     }
 }
+
+
 
 public enum AIBehavior { Deffensive, Aggressive, Passive, Expansionist}
 

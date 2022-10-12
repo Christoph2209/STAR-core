@@ -30,7 +30,7 @@ public class UniverseChronology : MonoBehaviour
 
     IEnumerator TurnPhase()
     {
-        float transitionTime=3;
+        float transitionTime=0.2f;
         int currentRound = 0;
 
 
@@ -90,10 +90,11 @@ public class UniverseChronology : MonoBehaviour
             Debug.Log(readiedFactions.SetEquals(universeSimulation.factionsInPlay));
             return false;
         }
-        
     }
-
-
-
+    public bool IsFactionReady(FactionCommander factionCommander)
+    {
+        return readiedFactions.Contains(factionCommander);
+    }
 }
+
 public enum TurnPhase { TransitionToMain, Main, TransitionToCombat, Combat };

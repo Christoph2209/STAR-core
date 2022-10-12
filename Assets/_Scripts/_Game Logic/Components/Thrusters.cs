@@ -14,6 +14,7 @@ public class Thrusters : PawnComponent
     }
     public void SelectMoveTarget()
     {
+        Debug.Log("Selecting Move Target");
         owner.SetMovePattern(() => MovePattern());
     }
 

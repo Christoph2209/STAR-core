@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Linq;
 public abstract class Pawn : MonoBehaviour
 {
     [SerializeField]
@@ -50,7 +51,7 @@ public abstract class Pawn : MonoBehaviour
     [SerializeField]// why does this make it work? I had a feeling it would work and it did, I don't have time to look into right now unfortunatley
     [HideInInspector]
     private List<GameObject> pawnComponents;//this is the real list that should be referenced by the code and shown at runtime
-
+    private Dictionary<string, List<PawnComponent>> pawnComponentPriorityLists;
     Action MovePawn;
 
 
@@ -73,6 +74,9 @@ public abstract class Pawn : MonoBehaviour
         universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
 
         CopyInspectorPawnValues();
+
+        DamagePawn(8f);
+
     }
 
 
@@ -155,18 +159,49 @@ public abstract class Pawn : MonoBehaviour
         GameObject newPawnComponent = Instantiate(pawnComponent, componentContainer);
         pawnComponents.Add(newPawnComponent);
         newPawnComponent.GetComponent<PawnComponent>().EstablishPawnComponent(this, universeSimulation);
+
+
+        UpdatePrioritys();
         UpdateStats();
     }
 
     private void RemovePawnComponent(GameObject pawnComponent)
     {
         pawnComponents.Remove(pawnComponent);
+
+        UpdatePrioritys();
         UpdateStats();
         Destroy(pawnComponent);
     }
 
 
+    public void UpdatePrioritys()
+    {
+        pawnComponentPriorityLists = new();
+        foreach(GameObject pawnComponent  in pawnComponents)
+        {
+            PawnComponent script = pawnComponent.GetComponent<PawnComponent>();
+            foreach(KeyValuePair<string,int> priority in script.Prioritys)
+            {
+                pawnComponentPriorityLists.TryAdd(priority.Key, new List<PawnComponent>());
+                pawnComponentPriorityLists[priority.Key].Add(script);
+            }
+        }
+        foreach(KeyValuePair<string, List<PawnComponent>> priorityList in pawnComponentPriorityLists)
+        {
+            string priorityName = priorityList.Key;
+            pawnComponentPriorityLists[priorityName].Sort((priorityA, priorityB) => priorityB.Prioritys[priorityName].CompareTo(priorityA.Prioritys[priorityName]));
+        }
 
+
+        Debug.Log("______Draw Order______");
+        for (int i = 0; i < pawnComponentPriorityLists["DrawOrder"].Count; i++) {
+            pawnComponentPriorityLists["DrawOrder"][i].transform.SetSiblingIndex(i);
+            Debug.Log(i + ".    " + pawnComponentPriorityLists["DrawOrder"][i].name);
+        }
+
+    }
+    
     public void UpdateStats()
     {
         stats = new();
@@ -189,7 +224,23 @@ public abstract class Pawn : MonoBehaviour
         statsText.text = statString;
     }
 
+    public void DamagePawn(float damage)
+    {
+        float excess = damage;
+        if (pawnComponentPriorityLists.ContainsKey("DamageOrder"))
+        {
+            for (int i = 0; i < pawnComponentPriorityLists["DamageOrder"].Count; i++)
+            {
+                excess = pawnComponentPriorityLists["DamageOrder"][i].DamageComponent(excess);
+            }
+        }
 
+        if(excess > 0)
+        {
+            Debug.Log("CRITICAL DAMAGE HAS BEEN SUSTAINED!!!!");
+        }
+        
+    }
    
     protected virtual void OnPhaseTransition()
     {

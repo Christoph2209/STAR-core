@@ -113,7 +113,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 203, y: 120}
+  m_SizeDelta: {x: 200, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &-6261162754269557378
 MonoBehaviour:
@@ -127,11 +127,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263d91f53cb65e04c9d8bc02715c2c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1
   owner: {fileID: 0}
   activeTurnPhase: 1
-  isDefaultAction: 0
-  defaultActionPriority: 0
-  startingStats: []
+  startingPrioritys:
+  - Name: DrawOrder
+    Value: 100
+  - Name: DefaultAction
+    Value: 10
+  - Name: DamageOrder
+    Value: 10
+  startingStats:
+  - Name: Sheilds
+    Value: 0
+  - Name: Weapons
+    Value: 0
+  - Name: Thrusters
+    Value: 0
 --- !u!1 &8411365859602193614
 GameObject:
   m_ObjectHideFlags: 0

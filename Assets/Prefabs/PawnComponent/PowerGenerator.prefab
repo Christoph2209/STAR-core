@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f112e03f8a88d454ab156693c3aaf00f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 1
   owner: {fileID: 0}
   activeTurnPhase: 3
-  isDefaultAction: 0
-  defaultActionPriority: 0
-  startingStats:
-  - StatName: Total Power
-    value: 130
+  startingPrioritys:
+  - Name: DamageOrder
+    Value: 5
+  startingStats: []

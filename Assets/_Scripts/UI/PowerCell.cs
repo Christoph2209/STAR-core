@@ -26,9 +26,7 @@ public class PowerCell : MonoBehaviour
     private Vector3 sliderPosition;
 
 
-    public float aValue { get; private set; }
-    public float bValue  { get; private set; }
-    public float cValue  { get; private set; }
+
     [SerializeField]
     string aValueName;
     [SerializeField]
@@ -51,6 +49,7 @@ public class PowerCell : MonoBehaviour
             values.Add(aValueName, 1f / 3f);
             values.Add(bValueName, 1f / 3f);
             values.Add(cValueName, 1f / 3f);
+    
         }
     }
     private void Start()
@@ -60,18 +59,10 @@ public class PowerCell : MonoBehaviour
         }
     }
 
-    private void ResetPowerCell()
-    {
-        sliderPosition = (aVertex + bVertex + cVertex) / 3;
-        bValue = 0.333f;
-        aValue = 0.333f;
-        cValue = 0.333f;
-        slider.transform.localPosition = sliderPosition;
-    }
+
 
     MeshCollider col;
     MeshFilter meshFilter;
-
     Mesh mesh;
     private void UpdatePowerCell()
     {
@@ -135,9 +126,7 @@ public class PowerCell : MonoBehaviour
         slider.transform.localPosition = localTarget;
 
         Vector3 baryCenter = hit.barycentricCoordinate;
-        aValue = baryCenter.x;
-        bValue = baryCenter.y;
-        cValue = baryCenter.z;
+
 
 
         values[aValueName] = baryCenter.x;
@@ -147,6 +136,18 @@ public class PowerCell : MonoBehaviour
         OnSliderValueUpdate(values);
   
         Debug.Log(hit.barycentricCoordinate);
+    }
+
+    public void ResetPowerCell()
+    {
+        sliderPosition = (aVertex + bVertex + cVertex) / 3;
+        values[aValueName] = 1f / 3f;
+        values[bValueName] = 1f / 3f;
+        values[cValueName] = 1f / 3f;
+
+        slider.transform.localPosition = sliderPosition;
+        OnSliderValueUpdate(values);
+
     }
 
 }

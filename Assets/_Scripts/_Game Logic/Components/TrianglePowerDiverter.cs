@@ -10,6 +10,7 @@ public class TrianglePowerDiverter : PawnComponent
         base.EstablishPawnComponent(owner, universeSimulation);
         PowerCell powerCell = GetComponentInChildren<PowerCell>();
         powerCell.OnSliderValueUpdate = (x) => OnSliderValueUpdate(x);
+        powerCell.ResetPowerCell();
     }
     public void OnSliderValueUpdate(Dictionary<string, float> updatedValues)
     {

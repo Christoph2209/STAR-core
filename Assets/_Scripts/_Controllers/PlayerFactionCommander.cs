@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 
 public class PlayerFactionCommander : FactionCommander 
 {
+    [SerializeField]
+    TMP_Text PhaseInfo;
+    
     float selectionDistance = 1.5f;
     Vector3 moveDirection = Vector3.zero;
     float camSpeed = 10f;
@@ -17,6 +21,10 @@ public class PlayerFactionCommander : FactionCommander
     GameObject[] sounds;
     private void Update()
     {
+
+        PhaseInfo.text = actingFaction.factionName + ": " + universeSimulation.universeChronology.currentPhase.ToString() + ", Ready:" + universeSimulation.universeChronology.IsFactionReady(actingFaction);
+
+
         //TODO Display Pawn Stats
        
         universeSimulation.transform.position -= camSpeed * Time.deltaTime * moveDirection;

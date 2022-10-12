@@ -5,15 +5,24 @@ using UnityEngine.InputSystem;
 using System.Linq;
 public class UniverseSimulation : MonoBehaviour
 {
-    public GameObject PlayerFactionCommander;
-    public GameObject NPCFactionCommander;
-    public GameObject Ship;
-    public GameObject SolarSystem;
+
 
     [SerializeField]
     private List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();
+    [HideInInspector]
     public UniverseChronology universeChronology;
+
+
+    //Move to a class that controls the state of the game
+    [Header("Testing:")]
+    public GameObject PlayerFactionCommander;
+    public GameObject NPCFactionCommander;
+    public GameObject Ship;
+    public GameObject SolarSystem;
+    //----------------------------------------------------
+
+
 
     public void GeneratePawn(GameObject pawnPrefab, FactionCommander faction, string pawnName, Vector3 position) 
     {
