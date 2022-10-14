@@ -18,7 +18,7 @@ public abstract class PawnComponent : MonoBehaviour
     
     public TurnPhase activeTurnPhase = TurnPhase.Main;
 
-    UniverseSimulation universeSimulation;
+    protected UniverseSimulation universeSimulation;
 
     /// <summary>
     /// The same component should never have more than one of the same starting stat
@@ -79,28 +79,28 @@ public abstract class PawnComponent : MonoBehaviour
 
 
 
-    public void OnMainPhaseStart()
+    public virtual void OnMainPhaseStart()
     {
         if(activeTurnPhase == TurnPhase.Main)
         {
             gameObject.SetActive(true);
         }
     }
-    public void OnMainPhaseEnd()
+    public virtual void OnMainPhaseEnd()
     {
         if(activeTurnPhase == TurnPhase.Main)
         {
             gameObject.SetActive(false);
         }
     }
-    public void OnCombatPhaseStart()
+    public virtual void OnCombatPhaseStart()
     {
         if (activeTurnPhase == TurnPhase.Combat)
         {
             gameObject.SetActive(true);
         }
     }
-    public void OnCombatPhaseEnd()
+    public virtual void OnCombatPhaseEnd()
     {
         if (activeTurnPhase == TurnPhase.Combat)
         {

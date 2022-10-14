@@ -10,6 +10,7 @@ public class UniverseSimulation : MonoBehaviour
     [SerializeField]
     private List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();
+    public PlayerFactionCommander playerFactionCommander;
     [HideInInspector]
     public UniverseChronology universeChronology;
 
@@ -48,7 +49,13 @@ public class UniverseSimulation : MonoBehaviour
         {
             GameObject faction = Instantiate(factionCommanderPrefab,transform);
             faction.GetComponent<FactionCommander>().EstablishFaction(name, this);
-            factionsInPlay.Add(faction.GetComponent<FactionCommander>());
+            FactionCommander factionCommander = faction.GetComponent<FactionCommander>();
+            factionsInPlay.Add(factionCommander);
+            if (factionCommander.GetType().IsAssignableFrom(typeof(PlayerFactionCommander)))
+            {
+                Debug.LogWarning("FOUND THE PLAYER!!!");
+                playerFactionCommander = (PlayerFactionCommander)factionCommander; 
+            }
             return true;
         }
         else 

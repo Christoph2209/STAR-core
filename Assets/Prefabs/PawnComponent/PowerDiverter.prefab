@@ -138,11 +138,11 @@ MonoBehaviour:
   - Name: DamageOrder
     Value: 10
   startingStats:
-  - Name: Sheilds
+  - Name: Sheilds Power
     Value: 0
-  - Name: Weapons
+  - Name: Weapons Power
     Value: 0
-  - Name: Thrusters
+  - Name: Thrusters Power
     Value: 0
 --- !u!1 &8411365859602193614
 GameObject:

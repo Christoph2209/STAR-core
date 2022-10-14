@@ -52,7 +52,8 @@ public abstract class Pawn : MonoBehaviour
     [HideInInspector]
     private List<GameObject> pawnComponents;//this is the real list that should be referenced by the code and shown at runtime
     private Dictionary<string, List<PawnComponent>> pawnComponentPriorityLists;
-    Action MovePawn;
+    Action Move;
+    Action Attack;
 
 
     private void Start()// we want to close these menus after they awake
@@ -241,10 +242,67 @@ public abstract class Pawn : MonoBehaviour
         }
         
     }
+
+    public float GetAggregatePower()
+    {
+        if (stats.TryGetValue("Aggregate Power", out float power))
+        {
+            return power;
+        }
+        else
+        {
+            stats.Add("Aggregate Power", 0);
+            return 0;
+        }
+    }
+
+    public float GetWeaponsPowerPercent()
+    {
+        if(stats.TryGetValue("Weapons Power", out float power))
+        {
+            return power;
+        }
+        else
+        {
+            stats.Add("Weapons Power", 0);
+            return 0;
+        }
+    }
    
+    public float GetSheildsPowerPercent()
+    {
+        if (stats.TryGetValue("Sheilds Power", out float power))
+        {
+            return power;
+        }
+        else
+        {
+            stats.Add("Sheilds Power", 0);
+            return 0;
+        }
+    }
+
+
+    public float GetThrustersPowerPercent()
+    {
+        if (stats.TryGetValue("Thrusters Power", out float power))
+        {
+            return power;
+        }
+        else
+        {
+            stats.Add("Thrusters Power", 0);
+            return 0;
+        }
+    }
+    
+
+
+
     protected virtual void OnPhaseTransition()
     {
-        MovePawn = () => { Debug.Log("No move action taken!"); };
+        Move = () => { Debug.Log("No move action taken!"); };
+        Attack = () => { Debug.Log("No attack action taken!"); };
         CloseComponentMenu();
     }
 
@@ -256,7 +314,7 @@ public abstract class Pawn : MonoBehaviour
     protected virtual void OnMainPhaseEnd()
     {
         
-        MovePawn();
+        Move();
         OnPhaseTransition();
     }
     protected virtual void OnCombatPhaseStart()
@@ -265,6 +323,7 @@ public abstract class Pawn : MonoBehaviour
     }
     protected virtual void OnCombatPhaseEnd()
     {
+        Attack();
         OnPhaseTransition();
 
     }
@@ -273,7 +332,11 @@ public abstract class Pawn : MonoBehaviour
 
     public void SetMovePattern(Action moveMethod)
     {
-        MovePawn = moveMethod;
+        Move = moveMethod;
+    }
+    public void SetAttackPattern(Action attackMethod)
+    {
+        Attack = attackMethod;
     }
 
 

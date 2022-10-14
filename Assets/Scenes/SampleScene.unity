@@ -135,6 +135,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerFactionCommander
       objectReference: {fileID: 0}
+    - target: {fileID: 1162371920799893116, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4002062866460659274, guid: 59d086d4eb3923c48a6976dd6f675268,
         type: 3}
       propertyPath: universeSimulation
@@ -670,6 +675,17 @@ PrefabInstance:
       propertyPath: pawns.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
+        type: 3}
+      propertyPath: PlayerFactionCommander
+      value: 
+      objectReference: {fileID: 751674279539517908, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+    - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
+        type: 3}
+      propertyPath: playerFactionCommander
+      value: 
+      objectReference: {fileID: 1006644124}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: factionsInPlay.Array.size

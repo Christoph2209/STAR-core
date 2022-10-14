@@ -132,4 +132,6 @@ MonoBehaviour:
   startingPrioritys:
   - Name: DamageOrder
     Value: 5
-  startingStats: []
+  startingStats:
+  - Name: Aggregate Power
+    Value: 100

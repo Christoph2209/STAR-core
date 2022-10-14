@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrianglePowerDiverter : PawnComponent
 {
-   
+
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         base.EstablishPawnComponent(owner, universeSimulation);

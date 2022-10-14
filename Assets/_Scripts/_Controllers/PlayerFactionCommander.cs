@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
-
+using System;
 
 
 public class PlayerFactionCommander : FactionCommander 
@@ -30,7 +30,7 @@ public class PlayerFactionCommander : FactionCommander
         universeSimulation.transform.position -= camSpeed * Time.deltaTime * moveDirection;
         isOverUI = EventSystem.current.IsPointerOverGameObject();//works as intended, ignore warning
         closestPawnToCursor = universeSimulation.GetClosestPawnInRange(MouseWorldPoint(), selectionDistance, out _);
-        MouseHighlight();
+        ProcessMouseHighlight();
 
 
     }
@@ -62,10 +62,14 @@ public class PlayerFactionCommander : FactionCommander
     }
 
 
-
+    
     public void OnMove(InputValue value)
     {
-        
+        if (playerControlOverride != null)
+        {
+            moveDirection = playerControlOverride.OnMove(value);
+            return;
+        }
         moveDirection = new Vector3(value.Get<Vector2>().x, 0, value.Get<Vector2>().y);
         Debug.Log(moveDirection);
     }
@@ -73,13 +77,19 @@ public class PlayerFactionCommander : FactionCommander
 
 
     Vector2 mouseScreenPoint = new(0.5f, 0.5f);
+    
     public void OnMouseMove(InputValue value)
     {
         mouseScreenPoint = value.Get<Vector2>();
+        if (playerControlOverride != null)
+        {
+            playerControlOverride.OnMouseMove(value);
+            return;
+        }
     }
 
 
-
+  
     public Vector3 MouseWorldPoint()
     {
         Ray ray = Camera.main.ScreenPointToRay(mouseScreenPoint);
@@ -104,8 +114,15 @@ public class PlayerFactionCommander : FactionCommander
 
     Vector3 startSelectPoint;
     bool wasOverUI;
+    
     public void OnSelect(InputValue value)
     {
+        if (playerControlOverride != null)
+        {
+            playerControlOverride.OnSelect(value);
+            return;
+        }
+
         float minDragDistance=0.5f;
         Vector3 currentSelectPoint = MouseWorldPoint();
       
@@ -141,9 +158,17 @@ public class PlayerFactionCommander : FactionCommander
             Debug.Log("Implement rectangular select");
         }
     }
+
     Pawn lastStatMenuOpened;
-    private void MouseHighlight()
+    
+    private void ProcessMouseHighlight()
     {
+        if (playerControlOverride != null)
+        {
+            playerControlOverride.OnMouseHighlight();
+            return;
+        }
+
         if (lastStatMenuOpened != closestPawnToCursor)
         {
             if (lastStatMenuOpened != null)
@@ -160,8 +185,15 @@ public class PlayerFactionCommander : FactionCommander
     }
 
     Pawn lastComponentMenuOpened;
+    
     public void OnOpenMenu(InputValue value)
     {
+        if (playerControlOverride!=null)
+        {
+            playerControlOverride.OnOpenMenu(value);
+            return;
+        }
+
         Pawn targetPawn;
         if (isOverUI||closestPawnToCursor == lastComponentMenuOpened)
         {
@@ -204,5 +236,30 @@ public class PlayerFactionCommander : FactionCommander
         Debug.Log(actingFaction);
     }
 
+
+    PlayerControlOverride playerControlOverride;
+    bool isOverride = false;
+    public void OverrideInput(PlayerControlOverride playerControlOverride)
+    {
+        this.playerControlOverride = playerControlOverride;
+
+        isOverride = true;
+        lastComponentMenuOpened.CloseComponentMenu();
+        if (lastStatMenuOpened != null)
+        {
+            lastStatMenuOpened.CloseStatMenu();
+            lastStatMenuOpened = null;// by setting last stat menu opened to null it will reset itself once control resumes
+        }
+    }
+
+    public void RestoreFactionInput()
+    {
+        playerControlOverride = null;
+        isOverride = false;
+        if (lastComponentMenuOpened != null)
+        {
+            lastComponentMenuOpened.OpenComponentMenu(actingFaction);
+        }
+    }
 
 }

@@ -81,4 +81,9 @@ public abstract class FactionCommander : MonoBehaviour
 
     #endregion
 
+    public FactionCommander GetActingFaction()
+    {
+        return actingFaction;
+    }
+
 }
