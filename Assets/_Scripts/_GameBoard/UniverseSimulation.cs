@@ -25,16 +25,17 @@ public class UniverseSimulation : MonoBehaviour
 
 
 
-    public void GeneratePawn(GameObject pawnPrefab, FactionCommander faction, string pawnName, Vector3 position) 
+    public GameObject GeneratePawn(GameObject pawnPrefab, FactionCommander faction, string pawnName, Vector3 position) 
     {
         GameObject pawnGameObject = Instantiate(pawnPrefab, transform);
         Pawn newPawn = pawnGameObject.GetComponent<Pawn>();
         newPawn.transform.position = position;
         pawns.Add(newPawn);
         newPawn.EstablishPawn(pawnName, this, faction);
+        return pawnGameObject;
     }
 
-    public bool EstablishFaction(string name, GameObject factionCommanderPrefab)
+    public FactionCommander EstablishFaction(string name, GameObject factionCommanderPrefab)
     {
         bool isNewFaction = true;
         foreach(FactionCommander factionCommander in factionsInPlay)
@@ -56,11 +57,11 @@ public class UniverseSimulation : MonoBehaviour
                 Debug.LogWarning("FOUND THE PLAYER!!!");
                 playerFactionCommander = (PlayerFactionCommander)factionCommander; 
             }
-            return true;
+            return faction.GetComponent<FactionCommander>();
         }
         else 
         {
-            return false;
+            return null;
         }
     }
 
@@ -139,14 +140,17 @@ public class UniverseSimulation : MonoBehaviour
 
 
 
+    private void Awake()
+    {
+        EstablishUniverseChronolgoy();
+    }
 
 
-    
     void Start()
     {
 
         //initialize all of the factions and turnphase tracking
-        EstablishUniverseChronolgoy();
+
         //EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
         EstablishFaction("OTHER FACTION", NPCFactionCommander);
         GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);

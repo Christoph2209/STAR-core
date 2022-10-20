@@ -235,7 +235,11 @@ public class PlayerFactionCommander : FactionCommander
 
         Debug.Log(actingFaction);
     }
-
+    public void OnExit(InputValue value)
+    {
+        Application.Quit();
+        Debug.Log("Exiting Game");
+    }
 
     PlayerControlOverride playerControlOverride;
     bool isOverride = false;

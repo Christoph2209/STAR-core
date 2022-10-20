@@ -208,7 +208,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4915240466949178303}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4915240466949178304}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1de439227f5e31c40b7ee9a975176f5d, type: 3}
@@ -703,3 +703,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e3b9c50088185e4fb4e63b8c4512854, type: 3}
+--- !u!1 &4915240466949178304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4915240466902235279, guid: 0e3b9c50088185e4fb4e63b8c4512854,
+    type: 3}
+  m_PrefabInstance: {fileID: 4915240466949178303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4915240466949178305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4915240466949178304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c4725becd6e094aa23525ecfaf3f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  universeLength: 2
+  universeWidth: 2
+  zones: []
+  zoneProb: 0.1
+  planet: {fileID: 1825581157490703194, guid: dd1c5b4551afd2447a94a60ac16cb2dc, type: 3}
