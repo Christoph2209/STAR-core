@@ -9,6 +9,7 @@ public class StartMenuGroup : MonoBehaviour
    {
         scene = "Assets/Scenes/Menus/Main/GameOverMenu.unity";
         SceneManager.LoadScene(scene);
+        SoundManager.PlaySound();
    }
 
    public void QuitGame()
