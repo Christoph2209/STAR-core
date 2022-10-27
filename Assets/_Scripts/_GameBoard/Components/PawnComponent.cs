@@ -17,6 +17,7 @@ public abstract class PawnComponent : MonoBehaviour
     public Pawn owner;
     
     public TurnPhase activeTurnPhase = TurnPhase.Main;
+    public bool isForeign = false;
 
     protected UniverseSimulation universeSimulation;
 

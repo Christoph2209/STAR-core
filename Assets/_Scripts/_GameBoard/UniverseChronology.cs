@@ -97,4 +97,4 @@ public class UniverseChronology : MonoBehaviour
     }
 }
 
-public enum TurnPhase { TransitionToMain, Main, TransitionToCombat, Combat };
+public enum TurnPhase { TransitionToMain, Main, TransitionToCombat, Combat, None};

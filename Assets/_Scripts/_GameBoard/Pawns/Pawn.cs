@@ -11,14 +11,10 @@ public abstract class Pawn : MonoBehaviour
     [SerializeField]
     FactionCommander faction;
 
-
-    public void mvtest()
-    {
-        Debug.Log("No Move Action Taken");
-    }
-
     public GameObject componentMenu;
+    public GameObject foreignComponentMenu;
     public Transform componentContainer;
+    public Transform foreignComponentContainer;
     public GameObject statsMenu;
     public TMP_Text statsText;
 
@@ -123,7 +119,7 @@ public abstract class Pawn : MonoBehaviour
         }
         else
         {
-            
+            foreignComponentMenu.SetActive(true);
             Debug.Log("Opening "+ this +" Foreign Menu");
         }
         
@@ -131,6 +127,7 @@ public abstract class Pawn : MonoBehaviour
     public void CloseComponentMenu()
     {
         componentMenu.SetActive(false);
+        foreignComponentMenu.SetActive(false);
         Debug.Log(this + " is closing menus");
     }
     public void OpenStatMenu(FactionCommander faction)
@@ -157,10 +154,19 @@ public abstract class Pawn : MonoBehaviour
     private void AddPawnComponent(GameObject pawnComponent)
     {
         Debug.Assert(pawnComponent.TryGetComponent(typeof(PawnComponent), out _));
-        GameObject newPawnComponent = Instantiate(pawnComponent, componentContainer);
+        GameObject newPawnComponent = Instantiate(pawnComponent,componentContainer);
         pawnComponents.Add(newPawnComponent);
-        newPawnComponent.GetComponent<PawnComponent>().EstablishPawnComponent(this, universeSimulation);
-
+        PawnComponent c = newPawnComponent.GetComponent<PawnComponent>();
+        if (c.isForeign)
+        {
+            newPawnComponent.transform.SetParent( foreignComponentContainer);
+        }
+        else
+        {
+            newPawnComponent.transform.SetParent(componentContainer);
+        }
+        
+        c.EstablishPawnComponent(this, universeSimulation);
 
         UpdatePrioritys();
         UpdateStats();
@@ -353,7 +359,10 @@ public abstract class Pawn : MonoBehaviour
     {
         return faction;
     }
-
+    public void SetFaction(FactionCommander faction)
+    {
+        this.faction = faction;
+    }
 
 }
 
