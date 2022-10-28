@@ -130,19 +130,20 @@ MonoBehaviour:
   maxHealth: 1
   owner: {fileID: 0}
   activeTurnPhase: 1
+  isForeign: 0
   startingPrioritys:
-  - Name: DrawOrder
+  - Name: 0
     Value: 100
-  - Name: DefaultAction
+  - Name: 1
     Value: 10
-  - Name: DamageOrder
+  - Name: 2
     Value: 10
   startingStats:
-  - Name: Sheilds Power
+  - Name: 1
     Value: 0
-  - Name: Weapons Power
+  - Name: 2
     Value: 0
-  - Name: Thrusters Power
+  - Name: 3
     Value: 0
 --- !u!1 &8411365859602193614
 GameObject:
@@ -272,21 +273,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412948709750067259, guid: edf8ec1369b22444e957934b340a9863,
-        type: 3}
-      propertyPath: aValueName
-      value: Sheilds
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412948709750067259, guid: edf8ec1369b22444e957934b340a9863,
-        type: 3}
-      propertyPath: bValueName
-      value: Weapons
-      objectReference: {fileID: 0}
-    - target: {fileID: 3412948709750067259, guid: edf8ec1369b22444e957934b340a9863,
-        type: 3}
-      propertyPath: cValueName
-      value: Thrusters
       objectReference: {fileID: 0}
     - target: {fileID: 3708477706087538035, guid: edf8ec1369b22444e957934b340a9863,
         type: 3}

@@ -25,11 +25,6 @@ public class UniverseGeneration : MonoBehaviour
 
     public void GenerateUniverse(){
 
-        ////clean slate for demonstration /*
-        //foreach (Transform child in transform) {
-        //    Destroy(child.gameObject    );
-        //}
-
         //generate universe
         for (int i = 0; i < universeLength; i++) {
             for (int j = 0; j < universeWidth; j++) {

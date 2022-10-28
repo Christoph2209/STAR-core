@@ -267,7 +267,7 @@ MonoBehaviour:
   activeTurnPhase: 1
   isForeign: 1
   startingPrioritys:
-  - Name: Draw Order
+  - Name: DrawOrder
     Value: 10000
   startingStats: []
   settleRange: 5

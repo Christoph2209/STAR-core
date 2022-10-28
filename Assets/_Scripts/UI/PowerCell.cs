@@ -28,18 +28,18 @@ public class PowerCell : MonoBehaviour
 
 
     [SerializeField]
-    string aValueName;
+    ComponentStat aValueName;
     [SerializeField]
-    string bValueName;
+    ComponentStat bValueName;
     [SerializeField]
-    string cValueName;
+    ComponentStat cValueName;
 
-    private Dictionary<string, float> values;
+    private Dictionary<ComponentStat, float> values;
 
     [SerializeField]
     private GameObject slider;
 
-    public Action<Dictionary<string,float>> OnSliderValueUpdate;
+    public Action<Dictionary<ComponentStat,float>> OnSliderValueUpdate;
 
     private void Awake()
     {

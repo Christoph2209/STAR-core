@@ -6,6 +6,18 @@ public class SettleSystem : PawnComponent
 {
     public float settleRange=2;
 
+    public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
+    {
+        base.EstablishPawnComponent(owner, universeSimulation);
+        if (owner.GetFaction() == null)
+        {
+            activeTurnPhase = TurnPhase.Main;
+        }
+        else
+        {
+            activeTurnPhase = TurnPhase.None;
+        }
+    }
     public void Settle(FactionCommander faction)
     {
         bool isFriendlyPawnInRange = false;
@@ -39,8 +51,20 @@ public class SettleSystem : PawnComponent
     // Start is called before the first frame update
     public void Settle()
     {
-        FactionCommander actingFaction = universeSimulation.playerFactionCommander;
+        FactionCommander actingFaction = universeSimulation.playerFactionCommander.GetActingFaction();
         Settle(actingFaction);
-        
+        owner.CloseComponentMenu();
+    }
+    protected override void OnFactionUpdate()
+    {
+        base.OnFactionUpdate();
+        if(owner.GetFaction()== null)
+        {
+            activeTurnPhase = TurnPhase.Main;
+        }
+        else
+        {
+            activeTurnPhase = TurnPhase.None;
+        }
     }
 }

@@ -129,9 +129,10 @@ MonoBehaviour:
   maxHealth: 1
   owner: {fileID: 0}
   activeTurnPhase: 3
+  isForeign: 0
   startingPrioritys:
-  - Name: DamageOrder
+  - Name: 0
     Value: 5
   startingStats:
-  - Name: Aggregate Power
+  - Name: 0
     Value: 100

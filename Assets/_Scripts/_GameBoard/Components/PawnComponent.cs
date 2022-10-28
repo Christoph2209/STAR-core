@@ -26,12 +26,12 @@ public abstract class PawnComponent : MonoBehaviour
     /// </summary>
     [SerializeField]
     private List<Priority> startingPrioritys;
-    protected Dictionary<string, int> prioritys = new();
-    public ReadOnlyDictionary<string,int> Prioritys { get => new ReadOnlyDictionary<string, int>(prioritys); }
+    protected Dictionary<ComponentPriority, int> prioritys = new();
+    public ReadOnlyDictionary<ComponentPriority,int> Prioritys { get => new ReadOnlyDictionary<ComponentPriority, int>(prioritys); }
     [SerializeField]
     private List<StartingStat> startingStats;
-    protected Dictionary<string, float> stats = new();
-    public ReadOnlyDictionary<string, float> Stats { get => new ReadOnlyDictionary<string, float>(stats); }
+    protected Dictionary<ComponentStat, float> stats = new();
+    public ReadOnlyDictionary<ComponentStat, float> Stats { get => new ReadOnlyDictionary<ComponentStat, float>(stats); }
 
 
 
@@ -64,6 +64,7 @@ public abstract class PawnComponent : MonoBehaviour
         this.universeSimulation.universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());
         this.universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
 
+        owner.OnFactionUpdate.AddListener(()=>OnFactionUpdate());
         RepairComponent();
 
     }
@@ -109,6 +110,7 @@ public abstract class PawnComponent : MonoBehaviour
         }
     }
 
+    protected virtual void OnFactionUpdate() { }
 
 
     public void TakeAction(AIBehavior behavior)
@@ -161,13 +163,13 @@ public abstract class PawnComponent : MonoBehaviour
     [System.Serializable]
     private struct StartingStat
     {
-        public string Name;
+        public ComponentStat Name;
         public float Value;
     }
     [System.Serializable]
     private struct Priority
     {
-        public string Name;
+        public ComponentPriority Name;
         public int Value;
     }
 }

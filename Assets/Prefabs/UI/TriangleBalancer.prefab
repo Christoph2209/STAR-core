@@ -60,9 +60,9 @@ MonoBehaviour:
   bColor: {r: 1, g: 0, b: 0, a: 0}
   cColor: {r: 0, g: 1, b: 0, a: 0}
   sliderPosition: {x: 0, y: 28.867514, z: 0}
-  aValueName: 
-  bValueName: 
-  cValueName: 
+  aValueName: 1
+  bValueName: 2
+  cValueName: 3
   slider: {fileID: 4451041327413509317}
 --- !u!33 &1283866913690730895
 MeshFilter:

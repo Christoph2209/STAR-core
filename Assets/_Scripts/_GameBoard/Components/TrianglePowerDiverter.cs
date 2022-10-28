@@ -12,9 +12,9 @@ public class TrianglePowerDiverter : PawnComponent
         powerCell.OnSliderValueUpdate = (x) => OnSliderValueUpdate(x);
         powerCell.ResetPowerCell();
     }
-    public void OnSliderValueUpdate(Dictionary<string, float> updatedValues)
+    public void OnSliderValueUpdate(Dictionary<ComponentStat, float> updatedValues)
     {
-        foreach(KeyValuePair<string,float> updatedValue in updatedValues)
+        foreach(KeyValuePair<ComponentStat,float> updatedValue in updatedValues)
         {
             stats.TryAdd(updatedValue.Key, 0);
             stats[updatedValue.Key] = updatedValue.Value;

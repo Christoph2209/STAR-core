@@ -4,21 +4,30 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Linq;
+using UnityEngine.Events;
+
 public abstract class Pawn : MonoBehaviour
 {
     [SerializeField]
-    UniverseSimulation universeSimulation;
+    private UniverseSimulation universeSimulation;
     [SerializeField]
-    FactionCommander faction;
+    private FactionCommander faction;
+    [SerializeField]
+    private GameObject componentMenu;
+    [SerializeField]
+    private GameObject foreignComponentMenu;
+    [SerializeField]
+    private Transform componentContainer;
+    [SerializeField]
+    private Transform foreignComponentContainer;
+    [SerializeField]
+    private GameObject statsMenu;
+    [SerializeField]
+    private TMP_Text statsText;
+    [SerializeField]
 
-    public GameObject componentMenu;
-    public GameObject foreignComponentMenu;
-    public Transform componentContainer;
-    public Transform foreignComponentContainer;
-    public GameObject statsMenu;
-    public TMP_Text statsText;
+    public Dictionary<ComponentStat, float> stats = new();
 
-    public Dictionary<string, float> stats = new();
 
     #region Copy and lock inpsector value hack
     [SerializeField]
@@ -44,13 +53,17 @@ public abstract class Pawn : MonoBehaviour
 
 
     #endregion
+
     [SerializeField]// why does this make it work? I had a feeling it would work and it did, I don't have time to look into right now unfortunatley
     [HideInInspector]
     private List<GameObject> pawnComponents;//this is the real list that should be referenced by the code and shown at runtime
-    private Dictionary<string, List<PawnComponent>> pawnComponentPriorityLists;
-    Action Move;
-    Action Attack;
+    private Dictionary<ComponentPriority, List<PawnComponent>> pawnComponentPriorityLists;
+   
+    private Action Move;
+    private Action Attack;
 
+    public UnityEvent OnStatsUpdate = new();
+    public UnityEvent OnFactionUpdate= new();
 
     private void Start()// we want to close these menus after they awake
     {
@@ -176,35 +189,49 @@ public abstract class Pawn : MonoBehaviour
     {
         pawnComponents.Remove(pawnComponent);
 
+
         UpdatePrioritys();
         UpdateStats();
         Destroy(pawnComponent);
     }
+    
+    private List<T> GetPawnComponents<T>() where T : new()
+    {
+        List<T> pawnComponentsOfType = new();
+        foreach (GameObject cgameObject in pawnComponents)
+        {
+            PawnComponent c = cgameObject.GetComponent<PawnComponent>();
 
-
+            if (c.GetType() is T componentOfType)
+            {
+                pawnComponentsOfType.Add(componentOfType);
+            }
+        }
+        return pawnComponentsOfType;
+    }
     public void UpdatePrioritys()
     {
         pawnComponentPriorityLists = new();
         foreach(GameObject pawnComponent  in pawnComponents)
         {
             PawnComponent script = pawnComponent.GetComponent<PawnComponent>();
-            foreach(KeyValuePair<string,int> priority in script.Prioritys)
+            foreach(KeyValuePair<ComponentPriority,int> priority in script.Prioritys)
             {
                 pawnComponentPriorityLists.TryAdd(priority.Key, new List<PawnComponent>());
                 pawnComponentPriorityLists[priority.Key].Add(script);
             }
         }
-        foreach(KeyValuePair<string, List<PawnComponent>> priorityList in pawnComponentPriorityLists)
+        foreach(KeyValuePair<ComponentPriority, List<PawnComponent>> priorityList in pawnComponentPriorityLists)
         {
-            string priorityName = priorityList.Key;
+            ComponentPriority priorityName = priorityList.Key;
             pawnComponentPriorityLists[priorityName].Sort((priorityA, priorityB) => priorityB.Prioritys[priorityName].CompareTo(priorityA.Prioritys[priorityName]));
         }
 
 
         Debug.Log("______Draw Order______");
-        for (int i = 0; i < pawnComponentPriorityLists["DrawOrder"].Count; i++) {
-            pawnComponentPriorityLists["DrawOrder"][i].transform.SetSiblingIndex(i);
-            Debug.Log(i + ".    " + pawnComponentPriorityLists["DrawOrder"][i].name);
+        for (int i = 0; i < pawnComponentPriorityLists[ComponentPriority.DrawOrder].Count; i++) {
+            pawnComponentPriorityLists[ComponentPriority.DrawOrder][i].transform.SetSiblingIndex(i);
+            Debug.Log(i + ".    " + pawnComponentPriorityLists[ComponentPriority.DrawOrder][i].name);
         }
 
     }
@@ -215,7 +242,7 @@ public abstract class Pawn : MonoBehaviour
         foreach (GameObject pawnComponent in pawnComponents)
         {
             PawnComponent script = pawnComponent.GetComponent<PawnComponent>();
-            foreach(KeyValuePair<string,float> stat in script.Stats)
+            foreach(KeyValuePair<ComponentStat,float> stat in script.Stats)
             {
                 stats.TryAdd(stat.Key, 0); //if the stat is not present creat a new one with a starting value of 0
                 stats[stat.Key] += stat.Value;
@@ -224,86 +251,48 @@ public abstract class Pawn : MonoBehaviour
 
         //update stat UI
         string statString = "";
-        foreach(KeyValuePair<string, float> stat in stats)
+        foreach(KeyValuePair<ComponentStat, float> stat in stats)
         {
             statString += stat.Key + ": " + stat.Value + "\n";
         }
         statsText.text = statString;
+        OnStatsUpdate.Invoke();
     }
+
+
+
+
+    public float GetStats(ComponentStat stat)
+    {
+        if (stats.TryGetValue(stat, out float value))
+        {
+            return value;
+        }
+        else
+        {
+            stats.Add(stat, 0);
+            return 0;
+        }
+    }
+
 
     public void DamagePawn(float damage)
     {
         float excess = damage;
-        if (pawnComponentPriorityLists.ContainsKey("DamageOrder"))
+        if (pawnComponentPriorityLists.ContainsKey(ComponentPriority.DamageOrder))
         {
-            for (int i = 0; i < pawnComponentPriorityLists["DamageOrder"].Count; i++)
+            for (int i = 0; i < pawnComponentPriorityLists[ComponentPriority.DamageOrder].Count; i++)
             {
-                excess = pawnComponentPriorityLists["DamageOrder"][i].DamageComponent(excess);
+                excess = pawnComponentPriorityLists[ComponentPriority.DamageOrder][i].DamageComponent(excess);
             }
         }
 
-        if(excess > 0)
+        if (excess > 0)
         {
             Debug.Log("CRITICAL DAMAGE HAS BEEN SUSTAINED!!!!");
         }
-        
+
     }
-
-    public float GetAggregatePower()
-    {
-        if (stats.TryGetValue("Aggregate Power", out float power))
-        {
-            return power;
-        }
-        else
-        {
-            stats.Add("Aggregate Power", 0);
-            return 0;
-        }
-    }
-
-    public float GetWeaponsPowerPercent()
-    {
-        if(stats.TryGetValue("Weapons Power", out float power))
-        {
-            return power;
-        }
-        else
-        {
-            stats.Add("Weapons Power", 0);
-            return 0;
-        }
-    }
-   
-    public float GetSheildsPowerPercent()
-    {
-        if (stats.TryGetValue("Sheilds Power", out float power))
-        {
-            return power;
-        }
-        else
-        {
-            stats.Add("Sheilds Power", 0);
-            return 0;
-        }
-    }
-
-
-    public float GetThrustersPowerPercent()
-    {
-        if (stats.TryGetValue("Thrusters Power", out float power))
-        {
-            return power;
-        }
-        else
-        {
-            stats.Add("Thrusters Power", 0);
-            return 0;
-        }
-    }
-    
-
-
 
     protected virtual void OnPhaseTransition()
     {
@@ -362,6 +351,7 @@ public abstract class Pawn : MonoBehaviour
     public void SetFaction(FactionCommander faction)
     {
         this.faction = faction;
+        OnFactionUpdate.Invoke();
     }
 
 }

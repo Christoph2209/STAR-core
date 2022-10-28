@@ -265,10 +265,11 @@ MonoBehaviour:
   maxHealth: 1
   owner: {fileID: 0}
   activeTurnPhase: 1
+  isForeign: 0
   startingPrioritys:
-  - Name: DrawOrder
+  - Name: 0
     Value: 90
-  - Name: DamageOrder
+  - Name: 2
     Value: 1
   startingStats: []
 --- !u!1 &7382267370808366029

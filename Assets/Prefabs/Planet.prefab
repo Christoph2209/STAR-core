@@ -57,8 +57,14 @@ MonoBehaviour:
   statsMenu: {fileID: 7202497222140181540}
   statsText: {fileID: 1377697391012707880}
   setPawnComponents:
-  - {fileID: 4369763219849521649, guid: ac0d203326efa0945993939b75a62f8d, type: 3}
+  - {fileID: 4369763219849521649, guid: 07ededef51f40b747a20c04725975c3e, type: 3}
   pawnComponents: []
+  OnStatsUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFactionUpdate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8722806584025753646
 GameObject:
   m_ObjectHideFlags: 0
