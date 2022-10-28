@@ -153,9 +153,13 @@ public class UniverseSimulation : MonoBehaviour
 
         //EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
         EstablishFaction("OTHER FACTION", NPCFactionCommander);
-        GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
+        GameObject playerPawn = GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
         GeneratePawn(Ship, factionsInPlay[1], "OTHER PAWN", Vector3.right*3);
 
+        CargoHold.AddResources(playerPawn.GetComponent<Pawn>(), ComponentResource.Medium, 50);
+        Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() },ComponentResource.Rare)+ "Rare Resources available");
+        Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.Medium) + "Medium Resources available");
+        Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.WellDone) + "WellDone Resources available");
 
     }
 

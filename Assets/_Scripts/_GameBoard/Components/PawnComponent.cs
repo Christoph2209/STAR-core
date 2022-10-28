@@ -139,6 +139,7 @@ public abstract class PawnComponent : MonoBehaviour
             Debug.LogError("Damage can not be a negative number!");
             return 0;
         }
+
         currentHealth -= damage;
         float overflow = Mathf.Abs(Mathf.Min(currentHealth, 0f));
 

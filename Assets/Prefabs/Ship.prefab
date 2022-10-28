@@ -62,7 +62,18 @@ MonoBehaviour:
   - {fileID: 4369763219849521649, guid: 9c7b24e8024537f45b2b9fe965709139, type: 3}
   - {fileID: 4369763219849521649, guid: b80c792b97f5eae4a88bf7dff3037121, type: 3}
   - {fileID: 4369763219849521649, guid: 07ededef51f40b747a20c04725975c3e, type: 3}
+  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
+  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
+  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
+  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
+  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
   pawnComponents: []
+  OnStatsUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFactionUpdate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8722806584025753646
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,12 +359,17 @@ PrefabInstance:
     - target: {fileID: 8163238627979813518, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.32118195
       objectReference: {fileID: 0}
     - target: {fileID: 8163238627979813518, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163238628419941447, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1245.4
       objectReference: {fileID: 0}
     - target: {fileID: 8163238628419941447, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}
@@ -521,6 +537,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Value
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163238628419941447, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8163238628419941447, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}

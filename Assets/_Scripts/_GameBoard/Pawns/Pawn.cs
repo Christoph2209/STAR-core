@@ -185,7 +185,7 @@ public abstract class Pawn : MonoBehaviour
         UpdateStats();
     }
 
-    private void RemovePawnComponent(GameObject pawnComponent)
+    public void RemovePawnComponent(GameObject pawnComponent)
     {
         pawnComponents.Remove(pawnComponent);
 
@@ -352,6 +352,11 @@ public abstract class Pawn : MonoBehaviour
     {
         this.faction = faction;
         OnFactionUpdate.Invoke();
+    }
+
+    public List<PawnComponent> GetComponentPriorityList(ComponentPriority cp)
+    {
+        return pawnComponentPriorityLists[cp];
     }
 
 }
