@@ -10,6 +10,11 @@ using System.Collections.ObjectModel;
 /// </summary>
 public abstract class PawnComponent : MonoBehaviour
 {
+
+    public List<Cost> price;
+    public GameObject icon;
+
+
     [SerializeField]
     private float maxHealth;
     private float currentHealth;
@@ -176,6 +181,11 @@ public abstract class PawnComponent : MonoBehaviour
 }
 
 
-
+[System.Serializable]
+public struct Cost
+{
+    public ComponentResource type;
+    public int value;
+}
 public enum AIBehavior { Deffensive, Aggressive, Passive, Expansionist}
 
