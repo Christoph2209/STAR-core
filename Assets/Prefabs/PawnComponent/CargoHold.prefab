@@ -132,6 +132,6 @@ MonoBehaviour:
   isForeign: 0
   startingPrioritys: []
   startingStats: []
-  resourceType: 1
+  resourceType: 0
   maxResources: 10
   resources: 3
