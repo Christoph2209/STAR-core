@@ -7,10 +7,14 @@ public class StartMenuGroup : MonoBehaviour
 {
     public void PlayGame(string scene)
    {
-        scene = "Assets/Scenes/Menus/Main/GameOverMenu.unity";
+        scene = "Assets/Scenes/SampleScene.unity";
         SceneManager.LoadScene(scene);
-        SoundManager.PlaySound();
    }
+
+    public void ReportBug()
+    {
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSdYi0FtZtnpq76GEI5_deuLjHJ9PPHNVg-168bor4B2zt0SMQ/viewform?usp=sf_link");
+    }
 
    public void QuitGame()
    {
