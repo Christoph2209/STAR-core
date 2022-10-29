@@ -15,12 +15,22 @@ public class Shop : PawnComponent
     {
         return componentPrefab.GetComponent<PawnComponent>().icon;
     }
+    //This method is used to purchase an item. The resources can be pulled from any pawn. The target recieves the pawn component
+    private bool TryPurchaseItem(List<Pawn> customers, Pawn target, GameObject pawnComponent)
+    {
+        List<Cost> resourceCost = GetComponentCost(pawnComponent);
 
-    //private bool TryPurchaseItem(List<Pawn> customers, GameObject item)
-    //{
-    //    int cost = GetComponentCost(item);
-    //    CargoHold.TryRemoveResources(customers,cost.)
-    //}
+        if(CargoHold.TryRemoveResources(customers, resourceCost))
+        {
+            target.AddPawnComponent(pawnComponent);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
 
 
 }

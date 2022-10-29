@@ -35,36 +35,45 @@ public class CargoHold : PawnComponent
             return totalResources;
     }
 
-    public static bool TryRemoveResources(List<Pawn> pawns,ComponentResource componentResource, int value)
+    public static bool TryRemoveResources(List<Pawn> pawns, List<Cost> resources)
     {
-        if(GetTotalResources(pawns,componentResource)< value && value < 0)
+        foreach (Cost resource in resources)//verify the resources are there
         {
-            Debug.Log("Invalid value");
-            return false;
+            if (GetTotalResources(pawns, resource.type) < resource.value || resource.value< 0)
+            {
+                Debug.Log("Failed To Purchase");
+                return false;
+            }
         }
 
 
-        int overflow = value;
-        foreach (Pawn pawn in pawns)
-        {
-            List<PawnComponent> cargoList = pawn.GetComponentPriorityList(ComponentPriority.SellOrder);
-            for (int i = 0; i < cargoList.Count; i++)
-            {
-                if (cargoList[i] is CargoHold cargoHold && cargoHold.resourceType == componentResource)
-                {
-                    overflow -= cargoHold.resources;
-                    if (overflow <= 0)
-                    {
-                        cargoHold.resources = -overflow;
-                        break;
-                    }
-                    else
-                    {
-                        cargoHold.resources = 0;
-                    }
 
+        foreach (Cost resource in resources)// remove all of the resources
+        {
+
+            int overflow = resource.value;
+            foreach (Pawn pawn in pawns)
+            {
+                List<PawnComponent> cargoList = pawn.GetComponentPriorityList(ComponentPriority.SellOrder);
+                for (int i = 0; i < cargoList.Count; i++)
+                {
+                    if (cargoList[i] is CargoHold cargoHold && cargoHold.resourceType == resource.type)
+                    {
+                        overflow -= cargoHold.resources;
+                        if (overflow <= 0)
+                        {
+                            cargoHold.resources = -overflow;
+                            break;
+                        }
+                        else
+                        {
+                            cargoHold.resources = 0;
+                        }
+
+                    }
                 }
             }
+
         }
         return true;
         

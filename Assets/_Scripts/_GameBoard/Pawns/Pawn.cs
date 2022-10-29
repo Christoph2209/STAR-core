@@ -164,7 +164,7 @@ public abstract class Pawn : MonoBehaviour
 
 
 
-    private void AddPawnComponent(GameObject pawnComponent)
+    public void AddPawnComponent(GameObject pawnComponent)
     {
         Debug.Assert(pawnComponent.TryGetComponent(typeof(PawnComponent), out _));
         GameObject newPawnComponent = Instantiate(pawnComponent,componentContainer);
