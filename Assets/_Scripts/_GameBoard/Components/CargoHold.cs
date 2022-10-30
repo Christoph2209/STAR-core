@@ -14,7 +14,14 @@ public class CargoHold : PawnComponent
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         base.EstablishPawnComponent(owner, universeSimulation);
-        prioritys.TryAdd(ComponentPriority.SellOrder, -resources);//Less resources, higher priority.
+        if (prioritys.TryAdd(ComponentPriority.SellOrder, -resources))
+        {//Less resources, higher priority.
+            Debug.Log("Added priority");
+        }
+        else
+        {
+            Debug.LogError("Failed to add priority");
+        }
     }
 
     public static int GetTotalResources(List<Pawn> pawns, ComponentResource componentResource)

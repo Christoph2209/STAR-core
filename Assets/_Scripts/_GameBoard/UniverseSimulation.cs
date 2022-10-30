@@ -121,6 +121,19 @@ public class UniverseSimulation : MonoBehaviour
         return pawnInRange;
     }
 
+    public List<Pawn> GetAllPawnsInRange(FactionCommander faction, Vector3 targetPosition, float range)
+    {
+        List<Pawn> pawnInRange = new();
+        foreach (Pawn pawn in pawns)
+        {
+            if (range > Vector3.Distance(targetPosition, pawn.transform.position) && pawn.GetFaction() == faction)
+            {
+                pawnInRange.Add(pawn);
+            }
+        }
+        return pawnInRange;
+    }
+
     public List<Pawn> GetAllFactionPawns(FactionCommander faction)
     {
         List<Pawn> pawnInRange = new();
@@ -133,7 +146,6 @@ public class UniverseSimulation : MonoBehaviour
         }
         return pawnInRange;
     }
-
 
 
 

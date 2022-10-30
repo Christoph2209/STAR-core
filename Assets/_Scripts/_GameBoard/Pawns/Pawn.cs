@@ -356,7 +356,14 @@ public abstract class Pawn : MonoBehaviour
 
     public List<PawnComponent> GetComponentPriorityList(ComponentPriority cp)
     {
-        return pawnComponentPriorityLists[cp];
+        if (pawnComponentPriorityLists.ContainsKey(cp))
+        {
+            return pawnComponentPriorityLists[cp];
+        }
+        else
+        {
+            return new List<PawnComponent> { };
+        }
     }
 
 }
