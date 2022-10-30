@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CargoHold : PawnComponent
+public class CargoHold : TransferableComponent
 {
     [SerializeField]
     private ComponentResource resourceType;
@@ -11,6 +11,7 @@ public class CargoHold : PawnComponent
     [SerializeField]
     private int resources = 10;
 
+
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         base.EstablishPawnComponent(owner, universeSimulation);
@@ -18,10 +19,7 @@ public class CargoHold : PawnComponent
         {//Less resources, higher priority.
             Debug.Log("Added priority");
         }
-        else
-        {
-            Debug.LogError("Failed to add priority");
-        }
+
     }
 
     public static int GetTotalResources(List<Pawn> pawns, ComponentResource componentResource)
@@ -70,11 +68,13 @@ public class CargoHold : PawnComponent
                         if (overflow <= 0)
                         {
                             cargoHold.resources = -overflow;
+                            cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
                             break;
                         }
                         else
                         {
                             cargoHold.resources = 0;
+                            cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
                         }
 
                     }
@@ -104,10 +104,13 @@ public class CargoHold : PawnComponent
 
                 excess = Mathf.Max(0, cargoHold.resources - cargoHold.maxResources);// set excess equal to how much resources overflowed. If the value is less than or equal to 0 clam the excess to 0
                 cargoHold.resources = Mathf.Clamp(cargoHold.resources, 0, cargoHold.maxResources);
+                cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
 
             }
         }
 
         return excess;
     }
+
+
 }

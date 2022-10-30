@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using System.Linq;
 using UnityEngine.Events;
+using UnityEditor;
 
 public abstract class Pawn : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public abstract class Pawn : MonoBehaviour
             
             if (pawnComponent != null)
             {
-                AddPawnComponent(pawnComponent);
+                InstantiatePawnComponent(pawnComponent);
             }
             else
             {
@@ -163,11 +164,13 @@ public abstract class Pawn : MonoBehaviour
 
 
 
-
-    public void AddPawnComponent(GameObject pawnComponent)
+    //Pawn Componeent Creation/destruction/transfer
+    public void InstantiatePawnComponent(GameObject pawnComponentPrefab)
     {
-        Debug.Assert(pawnComponent.TryGetComponent(typeof(PawnComponent), out _));
-        GameObject newPawnComponent = Instantiate(pawnComponent,componentContainer);
+        Debug.Assert(pawnComponentPrefab.TryGetComponent(typeof(PawnComponent), out _));
+
+
+        GameObject newPawnComponent = Instantiate(pawnComponentPrefab,componentContainer);
         pawnComponents.Add(newPawnComponent);
         PawnComponent c = newPawnComponent.GetComponent<PawnComponent>();
         if (c.isForeign)
@@ -185,15 +188,55 @@ public abstract class Pawn : MonoBehaviour
         UpdateStats();
     }
 
+    public void TransferPawnComopnent(GameObject pawnComponentInstance)
+    {
+        Debug.Assert(PrefabUtility.GetPrefabInstanceStatus(pawnComponentInstance) == PrefabInstanceStatus.NotAPrefab);
+        Debug.Assert(pawnComponentInstance.TryGetComponent(typeof(PawnComponent), out _));
+
+        PawnComponent c = pawnComponentInstance.GetComponent<PawnComponent>();
+
+        //remove from previous
+        Pawn previousOwner = c.owner;
+        previousOwner.RemovePawnComponent(pawnComponentInstance);
+
+
+
+        pawnComponents.Add(pawnComponentInstance);
+        
+
+        if (c.isForeign)
+        {
+            pawnComponentInstance.transform.SetParent(foreignComponentContainer);
+        }
+        else
+        {
+            pawnComponentInstance.transform.SetParent(componentContainer);
+        }
+
+        c.EstablishPawnComponent(this, universeSimulation);
+
+        UpdatePrioritys();
+        UpdateStats();
+    }
+
     public void RemovePawnComponent(GameObject pawnComponent)
     {
         pawnComponents.Remove(pawnComponent);
 
-
         UpdatePrioritys();
         UpdateStats();
+
+        pawnComponent.transform.SetParent(null,true);
+    }
+    public void DestroyPawnComponent(GameObject pawnComponent)
+    {
+        RemovePawnComponent(pawnComponent);
         Destroy(pawnComponent);
     }
+    //---------------------------------------
+
+
+
     
     private List<T> GetPawnComponents<T>() where T : new()
     {

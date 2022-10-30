@@ -23,7 +23,7 @@ public class Shop : PawnComponent
 
         if(CargoHold.TryRemoveResources(customers, resourceCost))
         {
-            target.AddPawnComponent(pawnComponent);
+            target.InstantiatePawnComponent(pawnComponent);
             return true;
         }
         else
