@@ -131,7 +131,7 @@ MonoBehaviour:
   - type: 0
     value: 10
   icon: {fileID: 0}
-  maxHealth: 1
+  maxHealth: 0
   owner: {fileID: 0}
   activeTurnPhase: 1
   isForeign: 0
@@ -139,8 +139,6 @@ MonoBehaviour:
   - Name: 0
     Value: 100
   - Name: 1
-    Value: 10
-  - Name: 2
     Value: 10
   startingStats:
   - Name: 1

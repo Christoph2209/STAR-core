@@ -192,7 +192,10 @@ public abstract class PawnComponent : MonoBehaviour
     protected virtual void PassiveAction() { }
     protected virtual void ExpansionistAction() { }
 
-
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
 
 
     [System.Serializable]

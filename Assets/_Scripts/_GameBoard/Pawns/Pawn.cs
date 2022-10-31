@@ -334,8 +334,26 @@ public abstract class Pawn : MonoBehaviour
         {
             Debug.Log("CRITICAL DAMAGE HAS BEEN SUSTAINED!!!!");
         }
-
+        Debug.Log("Pawn has been damaged! " + GetTotalHealth() + " Health left!");
     }
+    public float GetTotalHealth()
+    {
+        float health =0;
+        if (pawnComponentPriorityLists.ContainsKey(ComponentPriority.DamageOrder))
+        {
+            for (int i = 0; i < pawnComponentPriorityLists[ComponentPriority.DamageOrder].Count; i++)
+            {
+                health += pawnComponentPriorityLists[ComponentPriority.DamageOrder][i].GetHealth();
+            }
+        }
+        else
+        {
+            Debug.Log("This Pawn has no health!");
+            return 0;
+        }
+        return health;
+    }
+
 
     protected virtual void OnPhaseTransition()
     {
