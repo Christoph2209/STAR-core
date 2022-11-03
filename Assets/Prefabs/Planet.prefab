@@ -58,6 +58,7 @@ MonoBehaviour:
   statsText: {fileID: 1377697391012707880}
   setPawnComponents:
   - {fileID: 4369763219849521649, guid: 07ededef51f40b747a20c04725975c3e, type: 3}
+  - {fileID: 4369763219849521649, guid: 45895b5bdd312c349b60a36a40b26289, type: 3}
   pawnComponents: []
   OnStatsUpdate:
     m_PersistentCalls:

@@ -396,10 +396,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1a2ed05bfb36f4697648055cdc9fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: []
+  icon: {fileID: 0}
   maxHealth: 0
   owner: {fileID: 0}
   activeTurnPhase: 3
-  startingPrioritys: []
+  isForeign: 0
+  startingPrioritys:
+  - Name: 2
+    Value: 0
   startingStats: []
-  damage: 0
+  damage: 10
+  range: 3
   targetingUI: {fileID: 0}

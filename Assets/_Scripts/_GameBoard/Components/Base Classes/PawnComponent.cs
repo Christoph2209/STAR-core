@@ -10,6 +10,11 @@ using System.Collections.ObjectModel;
 /// </summary>
 public abstract class PawnComponent : MonoBehaviour
 {
+
+    public List<Cost> price;
+    public GameObject icon;
+
+
     [SerializeField]
     private float maxHealth;
     private float currentHealth;
@@ -26,37 +31,65 @@ public abstract class PawnComponent : MonoBehaviour
     /// </summary>
     [SerializeField]
     private List<Priority> startingPrioritys;
-    protected Dictionary<ComponentPriority, int> prioritys = new();
+    protected Dictionary<ComponentPriority, int> prioritys;
     public ReadOnlyDictionary<ComponentPriority,int> Prioritys { get => new ReadOnlyDictionary<ComponentPriority, int>(prioritys); }
     [SerializeField]
     private List<StartingStat> startingStats;
-    protected Dictionary<ComponentStat, float> stats = new();
+    protected Dictionary<ComponentStat, float> stats;
     public ReadOnlyDictionary<ComponentStat, float> Stats { get => new ReadOnlyDictionary<ComponentStat, float>(stats); }
 
 
 
-
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+    }
     public virtual void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         if(activeTurnPhase!= universeSimulation.universeChronology.currentPhase)
         {
             gameObject.SetActive(false);
         }
-
-
-        foreach (Priority basePriority in startingPrioritys)
+        else
         {
-            prioritys.Add(basePriority.Name, basePriority.Value);
+            gameObject.SetActive(true);
         }
-        foreach (StartingStat baseStat in startingStats)
-        {
-            stats.Add(baseStat.Name, baseStat.Value);
-        }
-        
 
+
+        if (prioritys == null)//if the prioritys have not been set we set them to there default
+        {
+            prioritys = new();
+            foreach (Priority basePriority in startingPrioritys)
+            {
+                prioritys.Add(basePriority.Name, basePriority.Value);
+            }
+        }
+        if (stats == null)//if the stats have nto been set, we set them to there default
+        {
+            stats = new();
+            foreach (StartingStat baseStat in startingStats)
+            {
+                stats.Add(baseStat.Name, baseStat.Value);
+            }
+        }
+
+
+        //Remove Listeners from previous owners
+        if (this.owner != null)
+        {
+            this.owner.OnFactionUpdate.RemoveListener(() => OnFactionUpdate());
+        }
+        if (this.universeSimulation != null)
+        {
+            this.universeSimulation.universeChronology.MainPhaseStart.RemoveListener(() => OnMainPhaseStart());
+            this.universeSimulation.universeChronology.MainPhaseEnd.RemoveListener(() => OnMainPhaseEnd());
+            this.universeSimulation.universeChronology.CombatPhaseStart.RemoveListener(() => OnCombatPhaseStart());
+            this.universeSimulation.universeChronology.CombatPhaseEnd.RemoveListener(() => OnCombatPhaseEnd());
+        }
+
+        //add listeners for new owner
         this.owner = owner;
-        Debug.Log("Owner:" + owner);
-
+        this.owner.OnFactionUpdate.AddListener(() => OnFactionUpdate());
 
         this.universeSimulation = universeSimulation;
         this.universeSimulation.universeChronology.MainPhaseStart.AddListener(() => OnMainPhaseStart());
@@ -64,8 +97,8 @@ public abstract class PawnComponent : MonoBehaviour
         this.universeSimulation.universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());
         this.universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
 
-        owner.OnFactionUpdate.AddListener(()=>OnFactionUpdate());
-        RepairComponent();
+
+        gameObject.GetComponent<RectTransform>().SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
     }
 
@@ -76,6 +109,7 @@ public abstract class PawnComponent : MonoBehaviour
     private void OnDestroy()
     {
         owner.UpdateStats();
+        
     }
 
 
@@ -158,7 +192,10 @@ public abstract class PawnComponent : MonoBehaviour
     protected virtual void PassiveAction() { }
     protected virtual void ExpansionistAction() { }
 
-
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
 
 
     [System.Serializable]
@@ -176,6 +213,11 @@ public abstract class PawnComponent : MonoBehaviour
 }
 
 
-
+[System.Serializable]
+public struct Cost
+{
+    public ComponentResource type;
+    public int value;
+}
 public enum AIBehavior { Deffensive, Aggressive, Passive, Expansionist}
 

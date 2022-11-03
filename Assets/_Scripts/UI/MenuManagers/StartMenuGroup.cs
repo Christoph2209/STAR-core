@@ -11,6 +11,11 @@ public class StartMenuGroup : MonoBehaviour
         SceneManager.LoadScene(scene);
    }
 
+    public void ReportBug()
+    {
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSdYi0FtZtnpq76GEI5_deuLjHJ9PPHNVg-168bor4B2zt0SMQ/viewform?usp=sf_link");
+    }
+
    public void QuitGame()
    {
       Application.Quit();

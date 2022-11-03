@@ -16,8 +16,9 @@ public class PlayerFactionCommander : FactionCommander
     Vector3 moveDirection = Vector3.zero;
     float camSpeed = 10f;
 
-    private bool isOverUI;
-    Pawn closestPawnToCursor;
+    public bool isOverUI { get; private set; }
+    public Pawn closestPawnToCursor { get; private set; }
+
     GameObject[] sounds;
     private void Update()
     {

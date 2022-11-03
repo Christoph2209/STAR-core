@@ -121,6 +121,19 @@ public class UniverseSimulation : MonoBehaviour
         return pawnInRange;
     }
 
+    public List<Pawn> GetAllPawnsInRange(FactionCommander faction, Vector3 targetPosition, float range)
+    {
+        List<Pawn> pawnInRange = new();
+        foreach (Pawn pawn in pawns)
+        {
+            if (range > Vector3.Distance(targetPosition, pawn.transform.position) && pawn.GetFaction() == faction)
+            {
+                pawnInRange.Add(pawn);
+            }
+        }
+        return pawnInRange;
+    }
+
     public List<Pawn> GetAllFactionPawns(FactionCommander faction)
     {
         List<Pawn> pawnInRange = new();
@@ -133,7 +146,6 @@ public class UniverseSimulation : MonoBehaviour
         }
         return pawnInRange;
     }
-
 
 
 
@@ -156,10 +168,18 @@ public class UniverseSimulation : MonoBehaviour
         GameObject playerPawn = GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
         GeneratePawn(Ship, factionsInPlay[1], "OTHER PAWN", Vector3.right*3);
 
-        CargoHold.AddResources(playerPawn.GetComponent<Pawn>(), ComponentResource.Medium, 50);
+        Cost test1;
+        Cost test2;
+        test1.type = ComponentResource.Rare;
+        test1.value = 100;
+
+
+        CargoHold.AddResources(playerPawn.GetComponent<Pawn>(), ComponentResource.Rare, 20);
+        Debug.Log(CargoHold.TryRemoveResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, new List<Cost> { test1 })+ "This should say false");
         Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() },ComponentResource.Rare)+ "Rare Resources available");
         Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.Medium) + "Medium Resources available");
         Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.WellDone) + "WellDone Resources available");
+        
 
     }
 

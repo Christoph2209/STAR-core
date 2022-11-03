@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CargoHold : PawnComponent
+public class CargoHold : TransferableComponent
 {
     [SerializeField]
     private ComponentResource resourceType;
@@ -11,10 +11,15 @@ public class CargoHold : PawnComponent
     [SerializeField]
     private int resources = 10;
 
+
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         base.EstablishPawnComponent(owner, universeSimulation);
-        prioritys.TryAdd(ComponentPriority.SellOrder, -resources);//Less resources, higher priority.
+        if (prioritys.TryAdd(ComponentPriority.SellOrder, -resources))
+        {//Less resources, higher priority.
+            Debug.Log("Added priority");
+        }
+
     }
 
     public static int GetTotalResources(List<Pawn> pawns, ComponentResource componentResource)
@@ -35,36 +40,47 @@ public class CargoHold : PawnComponent
             return totalResources;
     }
 
-    public static bool TryRemoveResources(List<Pawn> pawns,ComponentResource componentResource, int value)
+    public static bool TryRemoveResources(List<Pawn> pawns, List<Cost> resources)
     {
-        if(GetTotalResources(pawns,componentResource)< value && value < 0)
+        foreach (Cost resource in resources)//verify the resources are there
         {
-            Debug.Log("Invalid value");
-            return false;
+            if (GetTotalResources(pawns, resource.type) < resource.value || resource.value< 0)
+            {
+                Debug.Log("Failed To Purchase");
+                return false;
+            }
         }
 
 
-        int overflow = value;
-        foreach (Pawn pawn in pawns)
-        {
-            List<PawnComponent> cargoList = pawn.GetComponentPriorityList(ComponentPriority.SellOrder);
-            for (int i = 0; i < cargoList.Count; i++)
-            {
-                if (cargoList[i] is CargoHold cargoHold && cargoHold.resourceType == componentResource)
-                {
-                    overflow -= cargoHold.resources;
-                    if (overflow <= 0)
-                    {
-                        cargoHold.resources = -overflow;
-                        break;
-                    }
-                    else
-                    {
-                        cargoHold.resources = 0;
-                    }
 
+        foreach (Cost resource in resources)// remove all of the resources
+        {
+
+            int overflow = resource.value;
+            foreach (Pawn pawn in pawns)
+            {
+                List<PawnComponent> cargoList = pawn.GetComponentPriorityList(ComponentPriority.SellOrder);
+                for (int i = 0; i < cargoList.Count; i++)
+                {
+                    if (cargoList[i] is CargoHold cargoHold && cargoHold.resourceType == resource.type)
+                    {
+                        overflow -= cargoHold.resources;
+                        if (overflow <= 0)
+                        {
+                            cargoHold.resources = -overflow;
+                            cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
+                            break;
+                        }
+                        else
+                        {
+                            cargoHold.resources = 0;
+                            cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
+                        }
+
+                    }
                 }
             }
+
         }
         return true;
         
@@ -88,10 +104,13 @@ public class CargoHold : PawnComponent
 
                 excess = Mathf.Max(0, cargoHold.resources - cargoHold.maxResources);// set excess equal to how much resources overflowed. If the value is less than or equal to 0 clam the excess to 0
                 cargoHold.resources = Mathf.Clamp(cargoHold.resources, 0, cargoHold.maxResources);
+                cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
 
             }
         }
 
         return excess;
     }
+
+
 }
