@@ -262,6 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf7612eb51c5b640be564916825d0c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: []
+  icon: {fileID: 0}
   maxHealth: 1
   owner: {fileID: 0}
   activeTurnPhase: 1
@@ -270,7 +272,7 @@ MonoBehaviour:
   - Name: 0
     Value: 90
   - Name: 2
-    Value: 1
+    Value: 0
   startingStats: []
 --- !u!1 &7382267370808366029
 GameObject:

@@ -7,7 +7,8 @@ public class Weapon : PawnComponent, PlayerControlOverride
 {
     [SerializeField]
     private float damage;
-
+    [SerializeField]
+    private float range;
     [SerializeField]
     private GameObject targetingUI;
     private Pawn target;
@@ -15,7 +16,8 @@ public class Weapon : PawnComponent, PlayerControlOverride
     public void Attack()
     {
         target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower)* owner.GetStats(ComponentStat.AggregatePower));
-        
+
+        target = null;
     }
 
 
@@ -49,8 +51,29 @@ public class Weapon : PawnComponent, PlayerControlOverride
 
     public void OnSelect(InputValue value)
     {
-        PlayerFactionCommander playerFactionCommander = universeSimulation.playerFactionCommander;
-        playerFactionCommander.RestoreFactionInput();
+        PlayerFactionCommander input = universeSimulation.playerFactionCommander;
+
+        if (input.isOverUI)
+        {
+            target = null;
+        }
+        else
+        {
+            target = input.closestPawnToCursor;
+        }
+
+        if (target == null || Vector3.Distance(target.transform.position,owner.transform.position)>range)
+        {
+            Debug.Log("Nothing selected, try again");
+        }
+        else
+        {
+            Debug.Log(target + "Selected. Attacking Target");
+
+            owner.SetAttackPattern(() => Attack());
+
+            input.RestoreFactionInput();
+        }
     }
 
 
