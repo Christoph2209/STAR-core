@@ -7,9 +7,8 @@ public class StartMenuGroup : MonoBehaviour
 {
     public void PlayGame(string scene)
    {
-        scene = "Assets/Scenes/Menus/Main/GameOverMenu.unity";
+        scene = "Assets/Scenes/SampleScene.unity";
         SceneManager.LoadScene(scene);
-        SoundManager.PlaySound();
    }
 
    public void QuitGame()
