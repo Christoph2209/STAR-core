@@ -13,14 +13,8 @@ public class WEAPONS_beam : PawnComponent, PlayerControlOverride
     private Pawn target;
 
     public void Attack()
-    {
-        int RollValue;
-        RollValue = Random.Range(1, 20);
-
-        if (RollValue >= 10)
-        {
-            target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower) * owner.GetStats(ComponentStat.AggregatePower));
-        }
+    { 
+        target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower) * owner.GetStats(ComponentStat.AggregatePower));
     }
 
     public void SelectTarget()
