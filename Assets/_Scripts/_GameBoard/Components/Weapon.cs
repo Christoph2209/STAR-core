@@ -14,8 +14,7 @@ public class Weapon : PawnComponent, PlayerControlOverride
 
     public void Attack()
     {
-        target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower)* owner.GetStats(ComponentStat.AggregatePower));
-        
+        target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower) * owner.GetStats(ComponentStat.AggregatePower));
     }
 
 
