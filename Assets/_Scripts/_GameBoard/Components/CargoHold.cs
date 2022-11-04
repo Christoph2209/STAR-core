@@ -87,7 +87,7 @@ public class CargoHold : TransferableComponent
     }
 
 
-    public static int AddResources(Pawn pawn, ComponentResource componentResource, int value)
+    public static int AddResources(Pawn pawn, GameObject cargoHoldComponent, ComponentResource componentResource, int value)
     {
         if (value < 0)
         {
@@ -108,7 +108,26 @@ public class CargoHold : TransferableComponent
 
             }
         }
-
+        if (excess > 0)
+        {
+            while (excess > 0)
+            {
+                CargoHold newCargoHold = pawn.InstantiatePawnComponent(cargoHoldComponent) as CargoHold;
+                newCargoHold.resourceType = componentResource;
+                if (newCargoHold.maxResources > excess)
+                {
+                    newCargoHold.resources = excess;
+                    newCargoHold.prioritys[ComponentPriority.SellOrder] = -newCargoHold.resources;
+                    excess = 0;
+                }
+                else
+                {
+                    newCargoHold.resources = newCargoHold.maxResources;
+                    newCargoHold.prioritys[ComponentPriority.SellOrder] = -newCargoHold.resources;
+                    excess -= newCargoHold.resources;
+                }
+            }
+        }
         return excess;
     }
 

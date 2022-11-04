@@ -228,7 +228,12 @@ public class PlayerFactionCommander : FactionCommander
 
     public void OnTest(InputValue value)
     {
-        
+        List<Pawn> AllPawns = universeSimulation.GetAllPawns();
+        foreach(Pawn pawn in AllPawns)
+        {
+            pawn.CloseStatMenu();
+            pawn.CloseComponentMenu();
+        }
         int index = universeSimulation.factionsInPlay.IndexOf(actingFaction);
         index++;
         index %= universeSimulation.factionsInPlay.Count;

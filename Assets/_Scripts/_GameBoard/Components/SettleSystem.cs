@@ -17,6 +17,7 @@ public class SettleSystem : PawnComponent
         {
             activeTurnPhase = TurnPhase.None;
         }
+
     }
     public void Settle(FactionCommander faction)
     {

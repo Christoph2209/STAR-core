@@ -80,7 +80,10 @@ public class UniverseSimulation : MonoBehaviour
     
 
 
-
+    public List<Pawn> GetAllPawns()
+    {
+        return new(pawns);
+    }
     public Pawn GetClosestPawnToPosition(Vector3 targetPosition, out float distance)
     {
         distance = float.PositiveInfinity;
@@ -160,25 +163,25 @@ public class UniverseSimulation : MonoBehaviour
 
     void Start()
     {
-
-        //initialize all of the factions and turnphase tracking
-
+        //Initialize all factions
         //EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
         EstablishFaction("OTHER FACTION", NPCFactionCommander);
-        GameObject playerPawn = GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
-        GeneratePawn(Ship, factionsInPlay[1], "OTHER PAWN", Vector3.right*3);
-
-        Cost test1;
-        Cost test2;
-        test1.type = ComponentResource.Rare;
-        test1.value = 100;
 
 
-        CargoHold.AddResources(playerPawn.GetComponent<Pawn>(), ComponentResource.Rare, 20);
-        Debug.Log(CargoHold.TryRemoveResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, new List<Cost> { test1 })+ "This should say false");
-        Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() },ComponentResource.Rare)+ "Rare Resources available");
-        Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.Medium) + "Medium Resources available");
-        Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.WellDone) + "WellDone Resources available");
+        //GameObject playerPawn = GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
+        //GeneratePawn(Ship, factionsInPlay[1], "OTHER PAWN", Vector3.right*3);
+
+        //Cost test1;
+        //Cost test2;
+        //test1.type = ComponentResource.Rare;
+        //test1.value = 100;
+
+
+        //CargoHold.AddResources(playerPawn.GetComponent<Pawn>(), ComponentResource.Rare, 20);
+        //Debug.Log(CargoHold.TryRemoveResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, new List<Cost> { test1 })+ "This should say false");
+        //Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() },ComponentResource.Rare)+ "Rare Resources available");
+        //Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.Medium) + "Medium Resources available");
+        //Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.WellDone) + "WellDone Resources available");
         
 
     }

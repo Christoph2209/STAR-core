@@ -34,8 +34,15 @@ public class UniverseChronology : MonoBehaviour
         int currentRound = 0;
 
 
+        //Game Setup
+        readiedFactions.Clear();
+        currentPhase = global::TurnPhase.SelectHomeSystem;
+        yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
+        //Begin Game
 
-        while (true)
+
+
+        while (CheckVictoryCondition())
         {
             currentRound++;
 
@@ -71,6 +78,11 @@ public class UniverseChronology : MonoBehaviour
         }
     }
 
+    private bool CheckVictoryCondition()
+    {
+        return true;
+    }
+
 
 
 
@@ -97,4 +109,4 @@ public class UniverseChronology : MonoBehaviour
     }
 }
 
-public enum TurnPhase { TransitionToMain, Main, TransitionToCombat, Combat, None};
+public enum TurnPhase { SelectHomeSystem, TransitionToMain, Main, TransitionToCombat, Combat, None};

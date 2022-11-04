@@ -165,7 +165,7 @@ public abstract class Pawn : MonoBehaviour
 
 
     //Pawn Componeent Creation/destruction/transfer
-    public void InstantiatePawnComponent(GameObject pawnComponentPrefab)
+    public PawnComponent InstantiatePawnComponent(GameObject pawnComponentPrefab)
     {
         Debug.Assert(pawnComponentPrefab.TryGetComponent(typeof(PawnComponent), out _));
 
@@ -186,6 +186,8 @@ public abstract class Pawn : MonoBehaviour
 
         UpdatePrioritys();
         UpdateStats();
+
+        return c;
     }
 
     public void TransferPawnComopnent(GameObject pawnComponentInstance)
