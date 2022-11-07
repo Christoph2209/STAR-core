@@ -6,7 +6,6 @@ using System.Linq;
 public class UniverseSimulation : MonoBehaviour
 {
 
-
     [SerializeField]
     private List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();

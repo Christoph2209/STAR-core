@@ -9,6 +9,9 @@ using UnityEditor;
 
 public abstract class Pawn : MonoBehaviour
 {
+
+    SaveObject saver = new SaveObject();
+
     [SerializeField]
     private UniverseSimulation universeSimulation;
     [SerializeField]
@@ -78,7 +81,6 @@ public abstract class Pawn : MonoBehaviour
         this.name = name;
         this.universeSimulation = universeSimulation;
         this.faction = faction;
-
         universeSimulation.universeChronology.MainPhaseStart.AddListener(() => OnMainPhaseStart());
         universeSimulation.universeChronology.MainPhaseEnd.AddListener(() => OnMainPhaseEnd());
         universeSimulation.universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());
