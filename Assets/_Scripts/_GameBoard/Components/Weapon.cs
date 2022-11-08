@@ -23,7 +23,6 @@ public class Weapon : PawnComponent, PlayerControlOverride
 
     public void SelectTarget()
     {
-        
         universeSimulation.playerFactionCommander.OverrideInput(this);
         
     }
@@ -41,12 +40,12 @@ public class Weapon : PawnComponent, PlayerControlOverride
 
     public Vector3 OnMove(InputValue value)
     {
-        throw new System.NotImplementedException();
+        return Vector3.zero;
     }
 
     public void OnOpenMenu(InputValue value)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void OnSelect(InputValue value)

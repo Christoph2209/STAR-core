@@ -400,7 +400,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   maxHealth: 0
   owner: {fileID: 0}
-  activeTurnPhase: 3
+  activeTurnPhase: 4
   isForeign: 0
   startingPrioritys:
   - Name: 2

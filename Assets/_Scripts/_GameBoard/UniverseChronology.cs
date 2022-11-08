@@ -13,6 +13,7 @@ public class UniverseChronology : MonoBehaviour
     public UnityEvent CombatPhaseStart = new();
     public UnityEvent CombatPhaseEnd = new();
 
+    private FactionCommander winner;
     //Required for initialization. If this method doesn't get called it won't funtion properly
     public void EstablishUniverseChronology(UniverseSimulation universeSimulation)
     {
@@ -37,13 +38,15 @@ public class UniverseChronology : MonoBehaviour
         //Game Setup
         readiedFactions.Clear();
         currentPhase = global::TurnPhase.SelectHomeSystem;
-        yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
+        
+        yield return new WaitUntil(() => readiedFactions.SetEquals( new HashSet<FactionCommander>(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
         //Begin Game
+        Debug.Log("Is It Working?");
 
 
-
-        while (CheckVictoryCondition())
+        do
         {
+            Debug.Log("NO ONE HAS ONE! On to the next round");
             currentRound++;
 
             //Trasition to main
@@ -73,14 +76,57 @@ public class UniverseChronology : MonoBehaviour
             //----
 
             Debug.Log("***Round Complete***");
-            
 
+
+        } while (!CheckVictoryCondition());
+
+        currentPhase = global::TurnPhase.GameOver;
+        if(winner == null)
+        {
+            Debug.Log("Everyone Looses");
+        }
+        else
+        {
+            Debug.Log(winner.factionName + " IS THE WINNER WOOOOOOOOOOOOOH.");
         }
     }
 
     private bool CheckVictoryCondition()
     {
-        return true;
+        bool victoryAchieved = false;
+        List<FactionCommander> homeSystems = new();
+        foreach(Pawn pawn in universeSimulation.GetAllPawns())
+        {
+            //Trader Victory
+            //Check For VictoryItem Win Condition
+            if(pawn.GetPawnComponents<VictoryItem>().Count>0)
+            {
+                Debug.Log("GAME OVER: Victor item aquiered");
+                winner = pawn.GetFaction();
+                victoryAchieved = true;
+            }
+
+            //Raider Victory
+            //Check to see if there are any home systems left
+            if (pawn.GetPawnComponents<HomeSystem>().Count > 0)
+            {
+                homeSystems.Add(pawn.GetFaction());
+            }
+        }
+        if(homeSystems.Count == 1)
+        {
+            Debug.Log("GAME OVER: Last Home System Standing");
+            winner = homeSystems[0];
+            victoryAchieved = true;
+        }
+        else if(homeSystems.Count == 0)
+        {
+            Debug.Log("GAME OVER: NO Player Wins, Mutual Destruction");
+            winner = null;
+            victoryAchieved = true;
+        }
+
+        return victoryAchieved;
     }
 
 
@@ -109,4 +155,4 @@ public class UniverseChronology : MonoBehaviour
     }
 }
 
-public enum TurnPhase { SelectHomeSystem, TransitionToMain, Main, TransitionToCombat, Combat, None};
+public enum TurnPhase { SelectHomeSystem, TransitionToMain, Main, TransitionToCombat, Combat, GameOver, None};

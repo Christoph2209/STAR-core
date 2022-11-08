@@ -275,6 +275,7 @@ MonoBehaviour:
     Value: 0
   startingStats: []
   HomeSystemComponents:
+  - {fileID: 4369763219849521649, guid: cc07c198da1d9134ba23406893df9ee5, type: 3}
   - {fileID: 4369763219849521649, guid: 4e150dd7e2cb43f45b3ed280208156f1, type: 3}
 --- !u!1 &7382267370808366029
 GameObject:

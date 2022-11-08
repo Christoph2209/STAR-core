@@ -38,7 +38,7 @@ public class PlayerFactionCommander : FactionCommander
 
 
     Coroutine moveToLocation;
-    private void MoveToLocation(Vector3 targetLocation)
+    public void MoveCameraToLocation(Vector3 targetLocation)
     {
         if(moveToLocation!= null)
         {
@@ -148,7 +148,7 @@ public class PlayerFactionCommander : FactionCommander
                 }
                 //move selected location to center of screen
                 Vector3 targetLocation = universeSimulation.transform.position - moveOffset;
-                MoveToLocation(targetLocation);
+                MoveCameraToLocation(targetLocation);
                 //if the selcted target is a pawn activate the deafault action
 
             }

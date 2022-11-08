@@ -749,6 +749,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
+      propertyPath: SolarSystem
+      value: 
+      objectReference: {fileID: 1825581157490703194, guid: dd1c5b4551afd2447a94a60ac16cb2dc,
+        type: 3}
+    - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
+        type: 3}
       propertyPath: pawns.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -761,6 +767,11 @@ PrefabInstance:
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: pawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
+        type: 3}
+      propertyPath: pawns.Array.data[1]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,

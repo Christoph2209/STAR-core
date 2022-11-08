@@ -240,15 +240,16 @@ public abstract class Pawn : MonoBehaviour
 
 
     
-    private List<T> GetPawnComponents<T>() where T : new()
+    public List<T> GetPawnComponents<T>() where T : new()
     {
         List<T> pawnComponentsOfType = new();
         foreach (GameObject cgameObject in pawnComponents)
         {
             PawnComponent c = cgameObject.GetComponent<PawnComponent>();
-
-            if (c.GetType() is T componentOfType)
+         
+            if (c is T componentOfType)
             {
+                
                 pawnComponentsOfType.Add(componentOfType);
             }
         }

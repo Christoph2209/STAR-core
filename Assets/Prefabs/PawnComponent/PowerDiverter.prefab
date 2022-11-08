@@ -133,7 +133,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   maxHealth: 0
   owner: {fileID: 0}
-  activeTurnPhase: 1
+  activeTurnPhase: 2
   isForeign: 0
   startingPrioritys:
   - Name: 0
