@@ -6,24 +6,30 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using File = UnityEngine.Windows.File;
 //Coded by Christopher Soravilla
-public class SaveSystem : MonoBehaviour
+public class SaveSystem 
 {
     //These are the private variables, in which we have the path directories and the filetype, just so we dont have to type .text all the time
     private const string FileType = ".txt";
     private static string SavePath => Application.persistentDataPath + "/Saves/";
     private static string BackupPath => Application.persistentDataPath + "/BackUp/";
+    
+    
     //This is a save counter, after 5 saves, it will make a backup.
     private static int SaveCount;
+
     //Save Data Function
     public static void SaveData<T>(T data, string fileName)
     {
         //Creating the directories in the folders
         Directory.CreateDirectory(SavePath);
         Directory.CreateDirectory(BackupPath);
+        
         //If the savecount % 5 is 0, it will save to a backup.
         if (SaveCount % 5 == 0) Save(BackupPath);
+        
         //Saves the files into the function
         Save(SavePath);
+        
         //Adds to the save count
         SaveCount++;
 

@@ -10,7 +10,7 @@ using UnityEditor;
 public abstract class Pawn : MonoBehaviour
 {
 
-    SaveObject saver = new SaveObject();
+    
 
     [SerializeField]
     private UniverseSimulation universeSimulation;
@@ -87,7 +87,6 @@ public abstract class Pawn : MonoBehaviour
         universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
 
         CopyInspectorPawnValues();
-
         DamagePawn(8f);
 
     }

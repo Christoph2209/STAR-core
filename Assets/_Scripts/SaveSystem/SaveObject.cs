@@ -1,6 +1,10 @@
+using UnityEngine;
+
 [System.Serializable]
 public class SaveObject
 {
+    //Variable names
+    public GameObject prefab;
     public string name = "blank";
     public int locationX = 0;
     public int locationY = 0;
@@ -27,5 +31,5 @@ public class SaveObject
         locationZ = a;
     }
 
-
+   
 }
