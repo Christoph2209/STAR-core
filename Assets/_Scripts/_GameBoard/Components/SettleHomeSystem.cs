@@ -22,8 +22,9 @@ public class SettleHomeSystem : PawnComponent
         }
         else
         {
-            Debug.Log("Selecting home system: " + owner);
             owner.SetFaction(faction);
+            Debug.Log("Selecting home system: " + owner +" "+owner.GetFaction());
+            
             foreach(GameObject component in HomeSystemComponents)
             {
                 owner.InstantiatePawnComponent(component);
