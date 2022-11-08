@@ -393,7 +393,6 @@ GameObject:
   - component: {fileID: 8163238629261977752}
   - component: {fileID: 8163238629261977753}
   - component: {fileID: 8163238629261977750}
-  - component: {fileID: 3029498141460845950}
   m_Layer: 5
   m_Name: StatMenu
   m_TagString: Untagged
@@ -483,18 +482,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3029498141460845950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8163238629261977751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cdfe41585209e74586ad61ecb9c543b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8163238629501303671
 GameObject:
   m_ObjectHideFlags: 0

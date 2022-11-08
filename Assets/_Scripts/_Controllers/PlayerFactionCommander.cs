@@ -38,7 +38,7 @@ public class PlayerFactionCommander : FactionCommander
 
 
     Coroutine moveToLocation;
-    private void MoveToLocation(Vector3 targetLocation)
+    public void MoveCameraToLocation(Vector3 targetLocation)
     {
         if(moveToLocation!= null)
         {
@@ -148,7 +148,7 @@ public class PlayerFactionCommander : FactionCommander
                 }
                 //move selected location to center of screen
                 Vector3 targetLocation = universeSimulation.transform.position - moveOffset;
-                MoveToLocation(targetLocation);
+                MoveCameraToLocation(targetLocation);
                 //if the selcted target is a pawn activate the deafault action
 
             }
@@ -228,7 +228,12 @@ public class PlayerFactionCommander : FactionCommander
 
     public void OnTest(InputValue value)
     {
-        
+        List<Pawn> AllPawns = universeSimulation.GetAllPawns();
+        foreach(Pawn pawn in AllPawns)
+        {
+            pawn.CloseStatMenu();
+            pawn.CloseComponentMenu();
+        }
         int index = universeSimulation.factionsInPlay.IndexOf(actingFaction);
         index++;
         index %= universeSimulation.factionsInPlay.Count;

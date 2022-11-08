@@ -114,20 +114,21 @@ public abstract class PawnComponent : MonoBehaviour
 
 
 
-
+    
     public virtual void OnMainPhaseStart()
     {
         if(activeTurnPhase == TurnPhase.Main)
         {
             gameObject.SetActive(true);
         }
-    }
-    public virtual void OnMainPhaseEnd()
-    {
-        if(activeTurnPhase == TurnPhase.Main)
+        else
         {
             gameObject.SetActive(false);
         }
+    }
+    public virtual void OnMainPhaseEnd()
+    {
+            gameObject.SetActive(false);
     }
     public virtual void OnCombatPhaseStart()
     {
@@ -135,13 +136,14 @@ public abstract class PawnComponent : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
-    }
-    public virtual void OnCombatPhaseEnd()
-    {
-        if (activeTurnPhase == TurnPhase.Combat)
+        else
         {
             gameObject.SetActive(false);
         }
+    }
+    public virtual void OnCombatPhaseEnd()
+    {
+            gameObject.SetActive(false);
     }
 
     protected virtual void OnFactionUpdate() { }

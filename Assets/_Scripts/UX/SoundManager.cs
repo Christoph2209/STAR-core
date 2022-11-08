@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager
+public class SoundManager : MonoBehaviour
 {
-    private AudioSource[] SoundAssets;
+    public static SoundManager Instance;
 
-    private void Start()
+    [SerializeField]
+    private AudioSource _MusicSource, _SFXSource;
+
+    private void Awake()
     {
-        //SoundAssets = SoundAssets.GetComponents<AudioSource>();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public static void PlaySound()
+    public void PlaySound(AudioClip clip)
     {
-        
+        if(_SFXSource.isPlaying)
+        {
+            _SFXSource.Stop();
+        }
+
+        _SFXSource.PlayOneShot(clip);
     }
 }
