@@ -9,6 +9,9 @@ using UnityEditor;
 
 public abstract class Pawn : MonoBehaviour
 {
+
+    
+
     [SerializeField]
     private UniverseSimulation universeSimulation;
     [SerializeField]
@@ -78,14 +81,12 @@ public abstract class Pawn : MonoBehaviour
         this.name = name;
         this.universeSimulation = universeSimulation;
         this.faction = faction;
-
         universeSimulation.universeChronology.MainPhaseStart.AddListener(() => OnMainPhaseStart());
         universeSimulation.universeChronology.MainPhaseEnd.AddListener(() => OnMainPhaseEnd());
         universeSimulation.universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());
         universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
 
         CopyInspectorPawnValues();
-
         DamagePawn(8f);
 
     }
