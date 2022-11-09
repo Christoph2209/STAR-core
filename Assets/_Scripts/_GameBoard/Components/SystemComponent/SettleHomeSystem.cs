@@ -47,7 +47,7 @@ public class SettleHomeSystem : PawnComponent
         base.OnFactionUpdate();
         if(owner.GetFaction()== null)
         {
-            activeTurnPhase = TurnPhase.Main;
+            activeTurnPhase = TurnPhase.TraderPhase;
         }
         else
         {

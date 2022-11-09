@@ -97,7 +97,7 @@ public abstract class Pawn : MonoBehaviour
     {
         switch (universeSimulation.universeChronology.currentPhase)
         {
-            case TurnPhase.Main:
+            case TurnPhase.TraderPhase:
                 if (faction == this.faction)
                 {
                     Debug.Log("Friendly default main action!");
@@ -107,7 +107,7 @@ public abstract class Pawn : MonoBehaviour
                     Debug.Log("Foreign default main action!");
                 }
                 break;
-            case TurnPhase.Combat:
+            case TurnPhase.RaiderPhase:
                 if (faction == this.faction)
                 {
                     Debug.Log("Friendly default combat action!");

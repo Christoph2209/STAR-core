@@ -57,11 +57,16 @@ public class UniverseChronology : MonoBehaviour
             //----
 
             //Main 
-            currentPhase = global::TurnPhase.Main;
+            currentPhase = global::TurnPhase.TraderPhase;
             MainPhaseStart.Invoke();
             yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
             MainPhaseEnd.Invoke();
             //----
+
+            if (CheckVictoryCondition())
+            {
+                break;
+            }
 
             //Transition to combat
             currentPhase = global::TurnPhase.TransitionToCombat;
@@ -70,7 +75,7 @@ public class UniverseChronology : MonoBehaviour
             //----
 
             //Combat
-            currentPhase = global::TurnPhase.Combat;
+            currentPhase = global::TurnPhase.RaiderPhase;
             CombatPhaseStart.Invoke();
             yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
             CombatPhaseEnd.Invoke();
@@ -161,4 +166,4 @@ public class UniverseChronology : MonoBehaviour
     }
 }
 
-public enum TurnPhase { SelectHomeSystem, TransitionToMain, Main, TransitionToCombat, Combat, GameOver, None};
+public enum TurnPhase { SelectHomeSystem, TransitionToMain, TraderPhase, TransitionToCombat, RaiderPhase, GameOver, None};

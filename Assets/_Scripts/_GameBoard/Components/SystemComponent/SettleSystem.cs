@@ -11,7 +11,7 @@ public class SettleSystem : PawnComponent
         base.EstablishPawnComponent(owner, universeSimulation);
         if (owner.GetFaction() == null)
         {
-            activeTurnPhase = TurnPhase.Main;
+            activeTurnPhase = TurnPhase.TraderPhase;
         }
         else
         {
@@ -61,7 +61,7 @@ public class SettleSystem : PawnComponent
         base.OnFactionUpdate();
         if(owner.GetFaction()== null)
         {
-            activeTurnPhase = TurnPhase.Main;
+            activeTurnPhase = TurnPhase.TraderPhase;
         }
         else
         {
