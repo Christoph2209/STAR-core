@@ -8,7 +8,8 @@ public class UniverseGeneration : MonoBehaviour
     //sizes refer to the width of each of the squares
     private const int ZONE_SIZE = 4, SQUARE_SIZE = 3;
     //public variables
-    public static int universeLength = 2, universeWidth = 2; 
+    public static int universeLength = 2, universeWidth = 2;
+    public static int seed= 100;
     //private variables
     public GameObject[] zones;
     public float zoneProb=0.1f;
@@ -19,6 +20,7 @@ public class UniverseGeneration : MonoBehaviour
   
     void Start()
     {
+        Random.InitState(seed);
         universeSimulation = GetComponent<UniverseSimulation>();
         GenerateUniverse();
     }

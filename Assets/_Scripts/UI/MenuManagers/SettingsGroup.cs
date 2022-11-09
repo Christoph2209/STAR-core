@@ -18,7 +18,7 @@ public class SettingsGroup : MonoBehaviour
 
     public void close(string scene)
     {
-        scene = "Assets/Scenes/Menus/Main/StartMenu.unity";
+        scene = "Assets/Scenes/Menus/StartMenu.unity";
         SceneManager.LoadScene(scene);
     }
 

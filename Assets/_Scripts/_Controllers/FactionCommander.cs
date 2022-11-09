@@ -68,8 +68,8 @@ public abstract class FactionCommander : MonoBehaviour
         switch (universeSimulation.universeChronology.currentPhase)
         {
             case TurnPhase.SelectHomeSystem:
-            case TurnPhase.Main:
-            case TurnPhase.Combat:
+            case TurnPhase.TraderPhase:
+            case TurnPhase.RaiderPhase:
                 universeSimulation.universeChronology.MarkFactionReady(actingFaction);
                 break;
             default:
