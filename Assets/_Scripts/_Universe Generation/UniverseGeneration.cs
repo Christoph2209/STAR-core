@@ -9,6 +9,7 @@ public class UniverseGeneration : MonoBehaviour
     private const int ZONE_SIZE = 4, SQUARE_SIZE = 3;
     //public variables
     public int universeLength = 2, universeWidth = 2;
+    public static int seed= 100;
     //private variables
     public GameObject[] zones;
     public float zoneProb=0.1f;
@@ -19,6 +20,7 @@ public class UniverseGeneration : MonoBehaviour
   
     void Start()
     {
+        Random.InitState(seed);
         universeSimulation = GetComponent<UniverseSimulation>();
         GenerateUniverse();
     }
