@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sheild : PawnComponent
+public class Sheild : TransferableComponent
 {
     [SerializeField]
     private float sheildRegeneration;

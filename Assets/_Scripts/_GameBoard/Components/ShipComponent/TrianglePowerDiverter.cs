@@ -14,10 +14,12 @@ public class TrianglePowerDiverter : PawnComponent
     }
     public void OnSliderValueUpdate(Dictionary<ComponentStat, float> updatedValues)
     {
+        owner.stats.TryAdd(ComponentStat.AggregatePower, 0);
         foreach(KeyValuePair<ComponentStat,float> updatedValue in updatedValues)
         {
+            
             stats.TryAdd(updatedValue.Key, 0);
-            stats[updatedValue.Key] = updatedValue.Value;
+            stats[updatedValue.Key] = updatedValue.Value*owner.stats[ComponentStat.AggregatePower];
 
         }
         owner.UpdateStats();

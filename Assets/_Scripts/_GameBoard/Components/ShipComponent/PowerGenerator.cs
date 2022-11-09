@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Power generators just holds stats for power.
 /// </summary>
-public class PowerGenerator : PawnComponent
+public class PowerGenerator : TransferableComponent
 {
 
 }
