@@ -10,6 +10,31 @@ public class SaveObject
     public int locationY = 0;
     public int locationZ = 0;
     public FactionCommander commander;
+    
+    public string seed;
+    public int volume;
+    public int worldX;
+    public int worldY;
+
+
+    public void setWorldX(int x)
+    {
+        worldX = x;
+    }
+    public void setWorldY(int y)
+    {
+        worldY = y;
+    }
+
+    public void setVol(int vol)
+    {
+        volume = vol;
+    }
+
+    public void setSeed(string see)
+    {
+        seed = see;
+    }
 
     public void setName(string name2)
     {

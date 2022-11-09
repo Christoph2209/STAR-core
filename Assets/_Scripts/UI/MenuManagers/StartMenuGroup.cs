@@ -21,4 +21,11 @@ public class StartMenuGroup : MonoBehaviour
       Application.Quit();
       Debug.Log("Game is exiting");
    }
+
+    public void Settings(string scene)
+    {
+        scene = "Assets/Scenes/SettingScene.unity";
+        SceneManager.LoadScene(scene);
+    }
+
 }
