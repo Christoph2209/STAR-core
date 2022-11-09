@@ -18,4 +18,10 @@ public class SaveTest : MonoBehaviour
             so = SaveManager.Load();
         }
     }
+
+    public void Save()
+    {
+        SaveManager.Save(so);
+        Debug.LogError("Saved");
+    }
 }

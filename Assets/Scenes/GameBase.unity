@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.00843305, g: 0.04335481, b: 0.20900942, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -140,10 +140,45 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2558620497916459280, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558620497916459280, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558620497916459280, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558620497916459280, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558620497916459280, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558620497916459280, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: SaveTest, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558620497916459280, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4002062866460659274, guid: 59d086d4eb3923c48a6976dd6f675268,
         type: 3}
       propertyPath: universeSimulation
-      value:
+      value: 
       objectReference: {fileID: 329766734}
     - target: {fileID: 5384868620928185350, guid: 59d086d4eb3923c48a6976dd6f675268,
         type: 3}
@@ -212,8 +247,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1de439227f5e31c40b7ee9a975176f5d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,8 +345,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
@@ -343,8 +378,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e119cb0a9302ac4489fd2d8507383b49, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   _clip: {fileID: 8300000, guid: f03e7bb2fe97c1a4db4d9ed270974fd1, type: 3}
 --- !u!1 &410087039
 GameObject:
@@ -451,8 +486,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
@@ -488,8 +523,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
@@ -520,8 +555,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b08b7e5126279344a8bca08bfd5dce27, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1282309921 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6779973757941068590, guid: 59d086d4eb3923c48a6976dd6f675268,
@@ -538,14 +573,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b9b2d41f8183064b9b4b1f4f3c0d048, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   so:
-    name: blank
-    locationX: 0
-    locationY: 0
-    locationZ: 0
-    commander: {fileID: 0}
+    limitX: 0
+    limitY: 0
+    worldSeed: 0
+    volume_mu: 0
+    volume_sfx: 0
 --- !u!1 &1935227753
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,8 +609,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
@@ -604,8 +639,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
@@ -774,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: SolarSystem
-      value:
+      value: 
       objectReference: {fileID: 1825581157490703194, guid: dd1c5b4551afd2447a94a60ac16cb2dc,
         type: 3}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
@@ -785,29 +820,29 @@ PrefabInstance:
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: NPCFactionCommander
-      value:
+      value: 
       objectReference: {fileID: 6393625406945439049, guid: dd83d66dca1b10a41a012a2300573469,
         type: 3}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: pawns.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: pawns.Array.data[1]
-      value:
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: PlayerFactionCommander
-      value:
+      value: 
       objectReference: {fileID: 751674279539517908, guid: 59d086d4eb3923c48a6976dd6f675268,
         type: 3}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: playerFactionCommander
-      value:
+      value: 
       objectReference: {fileID: 1006644124}
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
@@ -817,7 +852,7 @@ PrefabInstance:
     - target: {fileID: 4915240466902235278, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
       propertyPath: factionsInPlay.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 1006644124}
     - target: {fileID: 4915240466902235279, guid: 0e3b9c50088185e4fb4e63b8c4512854,
         type: 3}
@@ -842,10 +877,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81c4725becd6e094aa23525ecfaf3f3e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  universeLength: 2
-  universeWidth: 2
+  m_Name: 
+  m_EditorClassIdentifier: 
   zones: []
   zoneProb: 0.1
+  so:
+    limitX: 0
+    limitY: 0
+    worldSeed: 0
+    volume_mu: 0
+    volume_sfx: 0
   planet: {fileID: 1825581157490703194, guid: dd1c5b4551afd2447a94a60ac16cb2dc, type: 3}

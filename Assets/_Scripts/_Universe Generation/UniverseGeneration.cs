@@ -15,6 +15,7 @@ public class UniverseGeneration : MonoBehaviour
     public float zoneProb=0.1f;
     private int zonesGenerated;
 
+    public SaveObject so;
     public GameObject planet;
     private UniverseSimulation universeSimulation;
   
@@ -22,6 +23,9 @@ public class UniverseGeneration : MonoBehaviour
     {
         Random.InitState(seed);
         universeSimulation = GetComponent<UniverseSimulation>();
+        so = SaveManager.Load();
+        so.worldSeed = seed;
+        SaveManager.Save(so);
         GenerateUniverse();
     }
     public void setUniverseL(int x)
