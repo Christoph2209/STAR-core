@@ -2,28 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shop : PawnComponent
+public class PawnFactory : PawnComponent
 {
     [SerializeField]
     private GameObject inventory;
-    private float interactionRange = 3 ;
-    private List<Cost> GetComponentCost(GameObject componentPrefab)
-    {
-        return componentPrefab.GetComponent<PawnComponent>().price;
-    }
-    private GameObject GetComponentIcon(GameObject componentPrefab)
-    {
-        return componentPrefab.GetComponent<PawnComponent>().icon;
-    }
+    [SerializeField]
+    private List<Cost> resourceCost;
+
+    private float interactionRange = 3;
+
 
     //This method is used to purchase an item. The resources can be pulled from any pawn. The target recieves the pawn component
-    private bool TryPurchaseItem(List<Pawn> customers, Pawn target, GameObject pawnComponent)
+    private bool TryPurchasePawn(List<Pawn> customers, GameObject pawnPrefab)
     {
-        List<Cost> resourceCost = GetComponentCost(pawnComponent);
-
-        if(CargoHold.TryRemoveResources(customers, resourceCost))
+        if (CargoHold.TryRemoveResources(customers, resourceCost))
         {
-            target.InstantiatePawnComponent(pawnComponent);
+            universeSimulation.GeneratePawn(pawnPrefab, owner.GetFaction(), "ShipBuiltInFactory", owner.transform.position + new Vector3(0, 0, -1f));
             return true;
         }
         else
@@ -36,7 +30,7 @@ public class Shop : PawnComponent
     {
         //purchase 
         List<Pawn> pawnsInRange = universeSimulation.GetAllPawnsInRange(owner.GetFaction(), owner.transform.position, interactionRange);
-        if (TryPurchaseItem(pawnsInRange , owner , inventory ))
+        if (TryPurchasePawn(pawnsInRange, inventory))
         {
             Debug.Log("Purchase successful!");
         }
@@ -45,8 +39,6 @@ public class Shop : PawnComponent
             Debug.Log("Purchase failure!");
         }
     }
-    
-    
 
 
 }

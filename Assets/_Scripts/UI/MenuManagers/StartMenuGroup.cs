@@ -7,8 +7,8 @@ public class StartMenuGroup : MonoBehaviour
 {
     public void PlayGame(string scene)
    {
-        scene = "Assets/Scenes/SampleScene.unity";
-        SceneManager.LoadScene("SampleScene");//sample scene is 2 on the index
+        scene = "Assets/Scenes/GameBase.unity";
+        SceneManager.LoadScene("GameBase");//sample scene is 2 on the index
    }
 
     public void ReportBug()

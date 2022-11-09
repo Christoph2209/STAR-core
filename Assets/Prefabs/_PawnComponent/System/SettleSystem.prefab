@@ -262,12 +262,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a594ac781ee52e42a4f380881f67ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: []
   maxHealth: 0
   owner: {fileID: 0}
-  activeTurnPhase: 1
+  activeTurnPhase: 2
   isForeign: 1
   startingPrioritys:
-  - Name: DrawOrder
+  - Name: 0
     Value: 10000
   startingStats: []
   settleRange: 5

@@ -127,10 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: []
-  icon: {fileID: 0}
   maxHealth: 1
   owner: {fileID: 0}
-  activeTurnPhase: 2
+  activeTurnPhase: 6
   isForeign: 0
   startingPrioritys:
   - Name: 0

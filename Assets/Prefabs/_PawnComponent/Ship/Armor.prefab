@@ -85,9 +85,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4598110260366521495}
-  - component: {fileID: 6397682630948406811}
+  - component: {fileID: -2114426071047140749}
   m_Layer: 0
-  m_Name: Mine
+  m_Name: Armor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 203, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6397682630948406811
+--- !u!114 &-2114426071047140749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,22 +123,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4369763219849521649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03cc9fc07fe546e40a514f218e44ee11, type: 3}
+  m_Script: {fileID: 11500000, guid: 8911b479bf0300d40b3d35d9adfd42c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   price: []
-  maxHealth: 0
+  maxHealth: 5
   owner: {fileID: 0}
   activeTurnPhase: 2
   isForeign: 0
-  startingPrioritys: []
+  startingPrioritys:
+  - Name: 2
+    Value: 100
   startingStats: []
-  resourceGeneration:
-  - type: 0
-    value: 5
-  - type: 1
-    value: 5
-  - type: 2
-    value: 5
-  cargoHold: {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1,
-    type: 3}

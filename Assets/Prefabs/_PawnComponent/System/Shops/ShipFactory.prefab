@@ -221,9 +221,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4598110260366521495}
-  - component: {fileID: 9101831170476235727}
+  - component: {fileID: 2894327097616774718}
   m_Layer: 0
-  m_Name: SettleHomeSystem
+  m_Name: ShipFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,7 +250,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 203, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9101831170476235727
+--- !u!114 &2894327097616774718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,24 +259,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4369763219849521649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dfaa06ff9a1b8744b615f954321b635, type: 3}
+  m_Script: {fileID: 11500000, guid: 18a1272832f78974d90c6ca18a0a99b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   price: []
-  maxHealth: 0
+  maxHealth: 10
   owner: {fileID: 0}
-  activeTurnPhase: 0
-  isForeign: 1
-  startingPrioritys:
-  - Name: 0
-    Value: 0
-  - Name: 1
-    Value: 0
+  activeTurnPhase: 2
+  isForeign: 0
+  startingPrioritys: []
   startingStats: []
-  HomeSystemComponents:
-  - {fileID: 4369763219849521649, guid: cc07c198da1d9134ba23406893df9ee5, type: 3}
-  - {fileID: 4369763219849521649, guid: f9b38a0047f184446b0312e9b5aab61e, type: 3}
-  - {fileID: 4369763219849521649, guid: 4e150dd7e2cb43f45b3ed280208156f1, type: 3}
+  inventory: {fileID: 1825581157490703194, guid: cc2cc7318ded5894f9056b1fbc90b6da,
+    type: 3}
+  resourceCost:
+  - type: 1
+    value: 5
+  - type: 0
+    value: 2
 --- !u!1 &7382267370808366029
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,9 +398,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9101831170476235727}
-        m_TargetAssemblyTypeName: SettleHomeSystem, Assembly-CSharp
-        m_MethodName: Settle
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: PurchaseItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

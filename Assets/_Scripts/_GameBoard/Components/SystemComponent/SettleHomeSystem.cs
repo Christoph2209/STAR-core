@@ -29,6 +29,7 @@ public class SettleHomeSystem : PawnComponent
             {
                 owner.InstantiatePawnComponent(component);
             }
+            gameObject.SetActive(false);
         }
         
     }

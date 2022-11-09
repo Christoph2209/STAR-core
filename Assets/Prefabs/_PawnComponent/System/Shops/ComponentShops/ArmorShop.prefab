@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4598110260366521495}
   - component: {fileID: -3431885192355102071}
   m_Layer: 0
-  m_Name: ShopExample
+  m_Name: ArmorShop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,14 +263,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: []
-  icon: {fileID: 0}
   maxHealth: 0
   owner: {fileID: 0}
-  activeTurnPhase: 1
+  activeTurnPhase: 2
   isForeign: 0
-  startingPrioritys: []
+  startingPrioritys:
+  - Name: 0
+    Value: 0
   startingStats: []
-  inventory: {fileID: 4369763219849521649, guid: ac0d203326efa0945993939b75a62f8d,
+  inventory: {fileID: 4369763219849521649, guid: 4fd6b216b45cb8a4daa983803500b946,
     type: 3}
 --- !u!1 &7382267370808366029
 GameObject:

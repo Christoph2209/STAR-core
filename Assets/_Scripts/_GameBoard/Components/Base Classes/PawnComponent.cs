@@ -12,12 +12,10 @@ public abstract class PawnComponent : MonoBehaviour
 {
 
     public List<Cost> price;
-    public GameObject icon;
-
 
     [SerializeField]
     private float maxHealth;
-    private float currentHealth;
+    protected float currentHealth;
 
     public Pawn owner;
     

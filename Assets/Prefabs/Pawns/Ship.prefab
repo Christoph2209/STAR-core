@@ -58,15 +58,8 @@ MonoBehaviour:
   statsText: {fileID: 1377697391012707880}
   setPawnComponents:
   - {fileID: 4369763219849521649, guid: ac0d203326efa0945993939b75a62f8d, type: 3}
-  - {fileID: 4369763219849521649, guid: 7039ddec66801694eae377bf868d0fe2, type: 3}
   - {fileID: 4369763219849521649, guid: 9c7b24e8024537f45b2b9fe965709139, type: 3}
-  - {fileID: 4369763219849521649, guid: b80c792b97f5eae4a88bf7dff3037121, type: 3}
-  - {fileID: 4369763219849521649, guid: 07ededef51f40b747a20c04725975c3e, type: 3}
-  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
-  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
-  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
-  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
-  - {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1, type: 3}
+  - {fileID: 4369763219849521649, guid: 4fd6b216b45cb8a4daa983803500b946, type: 3}
   pawnComponents: []
   OnStatsUpdate:
     m_PersistentCalls:
@@ -531,7 +524,7 @@ PrefabInstance:
     - target: {fileID: 8163238627979813518, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}
       propertyPath: m_Size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8163238627979813518, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}

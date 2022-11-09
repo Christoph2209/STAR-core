@@ -221,9 +221,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4598110260366521495}
-  - component: {fileID: 9101831170476235727}
+  - component: {fileID: -3431885192355102071}
   m_Layer: 0
-  m_Name: SettleHomeSystem
+  m_Name: MineShop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,7 +250,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 203, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9101831170476235727
+--- !u!114 &-3431885192355102071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,24 +259,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4369763219849521649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dfaa06ff9a1b8744b615f954321b635, type: 3}
+  m_Script: {fileID: 11500000, guid: 351e0eac9bf44494b8b21c764c1591c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: []
+  price:
+  - type: 2
+    value: 20
   maxHealth: 0
   owner: {fileID: 0}
-  activeTurnPhase: 0
-  isForeign: 1
-  startingPrioritys:
-  - Name: 0
-    Value: 0
-  - Name: 1
-    Value: 0
+  activeTurnPhase: 2
+  isForeign: 0
+  startingPrioritys: []
   startingStats: []
-  HomeSystemComponents:
-  - {fileID: 4369763219849521649, guid: cc07c198da1d9134ba23406893df9ee5, type: 3}
-  - {fileID: 4369763219849521649, guid: f9b38a0047f184446b0312e9b5aab61e, type: 3}
-  - {fileID: 4369763219849521649, guid: 4e150dd7e2cb43f45b3ed280208156f1, type: 3}
+  inventory: {fileID: 4369763219849521649, guid: 4e150dd7e2cb43f45b3ed280208156f1,
+    type: 3}
 --- !u!1 &7382267370808366029
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,9 +395,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9101831170476235727}
-        m_TargetAssemblyTypeName: SettleHomeSystem, Assembly-CSharp
-        m_MethodName: Settle
+      - m_Target: {fileID: -3431885192355102071}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: PurchaseItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

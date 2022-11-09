@@ -130,14 +130,13 @@ MonoBehaviour:
   price:
   - type: 0
     value: 10
-  icon: {fileID: 0}
   maxHealth: 0
   owner: {fileID: 0}
   activeTurnPhase: 2
   isForeign: 0
   startingPrioritys:
   - Name: 0
-    Value: 100
+    Value: 1000
   - Name: 1
     Value: 10
   startingStats:
