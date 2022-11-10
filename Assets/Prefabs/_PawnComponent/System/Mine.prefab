@@ -271,12 +271,5 @@ MonoBehaviour:
   isForeign: 0
   startingPrioritys: []
   startingStats: []
-  resourceGeneration:
-  - type: 0
-    value: 5
-  - type: 1
-    value: 5
-  - type: 2
-    value: 5
-  cargoHold: {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1,
+  cargoHoldPrefab: {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1,
     type: 3}

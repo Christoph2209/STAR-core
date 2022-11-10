@@ -5,7 +5,7 @@ using UnityEngine;
 public class PawnFactory : PawnComponent
 {
     [SerializeField]
-    private GameObject inventory;
+    private List<GameObject> FactionShips;
     [SerializeField]
     private List<Cost> resourceCost;
 
@@ -26,11 +26,16 @@ public class PawnFactory : PawnComponent
         }
 
     }
+    private GameObject GetFactiongShip()
+    {
+        int index = universeSimulation.factionsInPlay.IndexOf(owner.GetFaction());
+        return FactionShips[index];
+    }
     public void PurchaseItem()
     {
         //purchase 
         List<Pawn> pawnsInRange = universeSimulation.GetAllPawnsInRange(owner.GetFaction(), owner.transform.position, interactionRange);
-        if (TryPurchasePawn(pawnsInRange, inventory))
+        if (TryPurchasePawn(pawnsInRange, GetFactiongShip()))
         {
             Debug.Log("Purchase successful!");
         }
