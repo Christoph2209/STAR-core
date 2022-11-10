@@ -44,13 +44,13 @@ public abstract class PawnComponent : MonoBehaviour
     }
     public virtual void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
-        if(activeTurnPhase!= universeSimulation.universeChronology.currentPhase)
+        if(activeTurnPhase== universeSimulation.universeChronology.currentPhase|| activeTurnPhase == TurnPhase.Every)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
         else
         {
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);
         }
 
 
@@ -115,7 +115,7 @@ public abstract class PawnComponent : MonoBehaviour
     
     public virtual void OnMainPhaseStart()
     {
-        if(activeTurnPhase == TurnPhase.TraderPhase)
+        if(activeTurnPhase == TurnPhase.TraderPhase|| activeTurnPhase == TurnPhase.Every)
         {
             gameObject.SetActive(true);
         }
@@ -130,7 +130,7 @@ public abstract class PawnComponent : MonoBehaviour
     }
     public virtual void OnCombatPhaseStart()
     {
-        if (activeTurnPhase == TurnPhase.RaiderPhase)
+        if (activeTurnPhase == TurnPhase.RaiderPhase || activeTurnPhase == TurnPhase.Every)
         {
             gameObject.SetActive(true);
         }

@@ -410,7 +410,7 @@ MonoBehaviour:
   startingPrioritys: []
   startingStats: []
   inventory:
-  - {fileID: 4369763219849521649, guid: 59eaac5880c46ea4c90d9e28aa788d46, type: 3}
+  - {fileID: 4369763219849521649, guid: 95c20286a121c1f4da8d3995f6bdc9f4, type: 3}
   - {fileID: 4369763219849521649, guid: 9d4e436511d6cc44d95d6a9b3b11a029, type: 3}
   - {fileID: 4369763219849521649, guid: 89196e73276428a4caac1a03520c15e9, type: 3}
   - {fileID: 4369763219849521649, guid: 8310ac98517667b44bcb131bb70eeef7, type: 3}
