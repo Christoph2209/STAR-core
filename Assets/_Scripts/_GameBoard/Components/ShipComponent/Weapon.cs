@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Weapon : PawnComponent, PlayerControlOverride
+public class Weapon : TransferableComponent, PlayerControlOverride
 {
     [SerializeField]
     private float damage;

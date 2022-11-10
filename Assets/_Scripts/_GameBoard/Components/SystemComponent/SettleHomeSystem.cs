@@ -29,6 +29,7 @@ public class SettleHomeSystem : PawnComponent
             {
                 owner.InstantiatePawnComponent(component);
             }
+            gameObject.SetActive(false);
         }
         
     }
@@ -46,7 +47,7 @@ public class SettleHomeSystem : PawnComponent
         base.OnFactionUpdate();
         if(owner.GetFaction()== null)
         {
-            activeTurnPhase = TurnPhase.Main;
+            activeTurnPhase = TurnPhase.TraderPhase;
         }
         else
         {

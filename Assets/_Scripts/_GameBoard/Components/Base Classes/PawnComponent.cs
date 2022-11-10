@@ -12,16 +12,14 @@ public abstract class PawnComponent : MonoBehaviour
 {
 
     public List<Cost> price;
-    public GameObject icon;
-
 
     [SerializeField]
     private float maxHealth;
-    private float currentHealth;
+    protected float currentHealth;
 
     public Pawn owner;
     
-    public TurnPhase activeTurnPhase = TurnPhase.Main;
+    public TurnPhase activeTurnPhase = TurnPhase.TraderPhase;
     public bool isForeign = false;
 
     protected UniverseSimulation universeSimulation;
@@ -117,7 +115,7 @@ public abstract class PawnComponent : MonoBehaviour
     
     public virtual void OnMainPhaseStart()
     {
-        if(activeTurnPhase == TurnPhase.Main)
+        if(activeTurnPhase == TurnPhase.TraderPhase)
         {
             gameObject.SetActive(true);
         }
@@ -132,7 +130,7 @@ public abstract class PawnComponent : MonoBehaviour
     }
     public virtual void OnCombatPhaseStart()
     {
-        if (activeTurnPhase == TurnPhase.Combat)
+        if (activeTurnPhase == TurnPhase.RaiderPhase)
         {
             gameObject.SetActive(true);
         }
