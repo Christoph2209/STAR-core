@@ -18,11 +18,12 @@ public class DrawCircle : MonoBehaviour
     private LineRenderer lineRenderer;
     private Material mat;
 
-    public static GameObject Create(Transform parent, Vector3 position, float radius, float lineWidth, Color color )
+    public static GameObject Create(Transform parent, Vector3 position, Quaternion rotation,  float radius, float lineWidth, Color color )
     {
         GameObject newCircle = new GameObject("Circle");
         newCircle.transform.parent = parent;
         newCircle.transform.position = position;
+        newCircle.transform.rotation = rotation; 
         DrawCircle drawCircle = newCircle.AddComponent<DrawCircle>();
 
         drawCircle.radius = radius;
