@@ -6,6 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
+
+    public SaveObject so;
     [SerializeField]
     private AudioSource _MusicSource, _SFXSource;
 
