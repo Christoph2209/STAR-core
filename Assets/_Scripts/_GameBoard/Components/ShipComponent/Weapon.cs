@@ -47,7 +47,8 @@ public class Weapon : TransferableComponent, PlayerControlOverride
 
     public void OnOpenMenu(InputValue value)
     {
-        //throw new System.NotImplementedException();
+        PlayerFactionCommander input = universeSimulation.playerFactionCommander;
+        input.RestoreFactionInput();
     }
 
     public void OnSelect(InputValue value)
