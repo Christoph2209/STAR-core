@@ -39,7 +39,8 @@ public class SettingsGroup : MonoBehaviour
     public void setMusicVolume(float f)
     {
         f = mu.value;
-        Debug.LogError("Music Volume is " + f);
+        musi = f;
+        Debug.LogError("Music Volume is " + mu.value);
         musi.volume = f;
         so.volume_mu = f;
     }

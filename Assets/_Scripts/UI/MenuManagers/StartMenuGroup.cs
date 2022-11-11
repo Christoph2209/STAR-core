@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuGroup : MonoBehaviour
 {
+    public SaveObject so;
+
+
     public void PlayGame(string scene)
    {
         scene = "Assets/Scenes/GameBase.unity";
@@ -13,6 +16,15 @@ public class StartMenuGroup : MonoBehaviour
     public void ReportBug()
     {
         Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSdYi0FtZtnpq76GEI5_deuLjHJ9PPHNVg-168bor4B2zt0SMQ/viewform?usp=sf_link");
+    }
+    public void LoadGame(string scene)
+    {
+        scene = "Assets/Scenes/GameBase.unity";
+        so = SaveManager.Load();
+        UniverseGeneration.seed = so.worldSeed;
+        UniverseGeneration.universeLength = so.limitX;
+        UniverseGeneration.universeWidth = so.limitY;
+        SceneManager.LoadScene("GameBase");
     }
 
    public void QuitGame()
