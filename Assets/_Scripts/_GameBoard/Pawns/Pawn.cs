@@ -194,9 +194,10 @@ public abstract class Pawn : MonoBehaviour
 
     public void TransferPawnComopnent(GameObject pawnComponentInstance)
     {
+#if UNITY_EDITOR
         Debug.Assert(PrefabUtility.GetPrefabInstanceStatus(pawnComponentInstance) == PrefabInstanceStatus.NotAPrefab);
         Debug.Assert(pawnComponentInstance.TryGetComponent(typeof(PawnComponent), out _));
-
+#endif
         PawnComponent c = pawnComponentInstance.GetComponent<PawnComponent>();
 
         //remove from previous
