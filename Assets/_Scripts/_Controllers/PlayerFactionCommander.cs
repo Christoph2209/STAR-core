@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerFactionCommander : FactionCommander 
 {
@@ -243,7 +243,7 @@ public class PlayerFactionCommander : FactionCommander
     }
     public void OnExit(InputValue value)
     {
-        Application.Quit();
+        SceneManager.LoadScene("StartMenu");
         Debug.Log("Exiting Game");
     }
 
@@ -271,5 +271,12 @@ public class PlayerFactionCommander : FactionCommander
             lastComponentMenuOpened.OpenComponentMenu(actingFaction);
         }
     }
+
+
+
+
+
+
+
 
 }

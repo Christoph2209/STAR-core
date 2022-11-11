@@ -51,7 +51,7 @@ public class UniverseChronology : MonoBehaviour
             currentRound++;
 
             //Trasition to main
-            currentPhase = global::TurnPhase.TransitionToMain;
+            currentPhase = global::TurnPhase.TransitionToTrader;
             yield return new WaitForSeconds(transitionTime);
             readiedFactions.Clear();
             //----
@@ -69,7 +69,7 @@ public class UniverseChronology : MonoBehaviour
             }
 
             //Transition to combat
-            currentPhase = global::TurnPhase.TransitionToCombat;
+            currentPhase = global::TurnPhase.TransitionToRaider;
             yield return new WaitForSeconds(transitionTime);
             readiedFactions.Clear();
             //----
@@ -166,4 +166,4 @@ public class UniverseChronology : MonoBehaviour
     }
 }
 
-public enum TurnPhase { SelectHomeSystem, TransitionToMain, TraderPhase, TransitionToCombat, RaiderPhase, GameOver, None};
+public enum TurnPhase { SelectHomeSystem, TransitionToTrader, TraderPhase, TransitionToRaider, RaiderPhase, GameOver, None, Every };

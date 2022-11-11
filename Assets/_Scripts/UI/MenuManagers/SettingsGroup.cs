@@ -23,7 +23,7 @@ public class SettingsGroup : MonoBehaviour
         x = so.limitX;
         y = so.limitY;
         worldText.text = ("Your current World Values are (" + UniverseGeneration.universeLength + ", " + UniverseGeneration.universeWidth + ")");
-        Debug.LogError(so.limitX);
+        Debug.Log(so.limitX);
     }
 
 
@@ -39,7 +39,7 @@ public class SettingsGroup : MonoBehaviour
     public void setMusicVolume(float f)
     {
         f = mu.value;
-        Debug.LogError("Music Volume is " + f);
+        Debug.Log("Music Volume is " + f);
         musi.volume = f;
         so.volume_mu = f;
     }
@@ -47,7 +47,7 @@ public class SettingsGroup : MonoBehaviour
     public void setSFXVolume(float f)
     {
         f = sf.value;
-        Debug.LogError("SFX Volume is " + f);
+        Debug.Log("SFX Volume is " + f);
         sefx.volume = f;
         so.volume_sfx = f;
     }
@@ -57,7 +57,7 @@ public class SettingsGroup : MonoBehaviour
         x = int.Parse(z);
         UniverseGeneration.universeLength = x;
         worldText.text = ("Your current World Values are (" + UniverseGeneration.universeLength + ", " + UniverseGeneration.universeWidth + ")");
-        Debug.LogError("Value changed to " + x);
+        Debug.Log("Value changed to " + x);
         so.limitX = x;
     }
 
@@ -66,7 +66,7 @@ public class SettingsGroup : MonoBehaviour
         y = int.Parse(z);
         UniverseGeneration.universeWidth = y;
         worldText.text = ("Your current World Values are (" + UniverseGeneration.universeLength + ", " + UniverseGeneration.universeWidth + ")");
-        Debug.LogError("Value changed to " + y);
+        Debug.Log("Value changed to " + y);
         so.limitY = y;
     }
 }

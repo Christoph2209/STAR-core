@@ -10,6 +10,8 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     [SerializeField]
     private float range;
     [SerializeField]
+    private Color rangeColor;
+    [SerializeField]
     private GameObject targetingUI;
     private Pawn target;
 
@@ -75,5 +77,16 @@ public class Weapon : TransferableComponent, PlayerControlOverride
         }
     }
 
+    private GameObject circle;
+    public override void OnCombatPhaseStart()
+    {
+        base.OnCombatPhaseStart();
+        circle = DrawCircle.Create(owner.transform, owner.transform.position, Quaternion.Euler(90,0,0), range, 0.1f, Color.red);
+    }
+    public override void OnCombatPhaseEnd()
+    {
+        base.OnCombatPhaseEnd();
+        Destroy(circle);
+    }
 
 }
