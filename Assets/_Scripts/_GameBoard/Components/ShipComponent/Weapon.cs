@@ -81,12 +81,12 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     public override void OnCombatPhaseStart()
     {
         base.OnCombatPhaseStart();
-        circle = DrawCircle.Create(owner.transform, Vector3.zero, 2, 0.1f, Color.red);
+        circle = DrawCircle.Create(owner.transform, owner.transform.position, Quaternion.Euler(90,0,0), range, 0.1f, Color.red);
     }
     public override void OnCombatPhaseEnd()
     {
         base.OnCombatPhaseEnd();
-
+        Destroy(circle);
     }
 
 }

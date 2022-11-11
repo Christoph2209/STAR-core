@@ -89,6 +89,8 @@ public abstract class Pawn : MonoBehaviour
         CopyInspectorPawnValues();
         DamagePawn(8f);
 
+        OnPhaseTransition();
+
     }
 
 
