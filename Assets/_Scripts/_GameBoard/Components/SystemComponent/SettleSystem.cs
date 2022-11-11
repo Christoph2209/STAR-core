@@ -63,9 +63,9 @@ public class SettleSystem : PawnComponent
         bool isEnemyPawnInRange = false;
         foreach (Pawn pawnInRange in universeSimulation.GetAllPawnsInRange(owner.transform.position, settleRange))
         {
-            if(pawnInRange is Planet)
+            if (pawnInRange.transform.TryGetComponent<Planet>(out _))
             {
-                break;
+                continue;
             }
             if (pawnInRange.GetFaction() == faction)
             {
