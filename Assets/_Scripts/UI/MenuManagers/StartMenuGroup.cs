@@ -17,7 +17,11 @@ public class StartMenuGroup : MonoBehaviour
 
    public void QuitGame()
    {
-      Application.Quit();
+        if (Random.value <= 0.15)
+        {
+            Application.OpenURL("https://youtu.be/dQw4w9WgXcQ");
+        }
+        Application.Quit();
       Debug.Log("Game is exiting");
    }
 
