@@ -87,7 +87,6 @@ public abstract class Pawn : MonoBehaviour
         universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
 
         CopyInspectorPawnValues();
-        DamagePawn(8f);
 
         OnPhaseTransition();
 
@@ -339,6 +338,7 @@ public abstract class Pawn : MonoBehaviour
         if (excess > 0)
         {
             Debug.Log("CRITICAL DAMAGE HAS BEEN SUSTAINED!!!!");
+            universeSimulation.DestroyPawn(this);
         }
         Debug.Log("Pawn has been damaged! " + GetTotalHealth() + " Health left!");
     }

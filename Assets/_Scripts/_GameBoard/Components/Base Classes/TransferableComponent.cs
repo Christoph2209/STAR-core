@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 public class TransferableComponent : PawnComponent,PlayerControlOverride
 {
+    private float transferRange = 2.5f;
+    private GameObject circleHighlight;
+    private GameObject circleRange;
+
 
     public void TransferComponent(Pawn newOwner)
     {
@@ -14,14 +18,34 @@ public class TransferableComponent : PawnComponent,PlayerControlOverride
     public void TransferComponent()
     {
         universeSimulation.playerFactionCommander.OverrideInput(this);
-
-        
+        circleRange = DrawCircle.Create(owner.transform, owner.transform.position, Quaternion.Euler(90, 0, 0), transferRange - 0.25f, 0.06f, Color.white);
     }
 
 
     public virtual void OnMouseHighlight()
     {
-        //throw new System.NotImplementedException();
+        PlayerFactionCommander input = universeSimulation.playerFactionCommander;
+        if (input.isOverUI)
+        {
+            return;
+        }
+
+        Pawn targetPawn = input.closestPawnToCursor;
+
+        if (circleHighlight != null)
+        {
+            Destroy(circleHighlight);
+        }
+
+        if (targetPawn != null)
+        {
+
+            if (Vector3.Distance(targetPawn.transform.position, owner.transform.position) <= transferRange)
+            {
+                Debug.Log("Drawing Circle");
+                circleHighlight = DrawCircle.Create(targetPawn.transform, targetPawn.transform.position, Quaternion.Euler(90, 0, 0), 1.0f, 0.03f, Color.white);
+            }
+        }
     }
 
     public virtual void OnMouseMove(InputValue value)
@@ -37,7 +61,6 @@ public class TransferableComponent : PawnComponent,PlayerControlOverride
 
     public virtual void OnOpenMenu(InputValue value)
     {
-        universeSimulation.playerFactionCommander.RestoreFactionInput();
         //throw new System.NotImplementedException();
     }
 
@@ -62,9 +85,16 @@ public class TransferableComponent : PawnComponent,PlayerControlOverride
         {
             Debug.Log(targetPawn + "Selected. Transfering comonent");
             TransferComponent(targetPawn);
-            input.RestoreFactionInput();
+            
         }
+        OnTransferMenuExit(input);
         
+    }
+    private void OnTransferMenuExit(PlayerFactionCommander input)
+    {
+        input.RestoreFactionInput();
+        Destroy(circleHighlight);
+        Destroy(circleRange);
     }
 
 }

@@ -33,6 +33,11 @@ public class UniverseSimulation : MonoBehaviour
         newPawn.EstablishPawn(pawnName, this, faction);
         return pawnGameObject;
     }
+    public void DestroyPawn(Pawn pawn)
+    {
+        pawns.Remove(pawn);
+        Destroy(pawn.gameObject);
+    }
 
     public FactionCommander EstablishFaction(string name, GameObject factionCommanderPrefab)
     {

@@ -6,7 +6,7 @@ public abstract class FactionCommander : MonoBehaviour
 {
     
     [SerializeField]
-    protected UniverseSimulation universeSimulation;
+    public UniverseSimulation universeSimulation;
     public string factionName = default;
     protected FactionCommander actingFaction;
 

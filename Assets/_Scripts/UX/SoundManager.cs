@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
 
     public SaveObject so;
     [SerializeField]
-    private AudioSource _MusicSource, _SFXSource;
+    public AudioSource _MusicSource, _SFXSource;
 
     private void Awake()
     {

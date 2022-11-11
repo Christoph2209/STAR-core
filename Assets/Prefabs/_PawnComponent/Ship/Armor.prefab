@@ -405,6 +405,8 @@ MonoBehaviour:
   startingPrioritys:
   - Name: 2
     Value: 100
+  - Name: 0
+    Value: 9
   startingStats: []
 --- !u!1 &7701976978265073824
 GameObject:
@@ -423,7 +425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6491009787890167646
 RectTransform:
   m_ObjectHideFlags: 0
@@ -441,7 +443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -5.3, y: 0}
   m_SizeDelta: {x: 81.5, y: 31.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2090700349562269452

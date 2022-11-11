@@ -17,11 +17,17 @@ public class SettingsGroup : MonoBehaviour
 
     void Start()
     {
+        sefx = SoundManager.Instance._SFXSource;
+        musi = SoundManager.Instance._MusicSource;
+        
         so = SaveManager.Load();
+
+        Debug.Log(sf);
         sf.value = so.volume_sfx;
         mu.value = so.volume_mu;
         x = so.limitX;
         y = so.limitY;
+        
         worldText.text = ("Your current World Values are (" + UniverseGeneration.universeLength + ", " + UniverseGeneration.universeWidth + ")");
         Debug.Log(so.limitX);
     }

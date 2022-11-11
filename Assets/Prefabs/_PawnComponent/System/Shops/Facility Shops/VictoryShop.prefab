@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price:
   - type: 0
-    value: 0
+    value: 400
   maxHealth: 0
   owner: {fileID: 0}
   activeTurnPhase: 2
@@ -427,7 +427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1527206474117972518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -445,8 +445,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 47.599854, y: 3.3000488}
-  m_SizeDelta: {x: 81.5, y: 31.2}
+  m_AnchoredPosition: {x: 77.8, y: 3.3000488}
+  m_SizeDelta: {x: 46.1, y: 31.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8907193883840446502
 CanvasRenderer:
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Victory Item
+  m_text: 'Pay 2 Win
 
 '
   m_isRightToLeft: 0
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

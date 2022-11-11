@@ -270,6 +270,8 @@ MonoBehaviour:
   startingPrioritys:
   - Name: 2
     Value: 0
+  - Name: 0
+    Value: 11
   startingStats: []
   resourceType: 0
   maxResources: 10
