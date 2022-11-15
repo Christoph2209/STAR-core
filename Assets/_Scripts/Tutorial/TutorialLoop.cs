@@ -13,6 +13,7 @@ public class TutorialLoop : MonoBehaviour
     private UniverseChronology universeChronology;
     private void Start()
     {
+        universeChronology = universeSimulation.universeChronology;
         universeChronology.OnSetup.AddListener(() => OnSetup());
         universeChronology.MainPhaseStart.AddListener(() => OnMainPhaseStart());
         universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());

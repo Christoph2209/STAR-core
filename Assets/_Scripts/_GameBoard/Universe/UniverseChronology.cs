@@ -17,6 +17,7 @@ public class UniverseChronology : MonoBehaviour
 
     private FactionCommander winner;
     private int turnCount = 0 ;
+    private TutorialLoop tLoop;
     //Required for initialization. If this method doesn't get called it won't funtion properly
     public void EstablishUniverseChronology(UniverseSimulation universeSimulation)
     {
@@ -27,6 +28,7 @@ public class UniverseChronology : MonoBehaviour
         else
         {
             this.universeSimulation = universeSimulation;
+    
             StartCoroutine(TurnPhase());
         }
     }
@@ -34,10 +36,10 @@ public class UniverseChronology : MonoBehaviour
 
     IEnumerator TurnPhase()
     {
+        yield return null;
+
         float transitionTime=0.2f;
         
-
-
         //Game Setup
         readiedFactions.Clear();
         currentPhase = global::TurnPhase.SelectHomeSystem;
