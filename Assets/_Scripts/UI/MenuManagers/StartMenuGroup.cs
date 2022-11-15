@@ -21,10 +21,16 @@ public class StartMenuGroup : MonoBehaviour
     {
         scene = "Assets/Scenes/GameBase.unity";
         so = SaveManager.Load();
-        UniverseGeneration.seed = so.worldSeed;
-        UniverseGeneration.universeLength = so.limitX;
-        UniverseGeneration.universeWidth = so.limitY;
-        SceneManager.LoadScene("GameBase");
+        if (SaveManager.trueState == false){
+            Debug.LogError("Cant open a file");
+        }
+        else
+        {
+            UniverseGeneration.seed = so.worldSeed;
+            UniverseGeneration.universeLength = so.limitX;
+            UniverseGeneration.universeWidth = so.limitY;
+            SceneManager.LoadScene("GameBase");
+        }
     }
 
    public void QuitGame()
