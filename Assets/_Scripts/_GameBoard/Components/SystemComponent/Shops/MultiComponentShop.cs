@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class MultiComponentShop : PawnComponent
 { 
     [SerializeField]
@@ -10,7 +10,37 @@ public class MultiComponentShop : PawnComponent
     private List<Cost> resourceCost;
 
     private float interactionRange = 3;
+    [SerializeField]
+    TMP_Text rare;
+    [SerializeField]
+    TMP_Text medium;
+    [SerializeField]
+    TMP_Text well;
 
+
+    public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
+    {
+        base.EstablishPawnComponent(owner, universeSimulation);
+    
+
+        foreach (Cost c in resourceCost)
+        {
+            switch (c.type)
+            {
+                case ComponentResource.Rare:
+                    rare.text = c.value.ToString();
+                    break;
+                case ComponentResource.Medium:
+                    medium.text = c.value.ToString();
+                    break;
+                case ComponentResource.WellDone:
+                    well.text = c.value.ToString();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
     public void PurchaseItem()
     {

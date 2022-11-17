@@ -140,7 +140,8 @@ public class PlayerFactionCommander : FactionCommander
                 if (closestPawnToCursor != null)
                 {
                     moveOffset = closestPawnToCursor.transform.position - ScreenCenterWorldPoint();
-                    closestPawnToCursor.DefaultAction(actingFaction);
+
+                    OpenMenu(value);
                 }
                 else
                 {
@@ -187,7 +188,7 @@ public class PlayerFactionCommander : FactionCommander
 
     Pawn lastComponentMenuOpened;
     
-    public void OnOpenMenu(InputValue value)
+    public void OpenMenu(InputValue value)
     {
         if (playerControlOverride!=null)
         {

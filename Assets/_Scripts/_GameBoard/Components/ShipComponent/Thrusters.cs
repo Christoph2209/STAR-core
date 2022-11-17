@@ -13,13 +13,32 @@ public class Thrusters : PawnComponent, PlayerControlOverride
     private GameObject circleRange;
     private GameObject circleTarget;
 
+    private float moveTime = 0.2f;
+    
     private void MovePattern()
     {
         Debug.Log("Thrusters Moving Pawn");
         moveOffset = Vector3.ClampMagnitude(moveOffset, MaxMoveDistance());
-        owner.transform.position += moveOffset;
+        StaticCoroutine.Start(MoveProcess(moveOffset));
+        //owner.transform.position += moveOffset;
     }
+    IEnumerator MoveProcess(Vector3 moveOffset)
+    {
+        float t = 0;
+        Vector3 currentVelocity = Vector3.zero;
+        Vector3 currentOffset = Vector3.zero;
+        Vector3 previousOffset = Vector3.zero;
+        while (t <= moveTime)
+        {
+            t += Time.deltaTime;
 
+            currentOffset = Vector3.Lerp(Vector3.zero, moveOffset, t / moveTime);
+            owner.transform.position += currentOffset - previousOffset;
+            previousOffset = currentOffset;
+            yield return null;
+        }
+
+    }
     private float MaxMoveDistance()
     {
         return thrusterMovement * owner.stats[ComponentStat.ThrusterPower];
