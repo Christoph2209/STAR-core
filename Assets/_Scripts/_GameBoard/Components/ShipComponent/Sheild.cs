@@ -11,4 +11,5 @@ public class Sheild : TransferableComponent
         base.OnMainPhaseStart();
         currentHealth += (sheildRegeneration * owner.stats[ComponentStat.SheildPower]);
     }
+    
 }

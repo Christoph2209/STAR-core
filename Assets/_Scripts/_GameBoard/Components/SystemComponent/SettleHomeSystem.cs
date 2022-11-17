@@ -29,6 +29,7 @@ public class SettleHomeSystem : PawnComponent
             {
                 owner.InstantiatePawnComponent(component);
             }
+            universeSimulation.universeChronology.MarkFactionReady(faction);
             gameObject.SetActive(false);
         }
         

@@ -35,21 +35,26 @@ public class CargoHold : TransferableComponent
 
     private void UpdateResourceText()
     {
-
+        rare.transform.parent.gameObject.SetActive(false);
+        medium.transform.parent.gameObject.SetActive(false);
+        well.transform.parent.gameObject.SetActive(false);
 
         switch (resourceType)
         {
             case ComponentResource.Rare:
                 rare.text = resources + "/" + maxResources;
                 rare.transform.parent.gameObject.SetActive(true);
+                prioritys[ComponentPriority.DrawOrder] = -5;
                 break;
             case ComponentResource.Medium:
                 medium.text = resources + "/" + maxResources;
                 medium.transform.parent.gameObject.SetActive(true);
+                prioritys[ComponentPriority.DrawOrder] = -4;
                 break;
             case ComponentResource.WellDone:
                 well.text = resources +"/"+maxResources;
                 well.transform.parent.gameObject.SetActive(true);
+                prioritys[ComponentPriority.DrawOrder] = -3;
                 break;
             default:
                 break;
@@ -108,10 +113,12 @@ public class CargoHold : TransferableComponent
                         {
                             SetResources(0, cargoHold);
                         }
-
+                        cargoHold.UpdateResourceText();
                     }
+
                 }
             }
+            
 
         }
         return true;
@@ -147,7 +154,7 @@ public class CargoHold : TransferableComponent
                 SetResources(cargoHold.resources + excess, cargoHold);//add excess resources to resources
                 excess = Mathf.Max(0, cargoHold.resources - cargoHold.maxResources);// set excess equal to how much resources overflowed. If the value is less than or equal to 0 clam the excess to 0
                 SetResources(Mathf.Clamp(cargoHold.resources, 0, cargoHold.maxResources), cargoHold);
-
+                
             }
         }
         if (excess > 0)
@@ -166,6 +173,7 @@ public class CargoHold : TransferableComponent
                     SetResources(newCargoHold.maxResources,newCargoHold);
                     excess -= newCargoHold.resources;
                 }
+                
             }
         }
         return excess;
