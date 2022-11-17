@@ -120,9 +120,14 @@ public class CargoHold : TransferableComponent
 
     private static void SetResources(int value, CargoHold cargoHold)
     {
+        
         cargoHold.resources = value;
         cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
         cargoHold.UpdateResourceText();
+        if(value == 0)
+        {
+            cargoHold.owner.RemovePawnComponent(cargoHold.gameObject);
+        }
     }
 
     public static int AddResources(Pawn pawn, GameObject cargoHoldComponent, ComponentResource componentResource, int value)
