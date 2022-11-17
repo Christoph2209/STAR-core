@@ -10,7 +10,7 @@ using UnityEditor;
 public abstract class Pawn : MonoBehaviour
 {
 
-    
+    public SaveObject so;
 
     [SerializeField]
     private UniverseSimulation universeSimulation;

@@ -28,14 +28,7 @@ public class UniverseGeneration : MonoBehaviour
         SaveManager.Save(so);
         GenerateUniverse();
     }
-    public void setUniverseL(int x)
-    {
-        universeLength = x;
-    }
-    public void setUniverseW(int y)
-    {
-        universeWidth = y;
-    }
+
     public void GenerateUniverse(){
 
         //generate universe
@@ -52,6 +45,8 @@ public class UniverseGeneration : MonoBehaviour
                         if (Random.value < zoneProb)
                         {
                             GameObject newZone = universeSimulation.GeneratePawn(planet, null, ("Space Zone " + (zonesGenerated) + ": (" + k + "," + l + ")"), zonePosition);
+                            so.pawns.Add(newZone);
+                            SaveManager.Save(so);
                             //GameObject newZone = Instantiate(zones[Random.Range(0, zones.Length)]);
                             //if (newZone.tag == "System") {
                             //    newZone.GetComponent<planet>().generateStructure(Random.Range(0,3), Random.Range(0,3), Random.Range(0,2));

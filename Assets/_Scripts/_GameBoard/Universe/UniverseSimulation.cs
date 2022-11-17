@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 using System.Linq;
 public class UniverseSimulation : MonoBehaviour
 {
-
+    public SaveObject so;
+    
     [SerializeField]
     private List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();
