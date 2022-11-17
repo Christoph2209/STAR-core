@@ -22,7 +22,9 @@ public class PawnFactory : PawnComponent
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         base.EstablishPawnComponent(owner, universeSimulation);
-        
+        rare.text = "0";
+        medium.text = "0";
+        well.text = "0";
         foreach (Cost c in pawnCost)
         {
             switch (c.type)
