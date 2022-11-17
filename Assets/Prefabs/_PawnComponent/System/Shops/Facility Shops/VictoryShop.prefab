@@ -273,7 +273,7 @@ MonoBehaviour:
   isForeign: 0
   startingPrioritys:
   - Name: 0
-    Value: 0
+    Value: 199
   startingStats: []
   inventory: {fileID: 4369763219849521649, guid: f89cd90f052894b4d916b30a5b8f8b3c,
     type: 3}

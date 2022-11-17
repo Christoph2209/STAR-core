@@ -59,8 +59,6 @@ MonoBehaviour:
   setPawnComponents:
   - {fileID: 4369763219849521649, guid: 51228d13b423e7f44a75b52c8967bf13, type: 3}
   - {fileID: 4369763219849521649, guid: 07ededef51f40b747a20c04725975c3e, type: 3}
-  - {fileID: 4369763219849521649, guid: 615e4a42ca7cc4f4d94569b8df7400e3, type: 3}
-  - {fileID: 4369763219849521649, guid: 18473d68c1a5d5747addfe66baa0f574, type: 3}
   - {fileID: 4369763219849521649, guid: f870852febdca044b8519fb0d42b120b, type: 3}
   pawnComponents: []
   OnStatsUpdate:
@@ -483,6 +481,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8163238628419941447, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163238628419941447, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -720,6 +723,11 @@ PrefabInstance:
     - target: {fileID: 8163238627979813617, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}
       propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163238628419941447, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8163238628419941447, guid: ac92a85954b16a443aa330a90ad5cb11,

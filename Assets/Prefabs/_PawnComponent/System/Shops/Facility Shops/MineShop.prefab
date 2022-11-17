@@ -264,16 +264,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351e0eac9bf44494b8b21c764c1591c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price:
-  - type: 2
-    value: 20
+  price: []
   maxHealth: 0
   owner: {fileID: 0}
   activeTurnPhase: 2
   isForeign: 0
   startingPrioritys:
   - Name: 0
-    Value: 499
+    Value: 500
   startingStats: []
   inventory: {fileID: 4369763219849521649, guid: 4e150dd7e2cb43f45b3ed280208156f1,
     type: 3}

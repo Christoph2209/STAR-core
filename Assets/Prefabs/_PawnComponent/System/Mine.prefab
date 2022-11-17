@@ -265,12 +265,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03cc9fc07fe546e40a514f218e44ee11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: []
+  price:
+  - type: 0
+    value: 30
+  - type: 1
+    value: 30
+  - type: 2
+    value: 30
   maxHealth: 0
   owner: {fileID: 0}
   activeTurnPhase: 2
   isForeign: 0
-  startingPrioritys: []
+  startingPrioritys:
+  - Name: 0
+    Value: 150
   startingStats: []
   cargoHoldPrefab: {fileID: 4369763219849521649, guid: f8056c6e2f059404eb75b9a7d918e2d1,
     type: 3}

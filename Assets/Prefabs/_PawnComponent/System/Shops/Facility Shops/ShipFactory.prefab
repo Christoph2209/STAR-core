@@ -143,7 +143,13 @@ MonoBehaviour:
   - {fileID: 2590380323146769873, guid: e3bd43c9e6a20144b8026688b1891dfe, type: 3}
   - {fileID: 4795214652839332316, guid: e5b22cf907457e34ab3be35e56a011a6, type: 3}
   - {fileID: 4431651406661339191, guid: bd0a9f3a71493cd4e8d88c5158e800f6, type: 3}
-  pawnCost: []
+  pawnCost:
+  - type: 0
+    value: 10
+  - type: 1
+    value: 10
+  - type: 2
+    value: 10
   rare: {fileID: 6125974431667650901}
   medium: {fileID: 1832224452245607565}
   well: {fileID: 3754590614328831153}
