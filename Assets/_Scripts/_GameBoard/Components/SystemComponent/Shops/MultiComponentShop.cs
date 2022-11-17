@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 public class MultiComponentShop : PawnComponent
-{ 
+{
+    [SerializeField]
+    private bool destroyOnBuild= false;
     [SerializeField]
     private List<GameObject> inventory;
     [SerializeField]
@@ -56,6 +58,10 @@ public class MultiComponentShop : PawnComponent
                 owner.InstantiatePawnComponent(item);
             }
             Debug.Log("Purchase Succesful!");
+            if (destroyOnBuild)
+            {
+                owner.RemovePawnComponent(gameObject);
+            }
         }
         else
         {

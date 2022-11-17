@@ -5,6 +5,8 @@ using TMPro;
 public class Shop : PawnComponent
 {
     [SerializeField]
+    private bool destroyOnBuild = false;
+    [SerializeField]
     private GameObject inventory;
     private float interactionRange = 3 ;
     [SerializeField]
@@ -68,6 +70,10 @@ public class Shop : PawnComponent
         if (TryPurchaseItem(pawnsInRange , owner , inventory ))
         {
             Debug.Log("Purchase successful!");
+            if (destroyOnBuild)
+            {
+                owner.RemovePawnComponent(gameObject);
+            }
         }
         else
         {

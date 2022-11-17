@@ -412,6 +412,7 @@ MonoBehaviour:
   - Name: 0
     Value: 499
   startingStats: []
+  destroyOnBuild: 1
   inventory:
   - {fileID: 4369763219849521649, guid: 95c20286a121c1f4da8d3995f6bdc9f4, type: 3}
   - {fileID: 4369763219849521649, guid: 9d4e436511d6cc44d95d6a9b3b11a029, type: 3}

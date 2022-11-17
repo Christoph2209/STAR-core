@@ -273,6 +273,7 @@ MonoBehaviour:
   - Name: 0
     Value: 500
   startingStats: []
+  destroyOnBuild: 1
   inventory: {fileID: 4369763219849521649, guid: 4e150dd7e2cb43f45b3ed280208156f1,
     type: 3}
   rare: {fileID: 7546002180003921671}
