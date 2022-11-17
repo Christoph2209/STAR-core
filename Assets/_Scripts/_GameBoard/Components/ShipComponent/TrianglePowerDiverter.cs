@@ -25,4 +25,5 @@ public class TrianglePowerDiverter : PawnComponent
         owner.UpdateStats();
 
     }
+    
 }

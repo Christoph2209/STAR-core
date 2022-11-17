@@ -397,7 +397,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d7baa12c754d8419fe679abb7640fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: []
+  price:
+  - type: 0
+    value: 5
+  - type: 1
+    value: 10
+  - type: 2
+    value: 10
   maxHealth: 5
   owner: {fileID: 0}
   activeTurnPhase: 2

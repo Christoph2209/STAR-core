@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class SettleSystem : PawnComponent
 {
+    [SerializeField]
+    private List<GameObject> newSytemComponents;
+
+
     public float settleRange=2;
-
-
 
     private GameObject circle;
     public void OnEnable()
@@ -49,6 +51,14 @@ public class SettleSystem : PawnComponent
         {
             Debug.Log(faction.name + " Is settleing the " + owner.name + " system.");
             owner.SetFaction(faction);
+
+            foreach (GameObject component in newSytemComponents)
+            {
+                owner.InstantiatePawnComponent(component);
+            }
+            gameObject.SetActive(false);
+
+
         }
         else
         {
