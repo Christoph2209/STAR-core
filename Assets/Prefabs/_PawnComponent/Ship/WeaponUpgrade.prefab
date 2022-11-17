@@ -399,7 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price:
   - type: 0
-    value: 10
+    value: 5
   - type: 1
     value: 10
   - type: 2

@@ -406,7 +406,7 @@ MonoBehaviour:
   - type: 1
     value: 10
   - type: 2
-    value: 10
+    value: 5
   maxHealth: 5
   owner: {fileID: 0}
   activeTurnPhase: 2

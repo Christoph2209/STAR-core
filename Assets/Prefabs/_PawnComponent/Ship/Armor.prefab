@@ -399,11 +399,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price:
   - type: 0
-    value: 10
+    value: 2
   - type: 1
-    value: 10
+    value: 9
   - type: 2
-    value: 10
+    value: 5
   maxHealth: 5
   owner: {fileID: 0}
   activeTurnPhase: 2
