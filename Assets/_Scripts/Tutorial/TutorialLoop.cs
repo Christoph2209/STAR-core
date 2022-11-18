@@ -15,13 +15,36 @@ public class TutorialLoop : MonoBehaviour
     private UniverseSimulation universeSimulation;// universe simulation needs to be slotted into this field in the inspector
     private UniverseChronology universeChronology;
 
-    public GameObject Panel;
-    public TMP_Text TxtObj;
-
-    private string Txt;
-    private Vector3 Pos;
-
-    private bool UpdatingPanel;
+    [SerializeField]
+    private GameObject HomePlanetUI1;
+    [SerializeField]
+    private GameObject HomePlanetUI2;
+    [SerializeField]
+    private GameObject ControlsUI;
+    [SerializeField]
+    private GameObject ReadyPanelUI;
+    [SerializeField]
+    private GameObject ResourcesUI;
+    [SerializeField]
+    private GameObject ComponentsUI;
+    [SerializeField]
+    private GameObject ShipUI;
+    [SerializeField]
+    private GameObject TransferUI;
+    [SerializeField]
+    private GameObject PowerTriangle;
+    [SerializeField]
+    private GameObject Movement;
+    [SerializeField]
+    private GameObject TraderConclusion;
+    [SerializeField]
+    private GameObject RaiderUI;
+    [SerializeField]
+    private GameObject RaiderUI2;
+    [SerializeField]
+    private GameObject Damage;
+    [SerializeField]
+    private GameObject Final;
 
     private void Start()
     {
@@ -29,37 +52,15 @@ public class TutorialLoop : MonoBehaviour
         universeChronology.OnSetup.AddListener(() => OnSetup());
         universeChronology.MainPhaseStart.AddListener(() => OnMainPhaseStart());
         universeChronology.CombatPhaseStart.AddListener(() => OnCombatPhaseStart());
-
-        Debug.Log(UpdatingPanel);
     }
-
 
     //pick your home system
     public void OnSetup()
     {
         Debug.Log("TUTORIAL: setup phase, turn: " + universeChronology.GetTurnCount());
-        Debug.Log(UpdatingPanel);
-
-        Pos = new Vector3(0, 0, 0);
-        Txt = ("Welcome to Space Traders and Raiders. " +
-        "It is far in the future and humanity is in a constant power struggle. " +
-        "Stake your claim and conquer the universe by way of commerce…or force.");
-        UpdatePanel(Pos, Txt, 0.5f, 0.7f);
-
-        if (UpdatingPanel)
-        {
-            Debug.Log(UpdatingPanel);
-            Pos = new Vector3(200, 285, 0);
-            Txt = ("“PlAYER 1… It’s time to claim your territory. " +
-            "PLANETS and SHIPS that you own can be modified with items called COMPONENTS. " +
-            "These COMPONENTS are created by converting RESOURCES that you must acquire across the universe. " +
-            "Move around and open the Menu on the planet you wish to be your HOME SYSTEM with this in mind.”");
-            UpdatePanel(Pos, Txt, 0.2f, 0.5f);
-        }
+        HomePlanetUI1.SetActive(true);
     }
 
-
-   
     //called at the start of the phase, turn number can be gathered.
     public void OnMainPhaseStart()
     {
@@ -68,9 +69,15 @@ public class TutorialLoop : MonoBehaviour
         {
             case 1:
                 Debug.Log("TUTORIAL: It's the first turn!");
+                ResourcesUI.SetActive(true);
                 break;
             case 2:
                 Debug.Log("TUTORIAL: It's the second turn!");
+                if(RaiderUI.activeSelf)
+                {
+                    RaiderUI.SetActive(false);
+                }
+                TransferUI.SetActive(true);
                 break;
             default:
                 break;
@@ -80,22 +87,136 @@ public class TutorialLoop : MonoBehaviour
     public void OnCombatPhaseStart()
     {
         Debug.Log("TUTORIAL: combat phase, turn: " + universeChronology.GetTurnCount());
+        switch (universeChronology.GetTurnCount())
+        {
+            case 1:
+                Debug.Log("TUTORIAL: It's the first turn!");
+                RaiderUI.SetActive(true);
+                break;
+            case 2:
+                Debug.Log("TUTORIAL: It's the second turn!");
+                RaiderUI.SetActive(true);
+                break;
+            default:
+                break;
+        }
     }
 
-    public void UpdatePanel(Vector3 NewPos, string TextToPrint, float ScaleX, float ScaleY)
+    public void DeactivateHomePanel()
     {
-        Panel.transform.localPosition = NewPos;
-        Debug.Log(Panel.transform.position);
+        if (HomePlanetUI1.activeSelf)
+        {
+            HomePlanetUI1.SetActive(false);
 
-        Panel.gameObject.transform.localScale = new Vector3(ScaleX, ScaleY, 0);
-
-        TxtObj.text = TextToPrint;
-
-        UpdatingPanel = false;
+            HomePlanetUI2.SetActive(true);
+        }
     }
 
-    public void StartUpdating()
+    public void DeactivateHomePanel2()
     {
-        UpdatingPanel = true;
+        if (HomePlanetUI2.activeSelf)
+        {
+            HomePlanetUI2.SetActive(false);
+
+            ControlsUI.SetActive(true);
+            ReadyPanelUI.SetActive(true);
+        }
+    }
+
+    public void DeactivateControls()
+    {
+        if (ControlsUI.activeSelf && ReadyPanelUI.activeSelf)
+        {
+            ControlsUI.SetActive(false);
+            ReadyPanelUI.SetActive(false);
+        }
+
+        else
+        {
+            return;
+        }
+    }
+
+    public void DeactivateResourcesUI()
+    {
+        if (ResourcesUI.activeSelf)
+        {
+            ResourcesUI.SetActive(false);
+
+            ComponentsUI.SetActive(true);
+        }
+    }
+
+    public void DeactivateComponentsUI()
+    {
+        if (ComponentsUI.activeSelf)
+        {
+            ComponentsUI.SetActive(false);
+
+            ShipUI.SetActive(true);
+        }
+    }
+
+    public void DeactivateShipsUI()
+    {
+        if (ShipUI.activeSelf)
+        {
+            ShipUI.SetActive(false);
+        }
+    }
+
+    public void DeactivateTransferUI()
+    {
+        if (TransferUI.activeSelf)
+        {
+            TransferUI.SetActive(false);
+        }
+        PowerTriangle.SetActive(true);
+    }
+    public void DeactivateTriangleUI()
+    {
+        if (PowerTriangle.activeSelf)
+        {
+            PowerTriangle.SetActive(false);
+
+            Movement.SetActive(true);
+        }
+    }
+
+    public void DeactivateMovementUI()
+    {
+        if (Movement.activeSelf)
+        {
+            Movement.SetActive(false);
+
+            TraderConclusion.SetActive(true);
+        }
+    }
+    public void DeactivateTraderUI()
+    {
+        if (TraderConclusion.activeSelf)
+        {
+            TraderConclusion.SetActive(false);
+        }
+
+        Damage.SetActive(true);
+    }
+
+    public void DeactivateDamageUI()
+    {
+        if (Damage.activeSelf)
+        {
+            Damage.SetActive(false);
+        }
+
+        Final.SetActive(true);
+    }
+
+    public void EndTutorial ()
+    {
+        if (Final.activeSelf)
+        {
+            Final.SetActive(false);
+        }
     }
 }
