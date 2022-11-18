@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using System;
+
 public class UniverseSimulation : MonoBehaviour
 {
     public SaveObject so;
     
     [SerializeField]
-    private List<Pawn> pawns = new();
+    public static List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();
     public PlayerFactionCommander playerFactionCommander;
     [HideInInspector]
@@ -27,13 +29,28 @@ public class UniverseSimulation : MonoBehaviour
 
     public GameObject GeneratePawn(GameObject pawnPrefab, FactionCommander faction, string pawnName, Vector3 position) 
     {
+        
         GameObject pawnGameObject = Instantiate(pawnPrefab, transform);
         Pawn newPawn = pawnGameObject.GetComponent<Pawn>();
         newPawn.transform.position = position;
         pawns.Add(newPawn);
+        so.pawns.Add(pawnGameObject);
+        SaveManager.Save(so);
         newPawn.EstablishPawn(pawnName, this, faction);
         return pawnGameObject;
     }
+
+    public GameObject LoadExistingPawn(GameObject pawnPrefab, GameObject paw, Vector3 locate, FactionCommander faction, string names)
+    {
+        paw = Instantiate(pawnPrefab, transform);
+        Pawn newPawn = paw.GetComponent<Pawn>();
+        newPawn.transform.position = locate;
+        pawns.Add(newPawn);
+        so.pawns.Add(paw);
+        newPawn.EstablishPawn(names, this, faction);
+        return paw;
+    }
+
     public void DestroyPawn(Pawn pawn)
     {
         pawns.Remove(pawn);
@@ -62,6 +79,7 @@ public class UniverseSimulation : MonoBehaviour
                 Debug.LogWarning("FOUND THE PLAYER!!!");
                 playerFactionCommander = (PlayerFactionCommander)factionCommander; 
             }
+            so.faction.Add(factionCommander);
             return faction.GetComponent<FactionCommander>();
         }
         else 
@@ -171,8 +189,7 @@ public class UniverseSimulation : MonoBehaviour
         //Initialize all factions
         //EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
         EstablishFaction("OTHER FACTION", NPCFactionCommander);
-
-
+        so = SaveManager.Load();
         //GameObject playerPawn = GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
         //GeneratePawn(Ship, factionsInPlay[1], "OTHER PAWN", Vector3.right*3);
 
@@ -187,7 +204,7 @@ public class UniverseSimulation : MonoBehaviour
         //Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() },ComponentResource.Rare)+ "Rare Resources available");
         //Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.Medium) + "Medium Resources available");
         //Debug.Log(CargoHold.GetTotalResources(new List<Pawn> { playerPawn.GetComponent<Pawn>() }, ComponentResource.WellDone) + "WellDone Resources available");
-        
+
 
     }
 

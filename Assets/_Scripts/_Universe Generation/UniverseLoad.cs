@@ -15,7 +15,6 @@ public class UniverseLoad : MonoBehaviour
     public float zoneProb = 0.1f;
     private int zonesGenerated;
     private int numberPawns;
-
     public SaveObject so;
     public GameObject planet;
     private UniverseSimulation universeSimulation;
@@ -24,25 +23,19 @@ public class UniverseLoad : MonoBehaviour
     {
         universeSimulation = GetComponent<UniverseSimulation>();
         so = SaveManager.Load();
-        LoadUniverse();
         numberPawns = so.pawns.Count;
+        Debug.LogError(numberPawns);
+        LoadUniverse();
     }
 
     // Update is called once per frame
     void LoadUniverse()
     {
-        //load universe
-        for (int i = 0; i < universeLength; i++)
+        for (int o = 0; o < numberPawns; o++)
         {
-            for (int j = 0; j < universeWidth; j++)
-            {
-                for(int o = 0; o < numberPawns; o--)
-                {
-                    GameObject s = so.pawns.
-                    universeSimulation.GeneratePawn();
-                }
-            }
+            Debug.LogError(o);
+            GameObject stage = universeSimulation.LoadExistingPawn(planet, so.pawns[o], so.locate[o], so.faction[o], so.names[o]);
+            //universeSimulation.GeneratePawn();
         }
-
     }
 }

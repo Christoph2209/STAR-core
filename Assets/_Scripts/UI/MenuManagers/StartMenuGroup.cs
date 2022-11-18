@@ -19,7 +19,7 @@ public class StartMenuGroup : MonoBehaviour
     }
     public void LoadGame(string scene)
     {
-        scene = "Assets/Scenes/GameBase.unity";
+        scene = "Assets/Scenes/GameLoad.unity";
         so = SaveManager.Load();
         if (SaveManager.trueState == false){
             Debug.LogError("Cant open a file");
@@ -29,7 +29,7 @@ public class StartMenuGroup : MonoBehaviour
             UniverseGeneration.seed = so.worldSeed;
             UniverseGeneration.universeLength = so.limitX;
             UniverseGeneration.universeWidth = so.limitY;
-            SceneManager.LoadScene("GameBase");
+            SceneManager.LoadScene(scene);
         }
     }
 

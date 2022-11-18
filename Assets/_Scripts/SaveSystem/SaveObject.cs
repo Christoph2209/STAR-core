@@ -13,7 +13,15 @@ public class SaveObject
     public float volume_mu = 1.0F;
     public float volume_sfx = 1.0F;
     public List<GameObject> pawns;
+    public List<Vector3> locate;
+    public List<FactionCommander> faction;
+    public List<string> names;
     
+    public int getSize(List<GameObject> p)
+    {
+        return p.Count;
+    }
+
    // public FactionCommander commander;
 
     public void setWorld(int worldX, int worldY, float vm, float vsfx)

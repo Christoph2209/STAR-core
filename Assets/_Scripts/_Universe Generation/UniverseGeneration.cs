@@ -8,6 +8,7 @@ public class UniverseGeneration : MonoBehaviour
     //sizes refer to the width of each of the squares
     private const int ZONE_SIZE = 4, SQUARE_SIZE = 3;
     //public variables
+    public string namet;
     public static int universeLength = 2, universeWidth = 2;
     public static int seed= 100;
     //private variables
@@ -44,8 +45,11 @@ public class UniverseGeneration : MonoBehaviour
                         zonePosition.z -= 0.5f * universeLength * ZONE_SIZE*SQUARE_SIZE;
                         if (Random.value < zoneProb)
                         {
-                            GameObject newZone = universeSimulation.GeneratePawn(planet, null, ("Space Zone " + (zonesGenerated) + ": (" + k + "," + l + ")"), zonePosition);
+                            namet = "Space Zone " + (zonesGenerated) + ": (" + k + "," + l + ")";
+                            GameObject newZone = universeSimulation.GeneratePawn(planet, null, namet, zonePosition);
+                            so.names.Add(namet);
                             so.pawns.Add(newZone);
+                            so.locate.Add(zonePosition);
                             SaveManager.Save(so);
                             //GameObject newZone = Instantiate(zones[Random.Range(0, zones.Length)]);
                             //if (newZone.tag == "System") {
