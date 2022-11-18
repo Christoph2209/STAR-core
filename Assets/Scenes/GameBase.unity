@@ -177,6 +177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4002062866460659274, guid: 59d086d4eb3923c48a6976dd6f675268,
         type: 3}
+      propertyPath: factionName
+      value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002062866460659274, guid: 59d086d4eb3923c48a6976dd6f675268,
+        type: 3}
       propertyPath: universeSimulation
       value: 
       objectReference: {fileID: 329766734}
