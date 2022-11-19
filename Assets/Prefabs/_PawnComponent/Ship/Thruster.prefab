@@ -480,7 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: []
-  maxHealth: 1
+  maxHealth: 0
   healthText: {fileID: 0}
   owner: {fileID: 0}
   activeTurnPhase: 2

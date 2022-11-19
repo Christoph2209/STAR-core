@@ -556,7 +556,7 @@ MonoBehaviour:
   - Name: 0
     Value: 10
   startingStats: []
-  sheildRegeneration: 0
+  sheildRegeneration: 1
 --- !u!1 &7186253465052611413
 GameObject:
   m_ObjectHideFlags: 0
