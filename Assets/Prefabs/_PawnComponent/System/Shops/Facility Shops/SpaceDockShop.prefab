@@ -406,6 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: []
   maxHealth: 0
+  healthText: {fileID: 0}
   owner: {fileID: 0}
   activeTurnPhase: 2
   isForeign: 0
@@ -421,9 +422,9 @@ MonoBehaviour:
   - {fileID: 4369763219849521649, guid: 8310ac98517667b44bcb131bb70eeef7, type: 3}
   - {fileID: 4369763219849521649, guid: f1389fbd2b2d2bf41b9796731aebfb5f, type: 3}
   resourceCost:
-  - type: 2
-    value: 5
   - type: 1
+    value: 5
+  - type: 0
     value: 5
   rare: {fileID: 8664079664594831538}
   medium: {fileID: 3770205218039602538}

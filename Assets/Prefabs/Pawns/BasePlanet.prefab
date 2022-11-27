@@ -67,6 +67,8 @@ MonoBehaviour:
   OnFactionUpdate:
     m_PersistentCalls:
       m_Calls: []
+  desolatedPlanet: {fileID: 1825581157490703194, guid: 2ab98968a7d1c6d42a5e7085e99258f8,
+    type: 3}
 --- !u!1001 &522933405290849163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201,7 +203,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: d5b97737fc8da534da92efa6517941cf, type: 2}
   - {fileID: 2100000, guid: 6074e69e29701fb45bd4d7d4282930d1, type: 2}
   - {fileID: 2100000, guid: 8c959b59d36413144873ad8d79843bf3, type: 2}
-  - {fileID: 2100000, guid: 94475466991f5c444a2d65f60d1430aa, type: 2}
   - {fileID: 2100000, guid: d1119ca6be9944b458bcb10738ef0b03, type: 2}
   - {fileID: 2100000, guid: d8311f48c843c884c8eee20367fc8e2f, type: 2}
   - {fileID: 2100000, guid: 70a80af3327fed64fa42532d683235ab, type: 2}
