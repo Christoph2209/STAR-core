@@ -13,9 +13,9 @@ public abstract class Pawn : MonoBehaviour
     
 
     [SerializeField]
-    private UniverseSimulation universeSimulation;
+    protected UniverseSimulation universeSimulation;
     [SerializeField]
-    private FactionCommander faction;
+    protected FactionCommander faction;
     [SerializeField]
     private GameObject componentMenu;
     [SerializeField]
@@ -87,7 +87,8 @@ public abstract class Pawn : MonoBehaviour
         universeSimulation.universeChronology.CombatPhaseEnd.AddListener(() => OnCombatPhaseEnd());
 
         CopyInspectorPawnValues();
-        DamagePawn(8f);
+
+        OnPhaseTransition();
 
     }
 
@@ -193,9 +194,10 @@ public abstract class Pawn : MonoBehaviour
 
     public void TransferPawnComopnent(GameObject pawnComponentInstance)
     {
+#if UNITY_EDITOR
         Debug.Assert(PrefabUtility.GetPrefabInstanceStatus(pawnComponentInstance) == PrefabInstanceStatus.NotAPrefab);
         Debug.Assert(pawnComponentInstance.TryGetComponent(typeof(PawnComponent), out _));
-
+#endif
         PawnComponent c = pawnComponentInstance.GetComponent<PawnComponent>();
 
         //remove from previous
@@ -336,10 +338,17 @@ public abstract class Pawn : MonoBehaviour
 
         if (excess > 0)
         {
-            Debug.Log("CRITICAL DAMAGE HAS BEEN SUSTAINED!!!!");
+            CriticalDamage();
         }
         Debug.Log("Pawn has been damaged! " + GetTotalHealth() + " Health left!");
     }
+
+    protected virtual void  CriticalDamage()
+    {
+        Debug.Log("CRITICAL DAMAGE HAS BEEN SUSTAINED!!!!");
+        universeSimulation.DestroyPawn(this);
+    }
+
     public float GetTotalHealth()
     {
         float health =0;

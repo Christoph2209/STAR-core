@@ -10,8 +10,15 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     [SerializeField]
     private float range;
     [SerializeField]
+    private Color rangeColor;
+    [SerializeField]
     private GameObject targetingUI;
     private Pawn target;
+
+
+    private GameObject circleTarget;
+    private GameObject circleHighlight;
+    private GameObject circleRange;
 
     public void Attack()
     {
@@ -24,13 +31,39 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     public void SelectTarget()
     {
         universeSimulation.playerFactionCommander.OverrideInput(this);
-        
+        if(target!= null)
+        {
+            //if a target has already been selected highlight it
+            circleTarget = DrawCircle.Create(target.transform, target.transform.position, Quaternion.Euler(90, 0, 0), 1.5f, 0.03f, Color.red);
+        }
     }
 
 
-    public void OnMouseHighlight()
+   
+    public override void OnMouseHighlight()
     {
-       
+        PlayerFactionCommander input = universeSimulation.playerFactionCommander;
+        if (input.isOverUI)
+        {
+            return;
+        }
+
+        Pawn targetPawn = input.closestPawnToCursor;
+
+        if (circleHighlight != null)
+        {
+            Destroy(circleHighlight);
+        }
+
+        if (targetPawn != null)
+        {
+
+            if (Vector3.Distance(targetPawn.transform.position, owner.transform.position) <= range)
+            {
+                Debug.Log("Drawing Circle");
+                circleHighlight = DrawCircle.Create(targetPawn.transform, targetPawn.transform.position, Quaternion.Euler(90, 0, 0), 1.0f, 0.04f, Color.red);
+            }
+        }
     }
 
     public void OnMouseMove(InputValue value)
@@ -43,12 +76,14 @@ public class Weapon : TransferableComponent, PlayerControlOverride
         return Vector3.zero;
     }
 
-    public void OnOpenMenu(InputValue value)
+    public override void OnOpenMenu(InputValue value)
     {
-        //throw new System.NotImplementedException();
+        PlayerFactionCommander input = universeSimulation.playerFactionCommander;
+
+        ExitAttackMenu(input);
     }
 
-    public void OnSelect(InputValue value)
+    public override void OnSelect(InputValue value)
     {
         PlayerFactionCommander input = universeSimulation.playerFactionCommander;
 
@@ -67,13 +102,34 @@ public class Weapon : TransferableComponent, PlayerControlOverride
         }
         else
         {
+
             Debug.Log(target + "Selected. Attacking Target");
 
             owner.SetAttackPattern(() => Attack());
 
-            input.RestoreFactionInput();
+            
         }
+        ExitAttackMenu(input);
     }
 
+    private void ExitAttackMenu(PlayerFactionCommander input)
+    {
+        Destroy(circleTarget);
+        Destroy(circleHighlight);
+        input.RestoreFactionInput();
+    }
+
+    public override void OnCombatPhaseStart()
+    {
+        base.OnCombatPhaseStart();
+        circleRange = DrawCircle.Create(owner.transform, owner.transform.position, Quaternion.Euler(90,0,0), range, 0.1f, Color.red);
+    }
+    public override void OnCombatPhaseEnd()
+    {
+        base.OnCombatPhaseEnd();
+        Destroy(circleRange);
+        Destroy(circleTarget);
+        Destroy(circleHighlight);
+    }
 
 }

@@ -5,13 +5,26 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerFactionCommander : FactionCommander 
 {
     [SerializeField]
     TMP_Text PhaseInfo;
-    
+
+    [SerializeField]
+    List<GameObject> playerIcons;
+
+    [SerializeField]
+    GameObject traderPhase;
+    [SerializeField]
+    GameObject raderPhase;
+
+    [SerializeField]
+    GameObject ready;
+    [SerializeField]
+    GameObject notRead;
+
     float selectionDistance = 1.5f;
     Vector3 moveDirection = Vector3.zero;
     float camSpeed = 10f;
@@ -22,13 +35,40 @@ public class PlayerFactionCommander : FactionCommander
     GameObject[] sounds;
     private void Update()
     {
-
+        // bad code;
         PhaseInfo.text = actingFaction.factionName + ": " + universeSimulation.universeChronology.currentPhase.ToString() + ", Ready:" + universeSimulation.universeChronology.IsFactionReady(actingFaction);
+        foreach (GameObject icon in playerIcons) icon.SetActive(false);
+        playerIcons[universeSimulation.factionsInPlay.IndexOf(actingFaction)].SetActive(true);
+
+        if(universeSimulation.universeChronology.currentPhase == TurnPhase.RaiderPhase)
+        {
+            raderPhase.SetActive(true);
+            traderPhase.SetActive(false);
+        }
+        else if (universeSimulation.universeChronology.currentPhase == TurnPhase.TraderPhase)
+        {
+            traderPhase.SetActive(true);
+            raderPhase.SetActive(false);
+        }
+
+        if (universeSimulation.universeChronology.IsFactionReady(actingFaction))
+        {
+            ready.SetActive(true);
+            notRead.SetActive(false);
+        }
+        else
+        {
+            ready.SetActive(false);
+            notRead.SetActive(true);
+        }
 
 
-        //TODO Display Pawn Stats
-       
-        universeSimulation.transform.position -= camSpeed * Time.deltaTime * moveDirection;
+            //bad code;
+
+
+            //TODO Display Pawn Stats
+
+            universeSimulation.transform.position -= camSpeed * Time.deltaTime * moveDirection;
         isOverUI = EventSystem.current.IsPointerOverGameObject();//works as intended, ignore warning
         closestPawnToCursor = universeSimulation.GetClosestPawnInRange(MouseWorldPoint(), selectionDistance, out _);
         ProcessMouseHighlight();
@@ -140,7 +180,8 @@ public class PlayerFactionCommander : FactionCommander
                 if (closestPawnToCursor != null)
                 {
                     moveOffset = closestPawnToCursor.transform.position - ScreenCenterWorldPoint();
-                    closestPawnToCursor.DefaultAction(actingFaction);
+
+                    OpenMenu(value);
                 }
                 else
                 {
@@ -187,7 +228,7 @@ public class PlayerFactionCommander : FactionCommander
 
     Pawn lastComponentMenuOpened;
     
-    public void OnOpenMenu(InputValue value)
+    public void OpenMenu(InputValue value)
     {
         if (playerControlOverride!=null)
         {
@@ -243,7 +284,7 @@ public class PlayerFactionCommander : FactionCommander
     }
     public void OnExit(InputValue value)
     {
-        Application.Quit();
+        SceneManager.LoadScene("StartMenu");
         Debug.Log("Exiting Game");
     }
 
@@ -271,5 +312,12 @@ public class PlayerFactionCommander : FactionCommander
             lastComponentMenuOpened.OpenComponentMenu(actingFaction);
         }
     }
+
+
+
+
+
+
+
 
 }

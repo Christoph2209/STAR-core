@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 [ExecuteAlways]
 [RequireComponent(typeof(MeshFilter))]
@@ -27,12 +28,23 @@ public class PowerCell : MonoBehaviour
 
 
 
+
+
     [SerializeField]
     ComponentStat aValueName;
     [SerializeField]
     ComponentStat bValueName;
     [SerializeField]
     ComponentStat cValueName;
+
+    [SerializeField]
+    TMP_Text aValue;
+    [SerializeField]
+    TMP_Text bValue;
+    [SerializeField]
+    TMP_Text cValue;
+
+
 
     private Dictionary<ComponentStat, float> values;
 
@@ -133,6 +145,11 @@ public class PowerCell : MonoBehaviour
         values[bValueName] = baryCenter.y;
         values[cValueName] = baryCenter.z;
 
+
+        aValue.text = string.Format( "{0:0.0}", baryCenter.x * 100 )+ "%";
+        bValue.text = string.Format("{0:0.0}", baryCenter.y * 100) + "%";
+        cValue.text = string.Format("{0:0.0}", baryCenter.z * 100) + "%";
+
         OnSliderValueUpdate(values);
   
         Debug.Log(hit.barycentricCoordinate);
@@ -144,7 +161,9 @@ public class PowerCell : MonoBehaviour
         values[aValueName] = 1f / 3f;
         values[bValueName] = 1f / 3f;
         values[cValueName] = 1f / 3f;
-
+        aValue.text = 33.3 + "%";
+        bValue.text = 33.3 + "%";
+        cValue.text = 33.3 + "%";
         slider.transform.localPosition = sliderPosition;
         OnSliderValueUpdate(values);
 

@@ -9,12 +9,15 @@ public class UniverseChronology : MonoBehaviour
     UniverseSimulation universeSimulation;
     HashSet<FactionCommander> readiedFactions = new();
     public TurnPhase currentPhase { get; private set; }
+    public UnityEvent OnSetup = new();
     public UnityEvent MainPhaseStart = new();
     public UnityEvent MainPhaseEnd= new();
     public UnityEvent CombatPhaseStart = new();
     public UnityEvent CombatPhaseEnd = new();
 
     private FactionCommander winner;
+    private int turnCount = 0 ;
+    private TutorialLoop tLoop;
     //Required for initialization. If this method doesn't get called it won't funtion properly
     public void EstablishUniverseChronology(UniverseSimulation universeSimulation)
     {
@@ -25,6 +28,7 @@ public class UniverseChronology : MonoBehaviour
         else
         {
             this.universeSimulation = universeSimulation;
+    
             StartCoroutine(TurnPhase());
         }
     }
@@ -32,14 +36,14 @@ public class UniverseChronology : MonoBehaviour
 
     IEnumerator TurnPhase()
     {
+        yield return null;
+
         float transitionTime=0.2f;
-        int currentRound = 0;
-
-
+        
         //Game Setup
         readiedFactions.Clear();
         currentPhase = global::TurnPhase.SelectHomeSystem;
-        
+        OnSetup.Invoke();
         yield return new WaitUntil(() => readiedFactions.SetEquals( new HashSet<FactionCommander>(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
         //Begin Game
         Debug.Log("Is It Working?");
@@ -48,10 +52,10 @@ public class UniverseChronology : MonoBehaviour
         do
         {
             Debug.Log("NO ONE HAS ONE! On to the next round");
-            currentRound++;
+            turnCount++;
 
             //Trasition to main
-            currentPhase = global::TurnPhase.TransitionToMain;
+            currentPhase = global::TurnPhase.TransitionToTrader;
             yield return new WaitForSeconds(transitionTime);
             readiedFactions.Clear();
             //----
@@ -69,7 +73,7 @@ public class UniverseChronology : MonoBehaviour
             }
 
             //Transition to combat
-            currentPhase = global::TurnPhase.TransitionToCombat;
+            currentPhase = global::TurnPhase.TransitionToRaider;
             yield return new WaitForSeconds(transitionTime);
             readiedFactions.Clear();
             //----
@@ -154,9 +158,7 @@ public class UniverseChronology : MonoBehaviour
         }
         else
         {
-            readiedFactions.Remove(factionCommander);
-            Debug.Log(factionCommander + " is no longer ready to complete" + currentPhase + " phase!" + "\n" + "Canceling ready Status!");
-            Debug.Log(readiedFactions.SetEquals(universeSimulation.factionsInPlay));
+            Debug.Log(factionCommander  +  "  has already completeed their turn");
             return false;
         }
     }
@@ -164,6 +166,10 @@ public class UniverseChronology : MonoBehaviour
     {
         return readiedFactions.Contains(factionCommander);
     }
+    public int GetTurnCount()
+    {
+        return turnCount;
+    }
 }
 
-public enum TurnPhase { SelectHomeSystem, TransitionToMain, TraderPhase, TransitionToCombat, RaiderPhase, GameOver, None};
+public enum TurnPhase { SelectHomeSystem, TransitionToTrader, TraderPhase, TransitionToRaider, RaiderPhase, GameOver, None, Every };

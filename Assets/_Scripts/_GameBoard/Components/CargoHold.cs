@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class CargoHold : TransferableComponent
 {
     [SerializeField]
@@ -12,6 +12,15 @@ public class CargoHold : TransferableComponent
     private int resources = 10;
 
 
+    [SerializeField]
+    TMP_Text rare;
+    [SerializeField]
+    TMP_Text medium;
+    [SerializeField]
+    TMP_Text well;
+
+
+
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         base.EstablishPawnComponent(owner, universeSimulation);
@@ -20,6 +29,36 @@ public class CargoHold : TransferableComponent
             Debug.Log("Added priority");
         }
 
+        UpdateResourceText();
+
+    }
+
+    private void UpdateResourceText()
+    {
+        rare.transform.parent.gameObject.SetActive(false);
+        medium.transform.parent.gameObject.SetActive(false);
+        well.transform.parent.gameObject.SetActive(false);
+
+        switch (resourceType)
+        {
+            case ComponentResource.Rare:
+                rare.text = resources + "/" + maxResources;
+                rare.transform.parent.gameObject.SetActive(true);
+                prioritys[ComponentPriority.DrawOrder] = -5;
+                break;
+            case ComponentResource.Medium:
+                medium.text = resources + "/" + maxResources;
+                medium.transform.parent.gameObject.SetActive(true);
+                prioritys[ComponentPriority.DrawOrder] = -4;
+                break;
+            case ComponentResource.WellDone:
+                well.text = resources +"/"+maxResources;
+                well.transform.parent.gameObject.SetActive(true);
+                prioritys[ComponentPriority.DrawOrder] = -3;
+                break;
+            default:
+                break;
+        }
     }
 
     public static int GetTotalResources(List<Pawn> pawns, ComponentResource componentResource)
@@ -67,25 +106,36 @@ public class CargoHold : TransferableComponent
                         overflow -= cargoHold.resources;
                         if (overflow <= 0)
                         {
-                            cargoHold.resources = -overflow;
-                            cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
+                            SetResources(-overflow, cargoHold);
                             break;
                         }
                         else
                         {
-                            cargoHold.resources = 0;
-                            cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
+                            SetResources(0, cargoHold);
                         }
-
+                        cargoHold.UpdateResourceText();
                     }
+
                 }
             }
+            
 
         }
         return true;
         
     }
 
+    private static void SetResources(int value, CargoHold cargoHold)
+    {
+        
+        cargoHold.resources = value;
+        cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
+        cargoHold.UpdateResourceText();
+        if(value == 0)
+        {
+            cargoHold.owner.RemovePawnComponent(cargoHold.gameObject);
+        }
+    }
 
     public static int AddResources(Pawn pawn, GameObject cargoHoldComponent, ComponentResource componentResource, int value)
     {
@@ -100,12 +150,11 @@ public class CargoHold : TransferableComponent
         {
             if (cargoList[i] is CargoHold cargoHold && cargoHold.resourceType == componentResource)
             {
-                cargoHold.resources += excess;//add excess resources to resources
-
+                
+                SetResources(cargoHold.resources + excess, cargoHold);//add excess resources to resources
                 excess = Mathf.Max(0, cargoHold.resources - cargoHold.maxResources);// set excess equal to how much resources overflowed. If the value is less than or equal to 0 clam the excess to 0
-                cargoHold.resources = Mathf.Clamp(cargoHold.resources, 0, cargoHold.maxResources);
-                cargoHold.prioritys[ComponentPriority.SellOrder] = -cargoHold.resources;
-
+                SetResources(Mathf.Clamp(cargoHold.resources, 0, cargoHold.maxResources), cargoHold);
+                
             }
         }
         if (excess > 0)
@@ -116,16 +165,15 @@ public class CargoHold : TransferableComponent
                 newCargoHold.resourceType = componentResource;
                 if (newCargoHold.maxResources > excess)
                 {
-                    newCargoHold.resources = excess;
-                    newCargoHold.prioritys[ComponentPriority.SellOrder] = -newCargoHold.resources;
+                    SetResources(excess, newCargoHold);
                     excess = 0;
                 }
                 else
                 {
-                    newCargoHold.resources = newCargoHold.maxResources;
-                    newCargoHold.prioritys[ComponentPriority.SellOrder] = -newCargoHold.resources;
+                    SetResources(newCargoHold.maxResources,newCargoHold);
                     excess -= newCargoHold.resources;
                 }
+                
             }
         }
         return excess;

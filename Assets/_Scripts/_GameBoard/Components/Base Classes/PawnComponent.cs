@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.ObjectModel;
 
+using TMPro;
 
 /// <summary>
 /// MonoBehavior methods should not used by objects inheriting from this class.
@@ -16,7 +17,9 @@ public abstract class PawnComponent : MonoBehaviour
     [SerializeField]
     private float maxHealth;
     protected float currentHealth;
-
+    [SerializeField]
+    private TMP_Text healthText;
+    
     public Pawn owner;
     
     public TurnPhase activeTurnPhase = TurnPhase.TraderPhase;
@@ -41,16 +44,17 @@ public abstract class PawnComponent : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+        UpdateHealthDisplay();
     }
     public virtual void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
-        if(activeTurnPhase!= universeSimulation.universeChronology.currentPhase)
+        if(activeTurnPhase== universeSimulation.universeChronology.currentPhase|| activeTurnPhase == TurnPhase.Every)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
         else
         {
-            gameObject.SetActive(true);
+            gameObject.SetActive(false);
         }
 
 
@@ -98,6 +102,7 @@ public abstract class PawnComponent : MonoBehaviour
 
         gameObject.GetComponent<RectTransform>().SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
+        
     }
 
 
@@ -112,10 +117,10 @@ public abstract class PawnComponent : MonoBehaviour
 
 
 
-    
+
     public virtual void OnMainPhaseStart()
     {
-        if(activeTurnPhase == TurnPhase.TraderPhase)
+        if(activeTurnPhase == TurnPhase.TraderPhase|| activeTurnPhase == TurnPhase.Every)
         {
             gameObject.SetActive(true);
         }
@@ -130,7 +135,7 @@ public abstract class PawnComponent : MonoBehaviour
     }
     public virtual void OnCombatPhaseStart()
     {
-        if (activeTurnPhase == TurnPhase.RaiderPhase)
+        if (activeTurnPhase == TurnPhase.RaiderPhase || activeTurnPhase == TurnPhase.Every)
         {
             gameObject.SetActive(true);
         }
@@ -179,11 +184,22 @@ public abstract class PawnComponent : MonoBehaviour
 
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
+        UpdateHealthDisplay();
         return overflow;
     }
+
+    private void UpdateHealthDisplay()
+    {
+        if (healthText != null)
+        {
+            healthText.text = currentHealth / maxHealth * 100 + "%";
+        }
+    }
+
     public void RepairComponent()
     {
         currentHealth = maxHealth;
+        UpdateHealthDisplay();
     }
 
 

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Mine : PawnComponent
 {
+
     [SerializeField]
-    private List<Cost> resourceGeneration;
-    [SerializeField]
-    private GameObject cargoHold;
+    private GameObject cargoHoldPrefab;
     public override void OnMainPhaseStart()
     {
         base.OnMainPhaseStart();
-        foreach (Cost resource in resourceGeneration)
-        {
-            CargoHold.AddResources(owner, cargoHold, resource.type, resource.value);
-        }
+
+        CargoHold.AddResources(owner, cargoHoldPrefab, ComponentResource.Rare, (int) owner.stats[ComponentStat.RareResource]);
+        CargoHold.AddResources(owner, cargoHoldPrefab, ComponentResource.Medium, (int)owner.stats[ComponentStat.UncommonResource]);
+        CargoHold.AddResources(owner, cargoHoldPrefab, ComponentResource.WellDone, (int)owner.stats[ComponentStat.CommonResource]);
+
     }
 }

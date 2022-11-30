@@ -7,7 +7,7 @@ public static class SaveManager
 {
     public static string directory = "/SaveData/";
     public static string fileName = "CompleteData.txt";
-   
+    public static bool trueState = true;
     public static void Save(SaveObject so)
     {
         string dir = Application.persistentDataPath + directory;
@@ -34,6 +34,7 @@ public static class SaveManager
         }
         else
         {
+            trueState = false;
             Debug.Log("Save file does not exist");
         }
 

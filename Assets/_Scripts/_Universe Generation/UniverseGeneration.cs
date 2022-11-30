@@ -47,7 +47,8 @@ public class UniverseGeneration : MonoBehaviour
                     for (int l = 0; l < ZONE_SIZE; l++)
                     {
                         Vector3 zonePosition = new Vector3((j * ZONE_SIZE) * SQUARE_SIZE + l * SQUARE_SIZE, 0, (i * ZONE_SIZE) * SQUARE_SIZE + k * SQUARE_SIZE);
-
+                        zonePosition.x -= 0.5f * universeWidth*ZONE_SIZE*SQUARE_SIZE;
+                        zonePosition.z -= 0.5f * universeLength * ZONE_SIZE*SQUARE_SIZE;
                         if (Random.value < zoneProb)
                         {
                             GameObject newZone = universeSimulation.GeneratePawn(planet, null, ("Space Zone " + (zonesGenerated) + ": (" + k + "," + l + ")"), zonePosition);

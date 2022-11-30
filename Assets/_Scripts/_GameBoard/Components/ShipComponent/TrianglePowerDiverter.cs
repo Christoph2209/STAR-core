@@ -19,10 +19,11 @@ public class TrianglePowerDiverter : PawnComponent
         {
             
             stats.TryAdd(updatedValue.Key, 0);
-            stats[updatedValue.Key] = updatedValue.Value*owner.stats[ComponentStat.AggregatePower];
+            stats[updatedValue.Key] = updatedValue.Value;
 
         }
         owner.UpdateStats();
 
     }
+    
 }

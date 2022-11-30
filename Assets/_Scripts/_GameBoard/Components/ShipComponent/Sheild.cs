@@ -9,6 +9,7 @@ public class Sheild : TransferableComponent
     public override void OnMainPhaseStart()
     {
         base.OnMainPhaseStart();
-        currentHealth += (sheildRegeneration * owner.stats[ComponentStat.SheildPower]);
+        currentHealth += (sheildRegeneration * owner.stats[ComponentStat.SheildPower] * owner.stats[ComponentStat.AggregatePower]);
     }
+    
 }

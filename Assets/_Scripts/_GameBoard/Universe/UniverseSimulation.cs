@@ -33,6 +33,11 @@ public class UniverseSimulation : MonoBehaviour
         newPawn.EstablishPawn(pawnName, this, faction);
         return pawnGameObject;
     }
+    public void DestroyPawn(Pawn pawn)
+    {
+        pawns.Remove(pawn);
+        Destroy(pawn.gameObject);
+    }
 
     public FactionCommander EstablishFaction(string name, GameObject factionCommanderPrefab)
     {
@@ -164,7 +169,7 @@ public class UniverseSimulation : MonoBehaviour
     {
         //Initialize all factions
         //EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
-        EstablishFaction("OTHER FACTION", NPCFactionCommander);
+        EstablishFaction("Player 2", NPCFactionCommander);
 
 
         //GameObject playerPawn = GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
