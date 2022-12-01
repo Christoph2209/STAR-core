@@ -137,30 +137,22 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     {
         
         private Pawn currentTarget = null;
-        private bool isEnemy = false;
 
         List<pawn> possibleTargets = UniverseSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
         foreach (Pawn currentPawn in possibleTargets)
         {
-            if(currentPawn.GetFaction() == owner.GetFaction()) // determines if target is an enemy
+            if(currentPawn.GetFaction() != owner.GetFaction()) // determines if target is an enemy
                 {
-                isEnemy = false;
+                if (currentTarget == null || (currentPawn.GetTotalHealth() < currentTarget.GetTotalHealth())) // finds the enemy with lowest health
+                    {
+                    currentTarget = currentPawn;
+                    }
                 }
-                else
-                {
-                isEnemy = true;
-                }
-            
-            if (currentTarget == null || (currentPawn.GetTotalHealth() < currentTarget.GetTotalHealth()) && isEnemy ) // finds the enemy with lowest health
-            {
-                currentTarget = currentPawn;
-                isEnemy = false;
-            }
         }
         target = currentTarget;
         currentTarget = null;
         Attack();
-        
+
     }
 
 
