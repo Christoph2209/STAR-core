@@ -12,8 +12,8 @@ public class Mine : PawnComponent
         base.OnMainPhaseStart();
 
         CargoHold.AddResources(owner, cargoHoldPrefab, ComponentResource.Rare, (int) owner.stats[ComponentStat.RareResource]);
-        CargoHold.AddResources(owner, cargoHoldPrefab, ComponentResource.Medium, (int)owner.stats[ComponentStat.MediumResource]);
-        CargoHold.AddResources(owner, cargoHoldPrefab, ComponentResource.WellDone, (int)owner.stats[ComponentStat.WellResource]);
+        CargoHold.AddResources(owner, cargoHoldPrefab, ComponentResource.Medium, (int)owner.stats[ComponentStat.UncommonResource]);
+        CargoHold.AddResources(owner, cargoHoldPrefab, ComponentResource.WellDone, (int)owner.stats[ComponentStat.CommonResource]);
 
     }
 }

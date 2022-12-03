@@ -47,6 +47,8 @@ public class SettleSystem : PawnComponent
     {
         bool isSeblable = IsSettle(faction);
 
+
+
         if (isSeblable)
         {
             Debug.Log(faction.name + " Is settleing the " + owner.name + " system.");
@@ -69,6 +71,7 @@ public class SettleSystem : PawnComponent
 
     private bool IsSettle(FactionCommander faction)
     {
+
         bool isFriendlyPawnInRange = false;
         bool isEnemyPawnInRange = false;
         foreach (Pawn pawnInRange in universeSimulation.GetAllPawnsInRange(owner.transform.position, settleRange))

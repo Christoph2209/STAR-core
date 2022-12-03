@@ -41,7 +41,7 @@ public class Thrusters : PawnComponent, PlayerControlOverride
     }
     private float MaxMoveDistance()
     {
-        return thrusterMovement * owner.stats[ComponentStat.ThrusterPower];
+        return thrusterMovement * owner.stats[ComponentStat.ThrusterPower] * owner.stats[ComponentStat.AggregatePower];
     }
 
     public void SelectMoveTarget()

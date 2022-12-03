@@ -400,11 +400,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price:
   - type: 0
-    value: 2
+    value: 0
   - type: 1
-    value: 9
-  - type: 2
     value: 5
+  - type: 2
+    value: 10
   maxHealth: 5
   healthText: {fileID: 936017096790648491}
   owner: {fileID: 0}

@@ -132,4 +132,28 @@ public class Weapon : TransferableComponent, PlayerControlOverride
         Destroy(circleHighlight);
     }
 
+
+    protected  override void AggressiveAction()
+    {
+        
+        private Pawn currentTarget = null;
+
+        List<pawn> possibleTargets = UniverseSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
+        foreach (Pawn currentPawn in possibleTargets)
+        {
+            if(currentPawn.GetFaction() != owner.GetFaction()) // determines if target is an enemy
+                {
+                if (currentTarget == null || (currentPawn.GetTotalHealth() < currentTarget.GetTotalHealth())) // finds the enemy with lowest health
+                    {
+                    currentTarget = currentPawn;
+                    }
+                }
+        }
+        target = currentTarget;
+        currentTarget = null;
+        Attack();
+
+    }
+
+
 }

@@ -540,9 +540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price:
   - type: 0
-    value: 10
+    value: 15
   - type: 1
-    value: 10
+    value: 15
   - type: 2
     value: 5
   maxHealth: 5
