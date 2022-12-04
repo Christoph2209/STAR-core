@@ -17,8 +17,8 @@ public class SettingsGroup : MonoBehaviour
 
     void Start()
     {
-        sefx = SoundManager.Instance._SFXSource;
-        musi = SoundManager.Instance._MusicSource;
+        //sefx = SoundManager.Instance._SFXSource;
+        //musi = SoundManager.Instance._MusicSource;
         
         so = SaveManager.Load();
 

@@ -19,10 +19,6 @@ public class UniverseChronology : MonoBehaviour
     private int turnCount = 0 ;
     private TutorialLoop tLoop;
 
-    //AUDIO REFERENCES
-    public AudioSource TraderPhaseLoop;
-    public AudioSource RaiderPhaseLoop;
-
     //Required for initialization. If this method doesn't get called it won't funtion properly
     public void EstablishUniverseChronology(UniverseSimulation universeSimulation)
     {
@@ -68,15 +64,6 @@ public class UniverseChronology : MonoBehaviour
             //Main 
             currentPhase = global::TurnPhase.TraderPhase;
             MainPhaseStart.Invoke();
-
-            //AUDIO CALL
-            if (RaiderPhaseLoop.isPlaying)
-            {
-                RaiderPhaseLoop.Stop();
-                Debug.Log("Trader Music Starting");
-            }
-            TraderPhaseLoop.Play();
-
             yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
             MainPhaseEnd.Invoke();
             //----
@@ -95,15 +82,6 @@ public class UniverseChronology : MonoBehaviour
             //Combat
             currentPhase = global::TurnPhase.RaiderPhase;
             CombatPhaseStart.Invoke();
-
-            //AUDIO CALL
-            if (TraderPhaseLoop.isPlaying)
-            {
-                TraderPhaseLoop.Stop();
-                Debug.Log("Raider Music Starting");
-            }
-            RaiderPhaseLoop.Play();
-
             yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
             CombatPhaseEnd.Invoke();
             //----
