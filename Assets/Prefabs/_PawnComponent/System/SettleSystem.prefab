@@ -69,7 +69,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 1235321102, guid: 68390db8e4f25974593f974c2a0cc721, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: []
   maxHealth: 0
+  healthText: {fileID: 0}
   owner: {fileID: 0}
   activeTurnPhase: 2
   isForeign: 1
@@ -137,6 +138,7 @@ MonoBehaviour:
   - Name: 0
     Value: 10000
   startingStats: []
+  newSytemComponents: []
   settleRange: 5
 --- !u!1 &4456215527056794637
 GameObject:
