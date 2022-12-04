@@ -33,6 +33,7 @@ public class PlayerFactionCommander : FactionCommander
     public Pawn closestPawnToCursor { get; private set; }
 
     GameObject[] sounds;
+
     private void Update()
     {
         // bad code;
