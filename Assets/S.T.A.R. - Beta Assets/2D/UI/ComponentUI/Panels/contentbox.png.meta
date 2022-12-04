@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 28f5e17e6a30d1e4b9a7d2f01643f57a
+guid: 79c618b7e962daf4b9c5783841054316
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -44,14 +44,14 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 13, y: 13, z: 13, w: 13}
+  spriteBorder: {x: 100, y: 100, z: 100, w: 100}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -105,22 +105,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Resource Body 2x_0
+      name: contentbox_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 93
-        height: 58
+        x: 2
+        y: 3
+        width: 564
+        height: 885
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 13, y: 13, z: 13, w: 13}
+      pivot: {x: 0, y: 0}
+      border: {x: 100, y: 100, z: 100, w: 100}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 742fce4055690a941b18c6d293b0e631
-      internalID: 1124792866
+      spriteID: e6d055c3d78db154182ad27e77e6ea2c
+      internalID: 1158453345
       vertices: []
       indices: 
       edges: []
@@ -136,7 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Resource Body 2x_0: 1124792866
+      contentbox_0: 1158453345
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
