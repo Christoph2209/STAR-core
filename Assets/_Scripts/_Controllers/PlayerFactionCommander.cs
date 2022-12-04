@@ -32,7 +32,11 @@ public class PlayerFactionCommander : FactionCommander
     public bool isOverUI { get; private set; }
     public Pawn closestPawnToCursor { get; private set; }
 
-    GameObject[] sounds;
+    public AudioSource audioSrc;
+    public AudioClip SelectSFX;
+    public AudioClip MoveSFX;
+    public AudioClip ReadySFX;
+
     private void Update()
     {
         // bad code;
@@ -109,6 +113,7 @@ public class PlayerFactionCommander : FactionCommander
         if (playerControlOverride != null)
         {
             moveDirection = playerControlOverride.OnMove(value);
+            audioSrc.PlayOneShot(MoveSFX);
             return;
         }
         moveDirection = new Vector3(value.Get<Vector2>().x, 0, value.Get<Vector2>().y);
@@ -182,6 +187,7 @@ public class PlayerFactionCommander : FactionCommander
                     moveOffset = closestPawnToCursor.transform.position - ScreenCenterWorldPoint();
 
                     OpenMenu(value);
+                    audioSrc.PlayOneShot(SelectSFX);
                 }
                 else
                 {

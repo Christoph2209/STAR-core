@@ -133,7 +133,7 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     }
 
 
-    protected  override void AggressiveAction()
+    /*protected  override void AggressiveAction()
     {
         
         private Pawn currentTarget = null;
@@ -153,7 +153,7 @@ public class Weapon : TransferableComponent, PlayerControlOverride
         currentTarget = null;
         Attack();
 
-    }
+    }*/
 
 
 }

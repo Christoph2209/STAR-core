@@ -19,6 +19,8 @@ public class MultiComponentShop : PawnComponent
     [SerializeField]
     TMP_Text well;
 
+    public AudioSource AudioSrc;
+    public AudioClip CraftSFX;
 
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
@@ -56,6 +58,7 @@ public class MultiComponentShop : PawnComponent
             foreach (GameObject item in inventory)
             {
                 owner.InstantiatePawnComponent(item);
+                AudioSrc.PlayOneShot(CraftSFX);
             }
             Debug.Log("Purchase Succesful!");
             if (destroyOnBuild)
