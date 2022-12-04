@@ -188,14 +188,11 @@ public class UniverseSimulation : MonoBehaviour
     {
         //Initialize all factions
         //EstablishFaction("PLAYER FACTION",PlayerFactionCommander);
-<<<<<<< HEAD
-        EstablishFaction("OTHER FACTION", NPCFactionCommander);
+
         so = SaveManager.Load();
-=======
+
         EstablishFaction("Player 2", NPCFactionCommander);
 
-
->>>>>>> fe389eec29489abc4739d6afe026f211dec12adc
         //GameObject playerPawn = GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
         //GeneratePawn(Ship, factionsInPlay[1], "OTHER PAWN", Vector3.right*3);
 
