@@ -3,7 +3,15 @@ guid: 351e0eac9bf44494b8b21c764c1591c9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthText: {instanceID: 0}
+  - owner: {instanceID: 0}
+  - inventory: {instanceID: 0}
+  - rare: {instanceID: 0}
+  - medium: {instanceID: 0}
+  - well: {instanceID: 0}
+  - AudioSrc: {instanceID: 0}
+  - CraftSFX: {fileID: 8300000, guid: 450a6674eb406964f9a681e466155421, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -16,6 +16,7 @@ public class Shop : PawnComponent
     [SerializeField]
     TMP_Text well;
 
+    public AudioManager AudioInst;
 
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
@@ -73,6 +74,9 @@ public class Shop : PawnComponent
             if (destroyOnBuild)
             {
                 owner.RemovePawnComponent(gameObject);
+
+                //AUDIO CALL
+                AudioInst.PlayCraftSFX();
             }
         }
         else

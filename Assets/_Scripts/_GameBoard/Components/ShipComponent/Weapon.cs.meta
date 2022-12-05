@@ -3,7 +3,13 @@ guid: 9f1a2ed05bfb36f4697648055cdc9fd8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthText: {instanceID: 0}
+  - owner: {instanceID: 0}
+  - targetingUI: {instanceID: 0}
+  - Src: {instanceID: 0}
+  - TargetSFX: {fileID: 8300000, guid: 4c9450fefaedb004fb7478c02bc695b0, type: 3}
+  - FireSFX: {fileID: 8300000, guid: fc9dd78f8d89cef41ba9080381945ef3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

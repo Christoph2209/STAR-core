@@ -20,11 +20,16 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     private GameObject circleHighlight;
     private GameObject circleRange;
 
+    private AudioManager AudioInst;
+
     public void Attack()
     {
         target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower)* owner.GetStats(ComponentStat.AggregatePower));
 
         target = null;
+
+        //AUDIO CALL
+        AudioInst.PlayFireSFX();
     }
 
 
@@ -107,7 +112,8 @@ public class Weapon : TransferableComponent, PlayerControlOverride
 
             owner.SetAttackPattern(() => Attack());
 
-            
+            //AUDIO CALL
+            AudioInst.PlayTargetSFX();
         }
         ExitAttackMenu(input);
     }
