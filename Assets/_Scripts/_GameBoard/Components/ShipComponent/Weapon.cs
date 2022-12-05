@@ -135,6 +135,7 @@ public class Weapon : TransferableComponent, PlayerControlOverride
 
     protected  override void AggressiveAction()
     {
+        base.AggressiveAction();
         
         private Pawn currentTarget = null;
 

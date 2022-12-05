@@ -25,5 +25,26 @@ public class TrianglePowerDiverter : PawnComponent
         owner.UpdateStats();
 
     }
+
+    protected  override void AggressiveAction()
+    {
+        base.AggressiveAction();
+
+        List<pawn> possibleTargets = UniverseSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
+        foreach (Pawn currentPawn in possibleTargets)
+        {
+            if(currentPawn.GetFaction() != owner.GetFaction()) // determines if target is an enemy
+            {
+                // divert power to weapons (either 100% or 50/50 with shields)
+            }
+            else
+            {
+                // divert power to thrusters 100%
+            }
+        }
+
+
+    }
+
     
 }
