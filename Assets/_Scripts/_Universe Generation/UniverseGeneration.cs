@@ -13,6 +13,7 @@ public class UniverseGeneration : MonoBehaviour
     public static int seed= 100;
     //private variables
     public GameObject[] zones;
+    public GameObject grid;
     public float zoneProb=0.1f;
     private int zonesGenerated;
 
@@ -65,6 +66,7 @@ public class UniverseGeneration : MonoBehaviour
                         }
                     }
                 }
+                
                 zonesGenerated++;
             }
         }
