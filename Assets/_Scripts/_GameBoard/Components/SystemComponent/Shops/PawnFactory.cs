@@ -18,8 +18,6 @@ public class PawnFactory : PawnComponent
     [SerializeField]
     TMP_Text well;
 
-    public AudioManager AudioInst;
-
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         base.EstablishPawnComponent(owner, universeSimulation);
@@ -72,7 +70,7 @@ public class PawnFactory : PawnComponent
             Debug.Log("Purchase successful!");
 
             //AUDIO CALL
-            AudioInst.PlayCraftSFX();
+            AudioManager.Instance.PlayCraftSFX();
         }
         else
         {

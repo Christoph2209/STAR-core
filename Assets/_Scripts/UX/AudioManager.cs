@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
+    void Awake()
+    {
+        Instance = this;
+    }
+
     public AudioSource Src;
 
     public AudioClip DestroySFX;
@@ -13,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip SelectSFX;
     public AudioClip CraftSFX;
     public AudioClip TransferSFX;
+    public AudioClip ErrorSFX;
 
 
     public void PlayDestroySFX()
@@ -48,5 +55,10 @@ public class AudioManager : MonoBehaviour
     public void PlayTransferSFX()
     {
         Src.PlayOneShot(TransferSFX);
+    }
+
+    public void PlayErrorSFX()
+    {
+        Src.PlayOneShot(ErrorSFX);
     }
 }

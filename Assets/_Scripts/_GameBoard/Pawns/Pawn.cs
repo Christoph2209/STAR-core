@@ -32,8 +32,6 @@ public abstract class Pawn : MonoBehaviour
 
     public Dictionary<ComponentStat, float> stats = new();
 
-    AudioManager AudioInstance;
-
     #region Copy and lock inpsector value hack
     [SerializeField]
     private List<GameObject> setPawnComponents;//variable exposed in the inspector
@@ -350,7 +348,7 @@ public abstract class Pawn : MonoBehaviour
         universeSimulation.DestroyPawn(this);
 
         //AUDIO CALL
-        AudioInstance.PlayDestroySFX();
+        AudioManager.Instance.PlayDestroySFX();
     }
 
     public float GetTotalHealth()

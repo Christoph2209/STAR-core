@@ -32,8 +32,6 @@ public class PlayerFactionCommander : FactionCommander
     public bool isOverUI { get; private set; }
     public Pawn closestPawnToCursor { get; private set; }
 
-    public AudioManager AudioInst;
-
     private void Update()
     {
         // bad code;
@@ -99,11 +97,7 @@ public class PlayerFactionCommander : FactionCommander
             move = Vector3.ClampMagnitude(move, maxMove.magnitude);
             speed += Time.deltaTime * 200;
             universeSimulation.transform.position += move;
-
-            //AUDIO CALL
-            AudioInst.PlayMoveSFX();
         }
-        
     }
 
 
@@ -186,7 +180,9 @@ public class PlayerFactionCommander : FactionCommander
                     moveOffset = closestPawnToCursor.transform.position - ScreenCenterWorldPoint();
 
                     OpenMenu(value);
-                    AudioInst.PlaySelectSFX();
+                    
+                    //AUDIO CALL
+                    AudioManager.Instance.PlaySelectSFX();
                 }
                 else
                 {
