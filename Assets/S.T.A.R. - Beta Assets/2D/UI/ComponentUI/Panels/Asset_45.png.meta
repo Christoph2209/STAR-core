@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 28f5e17e6a30d1e4b9a7d2f01643f57a
+guid: 5be7e36bf6500d0478967736a3c28164
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -48,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 13, y: 13, z: 13, w: 13}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -105,22 +105,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Resource Body 2x_0
+      name: Asset_45_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 93
-        height: 58
+        y: 1
+        width: 323
+        height: 82
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 13, y: 13, z: 13, w: 13}
+      border: {x: 14, y: 6, z: 84, w: 24}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 742fce4055690a941b18c6d293b0e631
-      internalID: 1124792866
+      spriteID: 0e7892e54195c7049b4c847de686f8d5
+      internalID: -491023785
       vertices: []
       indices: 
       edges: []
@@ -128,15 +128,15 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 8bf5d50432b2eff4ab14ed7250473463
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Resource Body 2x_0: 1124792866
+      Asset_45_0: -491023785
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

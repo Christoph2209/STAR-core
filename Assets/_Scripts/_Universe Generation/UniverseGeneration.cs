@@ -8,10 +8,12 @@ public class UniverseGeneration : MonoBehaviour
     //sizes refer to the width of each of the squares
     private const int ZONE_SIZE = 4, SQUARE_SIZE = 3;
     //public variables
+    public string namet;
     public static int universeLength = 2, universeWidth = 2;
     public static int seed= 100;
     //private variables
     public GameObject[] zones;
+    public GameObject grid;
     public float zoneProb=0.1f;
     private int zonesGenerated;
 
@@ -28,14 +30,7 @@ public class UniverseGeneration : MonoBehaviour
         SaveManager.Save(so);
         GenerateUniverse();
     }
-    public void setUniverseL(int x)
-    {
-        universeLength = x;
-    }
-    public void setUniverseW(int y)
-    {
-        universeWidth = y;
-    }
+
     public void GenerateUniverse(){
 
         //generate universe
@@ -51,7 +46,12 @@ public class UniverseGeneration : MonoBehaviour
                         zonePosition.z -= 0.5f * universeLength * ZONE_SIZE*SQUARE_SIZE;
                         if (Random.value < zoneProb)
                         {
-                            GameObject newZone = universeSimulation.GeneratePawn(planet, null, ("Space Zone " + (zonesGenerated) + ": (" + k + "," + l + ")"), zonePosition);
+                            namet = "Space Zone " + (zonesGenerated) + ": (" + k + "," + l + ")";
+                            GameObject newZone = universeSimulation.GeneratePawn(planet, null, namet, zonePosition);
+                            so.names.Add(namet);
+                            so.pawns.Add(newZone);
+                            so.locate.Add(zonePosition);
+                            SaveManager.Save(so);
                             //GameObject newZone = Instantiate(zones[Random.Range(0, zones.Length)]);
                             //if (newZone.tag == "System") {
                             //    newZone.GetComponent<planet>().generateStructure(Random.Range(0,3), Random.Range(0,3), Random.Range(0,2));
@@ -66,6 +66,7 @@ public class UniverseGeneration : MonoBehaviour
                         }
                     }
                 }
+                
                 zonesGenerated++;
             }
         }
