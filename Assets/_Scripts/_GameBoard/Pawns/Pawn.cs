@@ -32,6 +32,7 @@ public abstract class Pawn : MonoBehaviour
 
     public Dictionary<ComponentStat, float> stats = new();
 
+    AudioManager AudioInstance;
 
     #region Copy and lock inpsector value hack
     [SerializeField]
@@ -347,6 +348,9 @@ public abstract class Pawn : MonoBehaviour
     {
         Debug.Log("CRITICAL DAMAGE HAS BEEN SUSTAINED!!!!");
         universeSimulation.DestroyPawn(this);
+
+        //AUDIO CALL
+        AudioInstance.PlayDestroySFX();
     }
 
     public float GetTotalHealth()
