@@ -283,6 +283,11 @@ public class PlayerFactionCommander : FactionCommander
 
         Debug.Log(actingFaction);
     }
+    public override void CompletePhase()
+    {
+        base.CompletePhase();
+        OnTest(null);
+    }
     public void OnExit(InputValue value)
     {
         SceneManager.LoadScene("StartMenu");
