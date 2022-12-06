@@ -35,7 +35,6 @@ public class UniverseSimulation : MonoBehaviour
         Pawn newPawn = pawnGameObject.GetComponent<Pawn>();
         newPawn.transform.position = position;
         pawns.Add(newPawn);
-        so.pawns.Add(pawnGameObject);
         SaveManager.Save(so);
         newPawn.EstablishPawn(pawnName, this, faction);
         return pawnGameObject;
@@ -47,7 +46,6 @@ public class UniverseSimulation : MonoBehaviour
         Pawn newPawn = paw.GetComponent<Pawn>();
         newPawn.transform.position = locate;
         pawns.Add(newPawn);
-        so.pawns.Add(paw);
         newPawn.EstablishPawn(names, this, faction);
         return paw;
     }
@@ -80,7 +78,6 @@ public class UniverseSimulation : MonoBehaviour
                 Debug.LogWarning("FOUND THE PLAYER!!!");
                 playerFactionCommander = (PlayerFactionCommander)factionCommander; 
             }
-            so.faction.Add(factionCommander);
             return faction.GetComponent<FactionCommander>();
         }
         else 

@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class SettingsGroup : MonoBehaviour
 {
-    private int x, y;
+    private int x, y, seed, pNum;
     public Text worldText;
     public AudioSource musi, sefx;
     public Slider mu, sf;
@@ -28,7 +28,8 @@ public class SettingsGroup : MonoBehaviour
         //mu.value = so.volume_mu;
         x = so.limitX;
         y = so.limitY;
-        
+        seed = so.worldSeed;
+        pNum = so.playerNumber;
         //worldText.text = ("Your current World Values are (" + UniverseGeneration.universeLength + ", " + UniverseGeneration.universeWidth + ")");
         Debug.Log(so.limitX);
     }
@@ -58,7 +59,18 @@ public class SettingsGroup : MonoBehaviour
         sefx.volume = f;
         so.volume_sfx = f;
     }
-
+    public void setSeed(string z)
+    {
+        seed = int.Parse(z);
+        UniverseGeneration.seed = seed;
+        so.worldSeed = seed;
+    }
+    public void setPlayers(string z)
+    {
+        pNum = int.Parse(z);
+        UniverseSimulation.playerNum = pNum;
+        so.playerNumber= pNum;
+    }
     public void worldX(string z)
     {
         x = int.Parse(z);
