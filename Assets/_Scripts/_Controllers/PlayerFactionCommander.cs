@@ -37,7 +37,7 @@ public class PlayerFactionCommander : FactionCommander
         // bad code;
         PhaseInfo.text = actingFaction.factionName + ": " + universeSimulation.universeChronology.currentPhase.ToString() + ", Ready:" + universeSimulation.universeChronology.IsFactionReady(actingFaction);
         foreach (GameObject icon in playerIcons) icon.SetActive(false);
-        playerIcons[universeSimulation.factionsInPlay.IndexOf(actingFaction)].SetActive(true);
+        playerIcons[universeSimulation.factionsInPlay.IndexOf(actingFaction)%playerIcons.Count].SetActive(true);
 
         if(universeSimulation.universeChronology.currentPhase == TurnPhase.RaiderPhase)
         {
