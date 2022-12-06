@@ -138,7 +138,9 @@ MonoBehaviour:
   - Name: 0
     Value: 10000
   startingStats: []
-  newSytemComponents: []
+  newSytemComponents:
+  - {fileID: 4369763219849521649, guid: 18473d68c1a5d5747addfe66baa0f574, type: 3}
+  - {fileID: 4369763219849521649, guid: 615e4a42ca7cc4f4d94569b8df7400e3, type: 3}
   settleRange: 5
 --- !u!1 &4456215527056794637
 GameObject:

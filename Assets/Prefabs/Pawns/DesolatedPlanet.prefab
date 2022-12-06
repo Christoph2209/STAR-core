@@ -48,6 +48,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69b3e2faba01e348a111c126f557d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  so:
+    limitX: 2
+    limitY: 2
+    worldSeed: 0
+    volume_mu: 1
+    volume_sfx: 1
+    pawns: []
+    locate: []
+    faction: []
+    names: []
   universeSimulation: {fileID: 0}
   faction: {fileID: 0}
   componentMenu: {fileID: 399571380160054927}
@@ -66,7 +76,7 @@ MonoBehaviour:
   OnFactionUpdate:
     m_PersistentCalls:
       m_Calls: []
-  desolatedPlanet: {fileID: 0}
+  desolatedPlanet: {fileID: 1825581157490703194}
 --- !u!1001 &522933405290849163
 PrefabInstance:
   m_ObjectHideFlags: 0
