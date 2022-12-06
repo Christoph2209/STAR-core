@@ -11,7 +11,7 @@ public class UniverseSimulation : MonoBehaviour
     public SaveObject so;
     
     [SerializeField]
-    public static List<Pawn> pawns = new();
+    public List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();
     public PlayerFactionCommander playerFactionCommander;
     [HideInInspector]

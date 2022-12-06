@@ -11,5 +11,8 @@ public class Sheild : TransferableComponent
         base.OnMainPhaseStart();
         currentHealth += (sheildRegeneration * owner.stats[ComponentStat.SheildPower] * owner.stats[ComponentStat.AggregatePower]);
     }
-    
+    public override void CriticalDamage()
+    {
+        //just do nothing
+    }
 }

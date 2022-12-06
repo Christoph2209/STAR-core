@@ -286,6 +286,7 @@ public abstract class Pawn : MonoBehaviour
     
     public void UpdateStats()
     {
+
         stats = new();
         foreach (GameObject pawnComponent in pawnComponents)
         {
@@ -332,6 +333,18 @@ public abstract class Pawn : MonoBehaviour
             for (int i = 0; i < pawnComponentPriorityLists[ComponentPriority.DamageOrder].Count; i++)
             {
                 excess = pawnComponentPriorityLists[ComponentPriority.DamageOrder][i].DamageComponent(excess);
+            }
+        }
+
+        if (pawnComponentPriorityLists.ContainsKey(ComponentPriority.DamageOrder))
+        {
+            for (int i = 0; i < pawnComponentPriorityLists[ComponentPriority.DamageOrder].Count; i++)
+            {
+                PawnComponent t = pawnComponentPriorityLists[ComponentPriority.DamageOrder][i];
+                if (t.GetHealth() == 0)
+                {
+                    t.CriticalDamage();
+                }
             }
         }
 
