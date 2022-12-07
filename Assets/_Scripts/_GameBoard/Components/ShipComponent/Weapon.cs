@@ -137,13 +137,14 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     }
 
 
-    /*protected  override void AggressiveAction()
+   /* protected  override void AggressiveAction()
     {
         base.AggressiveAction();
         
         private Pawn currentTarget = null;
+        var UniverseInstance = new UniverseSimulation();
 
-        List<pawn> possibleTargets = UniverseSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
+        List<Pawn> possibleTargets = UniverseInstance.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
         foreach (Pawn currentPawn in possibleTargets)
         {
             if(currentPawn.GetFaction() != owner.GetFaction()) // determines if target is an enemy

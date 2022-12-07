@@ -30,8 +30,10 @@ public class TrianglePowerDiverter : PawnComponent
     {
         base.AggressiveAction();
         bool enemyNear = false;
+        float range = 0.5f; // PLACEHOLDER VALUE
+        var UniverseInstance = new UniverseSimulation();
 
-        List<pawn> possibleTargets = UniverseSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
+        List<Pawn> possibleTargets = UniverseInstance.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
         foreach (Pawn currentPawn in possibleTargets)
         {
             if(currentPawn.GetFaction() != owner.GetFaction()){enemyNear = true;}  // determines if an enemy is in range
