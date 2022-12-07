@@ -133,7 +133,7 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     }
 
 
-    protected  override void AggressiveAction()
+    /*protected  override void AggressiveAction()
     {
         base.AggressiveAction();
         
@@ -154,7 +154,7 @@ public class Weapon : TransferableComponent, PlayerControlOverride
         currentTarget = null;
         Attack();
 
-    }
+    }*/
 
 
 }

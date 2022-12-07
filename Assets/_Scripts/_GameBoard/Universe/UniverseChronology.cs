@@ -18,6 +18,7 @@ public class UniverseChronology : MonoBehaviour
     private FactionCommander winner;
     private int turnCount = 0 ;
     private TutorialLoop tLoop;
+
     //Required for initialization. If this method doesn't get called it won't funtion properly
     public void EstablishUniverseChronology(UniverseSimulation universeSimulation)
     {

@@ -29,21 +29,28 @@ public class TrianglePowerDiverter : PawnComponent
     protected  override void AggressiveAction()
     {
         base.AggressiveAction();
+        bool enemyNear = false;
 
         List<pawn> possibleTargets = UniverseSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
         foreach (Pawn currentPawn in possibleTargets)
         {
-            if(currentPawn.GetFaction() != owner.GetFaction()) // determines if target is an enemy
-            {
-                // divert power to weapons (either 100% or 50/50 with shields)
-            }
-            else
-            {
-                // divert power to thrusters 100%
-            }
+            if(currentPawn.GetFaction() != owner.GetFaction()){enemyNear = true;}  // determines if an enemy is in range
         }
 
-
+        if(enemyNear) // divert power to weapons (either 100% or 50/50 with shields)
+        {
+            stats[ComponentStat.SheildPower]=0.0f;
+            stats[ComponentStat.ThrusterPower]=0.0f;
+            stats[ComponentStat.WeaponPower]=1.0f;
+        }
+        else // divert power to thrusters 100%
+        {
+            stats[ComponentStat.SheildPower]=0.0f;
+            stats[ComponentStat.ThrusterPower]=1.0f;
+            stats[ComponentStat.WeaponPower]=0.0f;
+        }
+        owner.UpdateStats();
+        enemyNear = false;
     }
 
     
