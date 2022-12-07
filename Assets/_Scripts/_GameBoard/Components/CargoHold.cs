@@ -85,6 +85,8 @@ public class CargoHold : TransferableComponent
         {
             if (GetTotalResources(pawns, resource.type) < resource.value || resource.value< 0)
             {
+                AudioManager.Instance.PlayErrorSFX();
+
                 Debug.Log("Failed To Purchase");
                 return false;
             }
