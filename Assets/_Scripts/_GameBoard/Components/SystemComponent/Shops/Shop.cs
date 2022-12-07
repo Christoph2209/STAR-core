@@ -16,7 +16,6 @@ public class Shop : PawnComponent
     [SerializeField]
     TMP_Text well;
 
-
     public override void EstablishPawnComponent(Pawn owner, UniverseSimulation universeSimulation)
     {
         base.EstablishPawnComponent(owner, universeSimulation);
@@ -70,6 +69,10 @@ public class Shop : PawnComponent
         if (TryPurchaseItem(pawnsInRange , owner , inventory ))
         {
             Debug.Log("Purchase successful!");
+
+            //AUDIO CALL
+            AudioManager.Instance.PlayCraftSFX();
+
             if (destroyOnBuild)
             {
                 owner.RemovePawnComponent(gameObject);
@@ -78,6 +81,9 @@ public class Shop : PawnComponent
         else
         {
             Debug.Log("Purchase failure!");
+
+            //AUDIO CALL
+            AudioManager.Instance.PlayErrorSFX();
         }
     }
     

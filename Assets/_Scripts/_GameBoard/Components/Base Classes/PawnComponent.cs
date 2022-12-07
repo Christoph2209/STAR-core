@@ -109,13 +109,6 @@ public abstract class PawnComponent : MonoBehaviour
 
 
 
-    private void OnDestroy()
-    {
-        owner.UpdateStats();
-        
-    }
-
-
 
 
     public virtual void OnMainPhaseStart()
@@ -186,6 +179,10 @@ public abstract class PawnComponent : MonoBehaviour
 
         UpdateHealthDisplay();
         return overflow;
+    }
+    public virtual void CriticalDamage()
+    {
+        owner.DestroyPawnComponent(gameObject);
     }
 
     private void UpdateHealthDisplay()

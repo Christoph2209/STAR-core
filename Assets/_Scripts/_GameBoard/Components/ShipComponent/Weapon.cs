@@ -25,6 +25,9 @@ public class Weapon : TransferableComponent, PlayerControlOverride
         target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower)* owner.GetStats(ComponentStat.AggregatePower));
 
         target = null;
+
+        //AUDIO CALL
+        AudioManager.Instance.PlayFireSFX();
     }
 
 
@@ -107,7 +110,8 @@ public class Weapon : TransferableComponent, PlayerControlOverride
 
             owner.SetAttackPattern(() => Attack());
 
-            
+            //AUDIO CALL
+            AudioManager.Instance.PlayTargetSFX();
         }
         ExitAttackMenu(input);
     }

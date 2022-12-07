@@ -32,7 +32,6 @@ public abstract class Pawn : MonoBehaviour
 
     public Dictionary<ComponentStat, float> stats = new();
 
-
     #region Copy and lock inpsector value hack
     [SerializeField]
     private List<GameObject> setPawnComponents;//variable exposed in the inspector
@@ -287,6 +286,7 @@ public abstract class Pawn : MonoBehaviour
     
     public void UpdateStats()
     {
+
         stats = new();
         foreach (GameObject pawnComponent in pawnComponents)
         {
@@ -336,6 +336,18 @@ public abstract class Pawn : MonoBehaviour
             }
         }
 
+        if (pawnComponentPriorityLists.ContainsKey(ComponentPriority.DamageOrder))
+        {
+            for (int i = 0; i < pawnComponentPriorityLists[ComponentPriority.DamageOrder].Count; i++)
+            {
+                PawnComponent t = pawnComponentPriorityLists[ComponentPriority.DamageOrder][i];
+                if (t.GetHealth() == 0)
+                {
+                    t.CriticalDamage();
+                }
+            }
+        }
+
         if (excess > 0)
         {
             CriticalDamage();
@@ -347,6 +359,9 @@ public abstract class Pawn : MonoBehaviour
     {
         Debug.Log("CRITICAL DAMAGE HAS BEEN SUSTAINED!!!!");
         universeSimulation.DestroyPawn(this);
+
+        //AUDIO CALL
+        AudioManager.Instance.PlayDestroySFX();
     }
 
     public float GetTotalHealth()

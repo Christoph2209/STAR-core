@@ -48,10 +48,6 @@ public class UniverseGeneration : MonoBehaviour
                         {
                             namet = "Space Zone " + (zonesGenerated) + ": (" + k + "," + l + ")";
                             GameObject newZone = universeSimulation.GeneratePawn(planet, null, namet, zonePosition);
-                            so.names.Add(namet);
-                            so.pawns.Add(newZone);
-                            so.locate.Add(zonePosition);
-                            SaveManager.Save(so);
                             //GameObject newZone = Instantiate(zones[Random.Range(0, zones.Length)]);
                             //if (newZone.tag == "System") {
                             //    newZone.GetComponent<planet>().generateStructure(Random.Range(0,3), Random.Range(0,3), Random.Range(0,2));

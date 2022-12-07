@@ -50,6 +50,8 @@ public class Thrusters : PawnComponent, PlayerControlOverride
         universeSimulation.playerFactionCommander.OverrideInput(this);
         //universeSimulation.playerFactionCommander.MoveCameraToLocation(universeSimulation.transform.position-owner.transform.position);// I need to redo the camera movement
 
+        //AUDIO CALL
+        AudioManager.Instance.PlayMoveSFX();
     }
 
     public Vector3 OnMove(InputValue value)
