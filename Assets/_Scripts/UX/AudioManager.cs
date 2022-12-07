@@ -15,11 +15,12 @@ public class AudioManager : MonoBehaviour
     public AudioClip DestroySFX;
     public AudioClip TargetSFX;
     public AudioClip FireSFX;
-    public AudioClip MoveSFX;
+    public AudioClip MoveTargetSFX;
     public AudioClip SelectSFX;
     public AudioClip CraftSFX;
     public AudioClip TransferSFX;
     public AudioClip ErrorSFX;
+    public AudioClip MoveActionSFX;
 
 
     public void PlayDestroySFX()
@@ -37,9 +38,14 @@ public class AudioManager : MonoBehaviour
         Src.PlayOneShot(FireSFX);
     }
 
-    public void PlayMoveSFX()
+    public void PlayMoveTargetSFX()
     {
-        Src.PlayOneShot(MoveSFX);
+        Src.PlayOneShot(MoveTargetSFX);
+    }
+
+    public void PlayMoveActionSFX()
+    {
+        Src.PlayOneShot(MoveActionSFX);
     }
 
     public void PlaySelectSFX()

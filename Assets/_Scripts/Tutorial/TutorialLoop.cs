@@ -95,7 +95,7 @@ public class TutorialLoop : MonoBehaviour
                 break;
             case 2:
                 Debug.Log("TUTORIAL: It's the second turn!");
-                RaiderUI.SetActive(true);
+                Damage.SetActive(true);
                 break;
             default:
                 break;
@@ -198,8 +198,6 @@ public class TutorialLoop : MonoBehaviour
         {
             TraderConclusion.SetActive(false);
         }
-
-        Damage.SetActive(true);
     }
 
     public void DeactivateDamageUI()
