@@ -116,7 +116,7 @@ public class Thrusters : PawnComponent, PlayerControlOverride
 
         foreach (Pawn pawn in universeSimulation.GetAllPawns()) // edited from UniverseSimulation.GetClosestPawnToPosition() 
         {
-            if (pawn.GetFaction() != owner.GetFaction()) // Determines if current pawn is enemy
+            if (pawn.GetFaction() != owner.GetFaction()&& pawn.GetFaction()!=null) // Determines if current pawn is enemy
             {
                 if (closestEnemy == null || Vector3.Distance(targetPosition, closestEnemy.transform.position) > Vector3.Distance(targetPosition, pawn.transform.position))
                 {
