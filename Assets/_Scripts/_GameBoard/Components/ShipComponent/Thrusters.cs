@@ -104,4 +104,40 @@ public class Thrusters : PawnComponent, PlayerControlOverride
     {
         //throw new NotImplementedException();
     }
+
+
+    protected override void AggressiveAction() // Finds the closest enemy pawn and approaches it
+    {
+        base.AggressiveAction();
+
+        float distance = float.PositiveInfinity;
+        Pawn closestEnemy = null;
+        Vector3 targetPosition = owner.transform.position;
+        var UniverseInstance = new UniverseSimulation();
+
+        foreach(Pawn pawn in UniverseInstance.GetAllPawns()) // edited from UniverseSimulation.GetClosestPawnToPosition() 
+        {
+            if(pawn.GetFaction() != owner.GetFaction()) // Determines if current pawn is enemy
+            {
+                if(closestEnemy==null || Vector3.Distance(targetPosition, closestEnemy.transform.position) > Vector3.Distance(targetPosition, pawn.transform.position))
+                {
+                    closestEnemy = pawn;
+                    distance = Vector3.Distance(targetPosition, pawn.transform.position);
+                }
+            }
+        }
+
+        /// move to closest enemy
+        Vector3 moveTarget = closestEnemy.transform.position;
+
+        moveOffset = moveTarget - owner.transform.position;
+
+        Debug.Log(owner + "Moving to location " + moveTarget);
+        owner.SetMovePattern(() => MovePattern());
+
+        closestEnemy = null;
+
+    }
+
+
 }
