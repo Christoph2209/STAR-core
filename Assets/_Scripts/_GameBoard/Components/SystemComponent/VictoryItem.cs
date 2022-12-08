@@ -8,4 +8,11 @@ using UnityEngine;
 /// </summary>
 public class VictoryItem : PawnComponent
 {
+
+protected override void AggressiveAction()
+{
+    // OPTIONAL: Set priority = 1
+    PurchaseItem();
+}
+
 }

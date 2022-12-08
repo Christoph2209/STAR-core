@@ -87,7 +87,13 @@ public class Shop : PawnComponent
         }
     }
     
-    
-
+    /*
+    protected override void AggressiveAction()
+    {
+        // item = victoryItem;
+        //PurchaseItem();
+        // item = ship;
+        //PurchaseItem();
+    }*/
 
 }
