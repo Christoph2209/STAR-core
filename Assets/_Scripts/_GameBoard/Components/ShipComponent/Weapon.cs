@@ -22,12 +22,15 @@ public class Weapon : TransferableComponent, PlayerControlOverride
 
     public void Attack()
     {
-        target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower)* owner.GetStats(ComponentStat.AggregatePower));
+        if (target != null)
+        {
+            target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower) * owner.GetStats(ComponentStat.AggregatePower));
 
-        target = null;
+            target = null;
 
-        //AUDIO CALL
-        AudioManager.Instance.PlayFireSFX();
+            //AUDIO CALL
+            AudioManager.Instance.PlayFireSFX();
+        }
     }
 
 
@@ -156,7 +159,8 @@ public class Weapon : TransferableComponent, PlayerControlOverride
                 }
         }
         target = currentTarget;
-        currentTarget = null;
+
+
         Attack();
 
     }

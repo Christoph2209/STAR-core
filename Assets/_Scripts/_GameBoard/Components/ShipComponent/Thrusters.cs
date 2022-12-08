@@ -115,11 +115,11 @@ public class Thrusters : PawnComponent, PlayerControlOverride
         Vector3 targetPosition = owner.transform.position;
         var UniverseInstance = new UniverseSimulation();
 
-        foreach(Pawn pawn in UniverseInstance.GetAllPawns()) // edited from UniverseSimulation.GetClosestPawnToPosition() 
+        foreach (Pawn pawn in UniverseInstance.GetAllPawns()) // edited from UniverseSimulation.GetClosestPawnToPosition() 
         {
-            if(pawn.GetFaction() != owner.GetFaction()) // Determines if current pawn is enemy
+            if (pawn.GetFaction() != owner.GetFaction()) // Determines if current pawn is enemy
             {
-                if(closestEnemy==null || Vector3.Distance(targetPosition, closestEnemy.transform.position) > Vector3.Distance(targetPosition, pawn.transform.position))
+                if (closestEnemy == null || Vector3.Distance(targetPosition, closestEnemy.transform.position) > Vector3.Distance(targetPosition, pawn.transform.position))
                 {
                     closestEnemy = pawn;
                     distance = Vector3.Distance(targetPosition, pawn.transform.position);
@@ -127,15 +127,16 @@ public class Thrusters : PawnComponent, PlayerControlOverride
             }
         }
 
-        /// move to closest enemy
-        Vector3 moveTarget = closestEnemy.transform.position;
+        if (closestEnemy != null)
+        {
+            /// move to closest enemy
+            Vector3 moveTarget = closestEnemy.transform.position;
 
-        moveOffset = moveTarget - owner.transform.position;
+            moveOffset = moveTarget - owner.transform.position;
 
-        Debug.Log(owner + "Moving to location " + moveTarget);
-        owner.SetMovePattern(() => MovePattern());
-
-        closestEnemy = null;
+            Debug.Log(owner + "Moving to location " + moveTarget);
+            owner.SetMovePattern(() => MovePattern());
+        }
 
     }
 

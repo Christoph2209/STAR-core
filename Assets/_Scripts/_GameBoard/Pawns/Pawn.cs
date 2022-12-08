@@ -257,6 +257,15 @@ public abstract class Pawn : MonoBehaviour
         }
         return pawnComponentsOfType;
     }
+    public List<PawnComponent> GetPawnComponents()
+    {
+        List<PawnComponent> pawnComponentList = new();
+        foreach(GameObject pob in pawnComponents)
+        {
+            pawnComponentList.Add(pob.GetComponent<PawnComponent>());
+        }
+        return pawnComponentList;
+    }
     public void UpdatePrioritys()
     {
         pawnComponentPriorityLists = new();
@@ -338,7 +347,7 @@ public abstract class Pawn : MonoBehaviour
 
         if (pawnComponentPriorityLists.ContainsKey(ComponentPriority.DamageOrder))
         {
-            for (int i = 0; i < pawnComponentPriorityLists[ComponentPriority.DamageOrder].Count; i++)
+            for (int i = pawnComponentPriorityLists[ComponentPriority.DamageOrder].Count-1; i >= 0 ; i--)
             {
                 PawnComponent t = pawnComponentPriorityLists[ComponentPriority.DamageOrder][i];
                 if (t.GetHealth() == 0)
