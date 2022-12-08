@@ -113,9 +113,8 @@ public class Thrusters : PawnComponent, PlayerControlOverride
         float distance = float.PositiveInfinity;
         Pawn closestEnemy = null;
         Vector3 targetPosition = owner.transform.position;
-        var UniverseInstance = new UniverseSimulation();
 
-        foreach (Pawn pawn in UniverseInstance.GetAllPawns()) // edited from UniverseSimulation.GetClosestPawnToPosition() 
+        foreach (Pawn pawn in universeSimulation.GetAllPawns()) // edited from UniverseSimulation.GetClosestPawnToPosition() 
         {
             if (pawn.GetFaction() != owner.GetFaction()) // Determines if current pawn is enemy
             {

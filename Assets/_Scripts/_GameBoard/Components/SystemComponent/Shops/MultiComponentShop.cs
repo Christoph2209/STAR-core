@@ -70,6 +70,10 @@ public class MultiComponentShop : PawnComponent
         }
     }
 
-
+    protected override void AggressiveAction()
+    {
+        base.AggressiveAction();
+        PurchaseItem();
+    }
 
 }

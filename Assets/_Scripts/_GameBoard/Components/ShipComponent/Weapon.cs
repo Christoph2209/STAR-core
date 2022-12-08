@@ -142,19 +142,21 @@ public class Weapon : TransferableComponent, PlayerControlOverride
 
     protected override void AggressiveAction()
     {
+        Debug.Log("Lets do this aggressive thingy");
         base.AggressiveAction();
         
         Pawn currentTarget = null;
-        var UniverseInstance = new UniverseSimulation();
 
-        List<Pawn> possibleTargets = UniverseInstance.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
+
+        List<Pawn> possibleTargets = universeSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
         foreach (Pawn currentPawn in possibleTargets)
         {
             if(currentPawn.GetFaction() != owner.GetFaction()) // determines if target is an enemy
                 {
-                if (currentTarget == null || (currentPawn.GetTotalHealth() < currentTarget.GetTotalHealth())) // finds the enemy with lowest health
+                    if (currentTarget == null || (currentPawn.GetTotalHealth() < currentTarget.GetTotalHealth())) // finds the enemy with lowest health
                     {
                     currentTarget = currentPawn;
+                    Debug.Log("Pawn in range for attack");
                     }
                 }
         }

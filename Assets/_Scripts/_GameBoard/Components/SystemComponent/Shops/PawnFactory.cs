@@ -78,5 +78,9 @@ public class PawnFactory : PawnComponent
         }
     }
 
-
+    protected override void AggressiveAction()
+    {
+        base.AggressiveAction();
+        PurchaseItem();
+    }
 }
