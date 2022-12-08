@@ -38,6 +38,7 @@ public class SystemInfo : PawnComponent
         stats[ComponentStat.CommonResource] = Random.Range(0, commonRange)+commonBase;
 
     }
+    
 
 
 
