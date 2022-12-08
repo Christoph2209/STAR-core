@@ -826,6 +826,16 @@ PrefabInstance:
       propertyPath: ErrorSFX
       value: 
       objectReference: {fileID: 8300000, guid: af79897a410d77646b7a0ed18e23127d, type: 3}
+    - target: {fileID: 5001799770850414857, guid: a65177ff293e6bc49ab1c8ea4541dcd5,
+        type: 3}
+      propertyPath: MoveActionSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 0db040dc86f8f0f4c989d5478dfa288f, type: 3}
+    - target: {fileID: 5001799770850414857, guid: a65177ff293e6bc49ab1c8ea4541dcd5,
+        type: 3}
+      propertyPath: MoveTargetSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 05b5ac3d31691a8468e3fca452fdbfaf, type: 3}
     - target: {fileID: 6464327938316863297, guid: a65177ff293e6bc49ab1c8ea4541dcd5,
         type: 3}
       propertyPath: m_Name

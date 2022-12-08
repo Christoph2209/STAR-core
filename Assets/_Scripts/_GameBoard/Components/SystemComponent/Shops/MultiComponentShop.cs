@@ -61,6 +61,8 @@ public class MultiComponentShop : PawnComponent
             {
                 owner.RemovePawnComponent(gameObject);
             }
+
+            AudioManager.Instance.PlayCraftSFX();
         }
         else
         {

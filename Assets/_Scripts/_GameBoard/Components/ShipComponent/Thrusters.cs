@@ -24,6 +24,8 @@ public class Thrusters : PawnComponent, PlayerControlOverride
     }
     IEnumerator MoveProcess(Vector3 moveOffset)
     {
+        AudioManager.Instance.PlayMoveActionSFX();
+
         float t = 0;
         Vector3 currentVelocity = Vector3.zero;
         Vector3 currentOffset = Vector3.zero;
@@ -51,7 +53,7 @@ public class Thrusters : PawnComponent, PlayerControlOverride
         //universeSimulation.playerFactionCommander.MoveCameraToLocation(universeSimulation.transform.position-owner.transform.position);// I need to redo the camera movement
 
         //AUDIO CALL
-        AudioManager.Instance.PlayMoveSFX();
+        AudioManager.Instance.PlayMoveTargetSFX();
     }
 
     public Vector3 OnMove(InputValue value)
