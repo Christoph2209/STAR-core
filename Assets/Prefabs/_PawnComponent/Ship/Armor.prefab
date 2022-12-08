@@ -412,7 +412,7 @@ MonoBehaviour:
   isForeign: 0
   startingPrioritys:
   - Name: 2
-    Value: 100
+    Value: 8
   - Name: 0
     Value: 9
   startingStats: []
