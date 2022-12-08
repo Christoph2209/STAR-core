@@ -104,7 +104,7 @@ public class Thrusters : PawnComponent, PlayerControlOverride
     }
 
 
-    protected  override void AggressiveAction() // Finds the closest enemy pawn and approaches it
+    protected override void AggressiveAction() // Finds the closest enemy pawn and approaches it
     {
         base.AggressiveAction();
 

@@ -26,7 +26,7 @@ public class TrianglePowerDiverter : PawnComponent
 
     }
 
-    protected  override void AggressiveAction()
+    protected override void AggressiveAction()
     {
         base.AggressiveAction();
         bool enemyNear = false;
