@@ -477,12 +477,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price:
   - type: 0
-    value: 10
+    value: 0
   - type: 1
     value: 5
   - type: 2
     value: 20
-  maxHealth: 5
+  maxHealth: 1
   healthText: {fileID: 6566537147172855164}
   owner: {fileID: 0}
   activeTurnPhase: 2
@@ -494,7 +494,7 @@ MonoBehaviour:
     Value: 8
   startingStats:
   - Name: 2
-    Value: 0.1
+    Value: 0.25
 --- !u!1 &7701976978265073824
 GameObject:
   m_ObjectHideFlags: 0

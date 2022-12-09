@@ -345,11 +345,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price:
   - type: 2
-    value: 5
-  - type: 1
     value: 0
-  - type: 0
+  - type: 1
     value: 10
+  - type: 0
+    value: 25
   maxHealth: 1
   healthText: {fileID: 8401968861136281729}
   owner: {fileID: 0}

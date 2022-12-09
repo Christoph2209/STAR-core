@@ -23,7 +23,7 @@ public class UniverseLoad : MonoBehaviour
     {
         universeSimulation = GetComponent<UniverseSimulation>();
         so = SaveManager.Load();
-        numberPawns = so.pawns.Count;
+
         Debug.LogError(numberPawns);
         LoadUniverse();
     }
@@ -34,7 +34,6 @@ public class UniverseLoad : MonoBehaviour
         for (int o = 0; o < numberPawns; o++)
         {
             Debug.LogError(o);
-            GameObject stage = universeSimulation.LoadExistingPawn(planet, so.pawns[o], so.locate[o], so.faction[o], so.names[o]);
             //universeSimulation.GeneratePawn();
         }
     }

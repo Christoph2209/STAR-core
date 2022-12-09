@@ -22,9 +22,15 @@ public class Weapon : TransferableComponent, PlayerControlOverride
 
     public void Attack()
     {
-        target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower)* owner.GetStats(ComponentStat.AggregatePower));
+        if (target != null)
+        {
+            target.DamagePawn(damage * owner.GetStats(ComponentStat.WeaponPower) * owner.GetStats(ComponentStat.AggregatePower));
 
-        target = null;
+            target = null;
+
+            //AUDIO CALL
+            AudioManager.Instance.PlayFireSFX();
+        }
     }
 
 
@@ -107,7 +113,8 @@ public class Weapon : TransferableComponent, PlayerControlOverride
 
             owner.SetAttackPattern(() => Attack());
 
-            
+            //AUDIO CALL
+            AudioManager.Instance.PlayTargetSFX();
         }
         ExitAttackMenu(input);
     }
@@ -133,27 +140,32 @@ public class Weapon : TransferableComponent, PlayerControlOverride
     }
 
 
-    /*protected  override void AggressiveAction()
+    protected override void AggressiveAction()
     {
+        Debug.Log("Lets do this aggressive thingy");
+        base.AggressiveAction();
         
-        private Pawn currentTarget = null;
+        Pawn currentTarget = null;
 
-        List<pawn> possibleTargets = UniverseSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
+
+        List<Pawn> possibleTargets = universeSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
         foreach (Pawn currentPawn in possibleTargets)
         {
             if(currentPawn.GetFaction() != owner.GetFaction()) // determines if target is an enemy
                 {
-                if (currentTarget == null || (currentPawn.GetTotalHealth() < currentTarget.GetTotalHealth())) // finds the enemy with lowest health
+                    if (currentTarget == null || (currentPawn.GetTotalHealth() < currentTarget.GetTotalHealth())) // finds the enemy with lowest health
                     {
                     currentTarget = currentPawn;
+                    Debug.Log("Pawn in range for attack");
                     }
                 }
         }
         target = currentTarget;
-        currentTarget = null;
+
+
         Attack();
 
-    }*/
+    }
 
 
 }

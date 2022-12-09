@@ -8,4 +8,7 @@ using UnityEngine;
 /// </summary>
 public class VictoryItem : PawnComponent
 {
+
+
+
 }

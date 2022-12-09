@@ -63,7 +63,7 @@ public abstract class FactionCommander : MonoBehaviour
 
 
     #region FactionActions
-    public void CompletePhase()// All factions need to mark themselves as ready to complete any given phase.
+    public  virtual void CompletePhase()// All factions need to mark themselves as ready to complete any given phase.
     {
         switch (universeSimulation.universeChronology.currentPhase)
         {

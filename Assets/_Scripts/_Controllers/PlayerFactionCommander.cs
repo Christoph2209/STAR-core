@@ -32,17 +32,12 @@ public class PlayerFactionCommander : FactionCommander
     public bool isOverUI { get; private set; }
     public Pawn closestPawnToCursor { get; private set; }
 
-    public AudioSource audioSrc;
-    public AudioClip SelectSFX;
-    public AudioClip MoveSFX;
-    public AudioClip ReadySFX;
-
     private void Update()
     {
         // bad code;
         PhaseInfo.text = actingFaction.factionName + ": " + universeSimulation.universeChronology.currentPhase.ToString() + ", Ready:" + universeSimulation.universeChronology.IsFactionReady(actingFaction);
         foreach (GameObject icon in playerIcons) icon.SetActive(false);
-        playerIcons[universeSimulation.factionsInPlay.IndexOf(actingFaction)].SetActive(true);
+        playerIcons[universeSimulation.factionsInPlay.IndexOf(actingFaction)%playerIcons.Count].SetActive(true);
 
         if(universeSimulation.universeChronology.currentPhase == TurnPhase.RaiderPhase)
         {
@@ -103,7 +98,6 @@ public class PlayerFactionCommander : FactionCommander
             speed += Time.deltaTime * 200;
             universeSimulation.transform.position += move;
         }
-        
     }
 
 
@@ -113,7 +107,6 @@ public class PlayerFactionCommander : FactionCommander
         if (playerControlOverride != null)
         {
             moveDirection = playerControlOverride.OnMove(value);
-            audioSrc.PlayOneShot(MoveSFX);
             return;
         }
         moveDirection = new Vector3(value.Get<Vector2>().x, 0, value.Get<Vector2>().y);
@@ -187,7 +180,9 @@ public class PlayerFactionCommander : FactionCommander
                     moveOffset = closestPawnToCursor.transform.position - ScreenCenterWorldPoint();
 
                     OpenMenu(value);
-                    audioSrc.PlayOneShot(SelectSFX);
+                    
+                    //AUDIO CALL
+                    AudioManager.Instance.PlaySelectSFX();
                 }
                 else
                 {
@@ -287,6 +282,11 @@ public class PlayerFactionCommander : FactionCommander
         actingFaction = universeSimulation.factionsInPlay[index];
 
         Debug.Log(actingFaction);
+    }
+    public override void CompletePhase()
+    {
+        base.CompletePhase();
+        OnTest(null);
     }
     public void OnExit(InputValue value)
     {

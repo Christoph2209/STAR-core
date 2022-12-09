@@ -9,10 +9,12 @@ public class TransferableComponent : PawnComponent,PlayerControlOverride
     private GameObject circleHighlight;
     private GameObject circleRange;
 
-
     public void TransferComponent(Pawn newOwner)
     {
         newOwner.TransferPawnComopnent(gameObject);
+
+        //AUDIO CALL
+        AudioManager.Instance.PlayTransferSFX();
     }
 
     public void TransferComponent()

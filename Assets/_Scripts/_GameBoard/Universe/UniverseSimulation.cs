@@ -7,10 +7,11 @@ using System;
 
 public class UniverseSimulation : MonoBehaviour
 {
+    public static int playerNum = 4;
     public SaveObject so;
     
     [SerializeField]
-    public static List<Pawn> pawns = new();
+    public List<Pawn> pawns = new();
     public List<FactionCommander> factionsInPlay = new();
     public PlayerFactionCommander playerFactionCommander;
     [HideInInspector]
@@ -34,7 +35,6 @@ public class UniverseSimulation : MonoBehaviour
         Pawn newPawn = pawnGameObject.GetComponent<Pawn>();
         newPawn.transform.position = position;
         pawns.Add(newPawn);
-        so.pawns.Add(pawnGameObject);
         SaveManager.Save(so);
         newPawn.EstablishPawn(pawnName, this, faction);
         return pawnGameObject;
@@ -46,7 +46,6 @@ public class UniverseSimulation : MonoBehaviour
         Pawn newPawn = paw.GetComponent<Pawn>();
         newPawn.transform.position = locate;
         pawns.Add(newPawn);
-        so.pawns.Add(paw);
         newPawn.EstablishPawn(names, this, faction);
         return paw;
     }
@@ -79,7 +78,6 @@ public class UniverseSimulation : MonoBehaviour
                 Debug.LogWarning("FOUND THE PLAYER!!!");
                 playerFactionCommander = (PlayerFactionCommander)factionCommander; 
             }
-            so.faction.Add(factionCommander);
             return faction.GetComponent<FactionCommander>();
         }
         else 
@@ -193,6 +191,10 @@ public class UniverseSimulation : MonoBehaviour
 
         EstablishFaction("Player 2", NPCFactionCommander);
 
+        for (int i = 2; i < playerNum; i++)
+        {
+            EstablishFaction("Player "+ (i+1), NPCFactionCommander);
+        }
         //GameObject playerPawn = GeneratePawn(Ship,factionsInPlay.First(), "TEST PAWN", Vector3.zero);
         //GeneratePawn(Ship, factionsInPlay[1], "OTHER PAWN", Vector3.right*3);
 

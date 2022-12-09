@@ -24,6 +24,8 @@ public class Thrusters : PawnComponent, PlayerControlOverride
     }
     IEnumerator MoveProcess(Vector3 moveOffset)
     {
+        AudioManager.Instance.PlayMoveActionSFX();
+
         float t = 0;
         Vector3 currentVelocity = Vector3.zero;
         Vector3 currentOffset = Vector3.zero;
@@ -50,6 +52,8 @@ public class Thrusters : PawnComponent, PlayerControlOverride
         universeSimulation.playerFactionCommander.OverrideInput(this);
         //universeSimulation.playerFactionCommander.MoveCameraToLocation(universeSimulation.transform.position-owner.transform.position);// I need to redo the camera movement
 
+        //AUDIO CALL
+        AudioManager.Instance.PlayMoveTargetSFX();
     }
 
     public Vector3 OnMove(InputValue value)
@@ -100,4 +104,40 @@ public class Thrusters : PawnComponent, PlayerControlOverride
     {
         //throw new NotImplementedException();
     }
+
+
+    protected override void AggressiveAction() // Finds the closest enemy pawn and approaches it
+    {
+        base.AggressiveAction();
+
+        float distance = float.PositiveInfinity;
+        Pawn closestEnemy = null;
+        Vector3 targetPosition = owner.transform.position;
+
+        foreach (Pawn pawn in universeSimulation.GetAllPawns()) // edited from UniverseSimulation.GetClosestPawnToPosition() 
+        {
+            if (pawn.GetFaction() != owner.GetFaction()) // Determines if current pawn is enemy
+            {
+                if (closestEnemy == null || Vector3.Distance(targetPosition, closestEnemy.transform.position) > Vector3.Distance(targetPosition, pawn.transform.position))
+                {
+                    closestEnemy = pawn;
+                    distance = Vector3.Distance(targetPosition, pawn.transform.position);
+                }
+            }
+        }
+
+        if (closestEnemy != null)
+        {
+            /// move to closest enemy
+            Vector3 moveTarget = closestEnemy.transform.position;
+
+            moveOffset = moveTarget - owner.transform.position;
+
+            Debug.Log(owner + "Moving to location " + moveTarget);
+            owner.SetMovePattern(() => MovePattern());
+        }
+
+    }
+
+
 }
