@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45efd7965c93d3448a480185a5745fed
+guid: 1333042086eed614fa0bbea4f06222d8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,22 +105,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: contentbox_red_0
+      name: universe_scale_revision_textlessbuttons_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 3
-        width: 564
-        height: 885
+        x: 1
+        y: 5
+        width: 555
+        height: 844
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 90, y: 90, z: 90, w: 90}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84a4b465dcf4dd747847f16904875676
-      internalID: -960872274
+      spriteID: 55bf67154df3bac4585a35cb9bf02871
+      internalID: -1877285427
       vertices: []
       indices: 
       edges: []
@@ -128,7 +128,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 7212d98b665d20947a64ea3db6974dcf
+    spriteID: 825d27225c8b0284da152e8cd8c3232d
     internalID: 0
     vertices: []
     indices: 
@@ -136,7 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      contentbox_red_0: -960872274
+      universe_scale_revision_textlessbuttons_0: -1877285427
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
