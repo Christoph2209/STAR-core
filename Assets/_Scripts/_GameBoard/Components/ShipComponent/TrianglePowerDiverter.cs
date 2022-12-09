@@ -35,7 +35,7 @@ public class TrianglePowerDiverter : PawnComponent
         List<Pawn> possibleTargets = universeSimulation.GetAllPawnsInRange(owner.transform.position, range); // finds all pawns within range
         foreach (Pawn currentPawn in possibleTargets)
         {
-            if(currentPawn.GetFaction() != owner.GetFaction()){enemyNear = true;}  // determines if an enemy is in range
+            if(currentPawn.GetFaction() != owner.GetFaction() && currentPawn.GetFaction()!=null){enemyNear = true;}  // determines if an enemy is in range
         }
 
         if(enemyNear) // divert power to weapons (either 100% or 50/50 with shields)

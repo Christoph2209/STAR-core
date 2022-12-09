@@ -286,7 +286,7 @@ public class PlayerFactionCommander : FactionCommander
     public override void CompletePhase()
     {
         base.CompletePhase();
-        OnTest(null);
+        //OnTest(null);
     }
     public void OnExit(InputValue value)
     {
@@ -318,7 +318,6 @@ public class PlayerFactionCommander : FactionCommander
             lastComponentMenuOpened.OpenComponentMenu(actingFaction);
         }
     }
-
 
 
 

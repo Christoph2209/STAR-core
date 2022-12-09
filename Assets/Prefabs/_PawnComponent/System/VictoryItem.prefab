@@ -129,12 +129,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price:
   - type: 0
-    value: 15
+    value: 100
   - type: 1
-    value: 15
+    value: 100
   - type: 2
-    value: 15
+    value: 100
   maxHealth: 0
+  healthText: {fileID: 0}
   owner: {fileID: 0}
   activeTurnPhase: 2
   isForeign: 0

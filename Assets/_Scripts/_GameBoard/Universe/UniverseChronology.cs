@@ -63,6 +63,7 @@ public class UniverseChronology : MonoBehaviour
 
             //Main 
             currentPhase = global::TurnPhase.TraderPhase;
+            yield return null;
             MainPhaseStart.Invoke();
             yield return new WaitUntil(() => (readiedFactions.SetEquals(universeSimulation.factionsInPlay)));//set equals checks if the sets are equal, it does nto set them to equivilant values lol
             MainPhaseEnd.Invoke();
