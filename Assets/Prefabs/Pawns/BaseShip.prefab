@@ -47,6 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf54be8edc6cf8469a3f8df35c2eb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  so:
+    limitX: 2
+    limitY: 2
+    worldSeed: 0
+    volume_mu: 1
+    volume_sfx: 1
+    playerNumber: 2
   universeSimulation: {fileID: 0}
   faction: {fileID: 0}
   componentMenu: {fileID: 399571380160054927}
@@ -235,6 +242,12 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 220
       objectReference: {fileID: 0}
+    - target: {fileID: 8163238629722790562, guid: d7859018c7ac4f94a9f704d0ddb8f3a8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -960872274, guid: 45efd7965c93d3448a480185a5745fed,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7859018c7ac4f94a9f704d0ddb8f3a8, type: 3}
 --- !u!114 &1377697391012707880 stripped
@@ -268,6 +281,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1825581157490703195}
     m_Modifications:
+    - target: {fileID: 5067768044918966781, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067768044918966781, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067768044918966781, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8163238627979813518, guid: ac92a85954b16a443aa330a90ad5cb11,
         type: 3}
       propertyPath: m_Size
@@ -412,6 +440,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163238629722790562, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -960872274, guid: 45efd7965c93d3448a480185a5745fed,
+        type: 3}
+    - target: {fileID: 8185351016491484079, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185351016491484079, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185351016491484079, guid: ac92a85954b16a443aa330a90ad5cb11,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac92a85954b16a443aa330a90ad5cb11, type: 3}

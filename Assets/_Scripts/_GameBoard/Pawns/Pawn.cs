@@ -311,7 +311,7 @@ public abstract class Pawn : MonoBehaviour
         string statString = "";
         foreach(KeyValuePair<ComponentStat, float> stat in stats)
         {
-            statString += stat.Key + ": " + stat.Value + "\n";
+            statString += stat.Value + "\n";
         }
         statsText.text = statString;
         OnStatsUpdate.Invoke();
